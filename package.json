@@ -2,8 +2,9 @@
   "name": "340ct-marshj6",
   "version": "0.0.0",
   "description": "Coventry University. Module 340CT. Coursework. Game Review. Jonathan Marsh",
-  "main": "src/index.js",
+  "main": "./src/index.js",
   "scripts": {
+    "start": "node ./src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -17,5 +18,8 @@
     "coursework"
   ],
   "author": "Jonathan Marsh <marshj6@coventry.ac.uk>",
-  "license": "UNLICENSED"
+  "license": "UNLICENSED",
+  "dependencies": {
+    "koa": "^2.11.0"
+  }
 }
