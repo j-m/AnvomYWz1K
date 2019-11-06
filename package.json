@@ -1,0 +1,21 @@
+{
+  "name": "340ct-marshj6",
+  "version": "0.0.0",
+  "description": "Coventry University. Module 340CT. Coursework. Game Review. Jonathan Marsh",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.coventry.ac.uk/340CT-1920SEPJAN/marshj6.git"
+  },
+  "keywords": [
+    "game",
+    "review",
+    "website",
+    "coursework"
+  ],
+  "author": "Jonathan Marsh <marshj6@coventry.ac.uk>",
+  "license": "UNLICENSED"
+}
