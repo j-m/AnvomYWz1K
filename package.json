@@ -42,6 +42,23 @@
     "jsdoc-route-plugin": "^0.1.0",
     "supertest": "^4.0.2"
   },
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "es6": true,
+      "jest": true
+    },
+    "extends": ["standard"],
+    "globals": {
+      "Atomics": "readonly",
+      "SharedArrayBuffer": "readonly"
+    },
+    "parserOptions": {
+      "ecmaVersion": 2018,
+      "sourceType": "module"
+    },
+    "rules": {}
+  },
   "husky": {
     "hooks": {
       "pre-commit": "npm run format",
