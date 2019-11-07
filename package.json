@@ -4,6 +4,7 @@
   "description": "Coventry University. Module 340CT. Coursework. Game Review. Jonathan Marsh",
   "main": "./src/index.js",
   "scripts": {
+    "format": "eslint ./src/ --fix",
     "start": "node ./src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -24,5 +25,19 @@
     "koa": "^2.11.0",
     "koa-router": "^7.4.0",
     "koa-views": "^6.2.1"
+  },
+  "devDependencies": {
+    "eslint": "^6.6.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-node": "^10.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "husky": "^3.0.9"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run format"
+    }
   }
 }
