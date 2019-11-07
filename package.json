@@ -5,6 +5,7 @@
   "main": "./src/server.mjs",
   "scripts": {
     "coverage": "jest --coverage",
+    "doc": "jsdoc -c ./jsdoc.conf",
     "format": "eslint ./src/* --fix",
     "start": "node --require esm ./src/server.mjs",
     "test": "jest"
@@ -37,12 +38,15 @@
     "eslint-plugin-standard": "^4.0.1",
     "husky": "^3.0.9",
     "jest": "^24.9.0",
+    "jsdoc": "^3.6.3",
+    "jsdoc-route-plugin": "^0.1.0",
     "supertest": "^4.0.2"
   },
   "husky": {
     "hooks": {
       "pre-commit": "npm run format",
-      "pre-push": "npm run coverage"
+      "pre-push": "npm run coverage",
+      "pre-merge": "npm run doc"
     }
   },
   "jest": {
