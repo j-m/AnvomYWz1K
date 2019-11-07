@@ -2,11 +2,12 @@
   "name": "340ct-marshj6",
   "version": "0.0.0",
   "description": "Coventry University. Module 340CT. Coursework. Game Review. Jonathan Marsh",
-  "main": "./src/index.js",
+  "main": "./src/server.mjs",
   "scripts": {
-    "format": "eslint ./src/ --fix",
-    "start": "node ./src/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "coverage": "jest --coverage",
+    "format": "eslint ./src/* --fix",
+    "start": "node --require esm ./src/server.mjs",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -21,6 +22,7 @@
   "author": "Jonathan Marsh <marshj6@coventry.ac.uk>",
   "license": "UNLICENSED",
   "dependencies": {
+    "esm": "^3.2.25",
     "handlebars": "^4.5.1",
     "koa": "^2.11.0",
     "koa-router": "^7.4.0",
@@ -33,11 +35,32 @@
     "eslint-plugin-node": "^10.0.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
-    "husky": "^3.0.9"
+    "husky": "^3.0.9",
+    "jest": "^24.9.0",
+    "supertest": "^4.0.2"
   },
   "husky": {
     "hooks": {
       "pre-commit": "npm run format"
     }
+  },
+  "jest": {
+    "verbose": true,
+    "coverageThreshold": {
+      "global": {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100
+      }
+    },
+    "coverageReporters": [
+      "text",
+      "text-summary"
+    ],
+    "modulePaths": [
+      "<rootDir>/src",
+      "<rootDir>/node_modules"
+    ]
   }
 }
