@@ -1,30 +1,26 @@
-const esmRequire = require('esm')(module)
-const database = esmRequire('../src/database.mjs')
+const database = require('../src/database.js')
 
-let originalDatabaseName
-
-beforeEach(async () => {
-  originalDatabaseName = process.env.DATABASE
-  process.env.DATABASE = ':memory:'
-})
-
-beforeAll(async () => {
-  await database.open()
-})
-
-afterEach(async () => {
-  process.env.DATABASE = originalDatabaseName
-})
-
-afterAll(async () => {
-  await database.close()
-})
+let originalDatabaseName = process.env.DATABASE
 
 describe('database', () => {
-  test('should create a table', async done => {
-    database.createTable()
-    database.addRowToTable()
-    expect(database.getTableRows()).toBe(1)
-    done()
+  beforeAll(async () => {
+    jest.resetModules()
+    originalDatabaseName = process.env.DATABASE
+    process.env.DATABASE = ':memory:'
+    await database.open()
+  })
+
+  afterAll(async () => {
+    await database.close()
+    process.env.DATABASE = originalDatabaseName
+  })
+
+  describe('.createTable()', () => {
+    test('should create a table', async done => {
+      expect(database.getTableRows).toThrow()
+      await database.createTable()
+      expect(await database.getTableRows()).toBe([{ id: 1 }])
+      done()
+    })
   })
 })

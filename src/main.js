@@ -1,5 +1,5 @@
-import database from './database.mjs'
-import server from './app.mjs'
+const database = require('./database.js')
+const server = require('./app.js')
 
 database.open()
 server.open()

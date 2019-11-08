@@ -1,7 +1,6 @@
 const request = require('supertest')
-const esmRequire = require('esm')(module)
-const app = esmRequire('../src/app.mjs')
-const server = esmRequire('../src/server.mjs')
+const app = require('../src/app.js')
+const server = require('../src/server.js')
 
 afterEach(async () => {
   server.close()

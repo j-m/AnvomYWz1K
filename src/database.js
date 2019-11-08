@@ -1,26 +1,28 @@
-import sqlite from 'sqlite-async'
+const sqlite = require('sqlite-async')
 
 let database
 
 async function open () {
-  database = await sqlite.open(process.env.DATABASE || 'database.db', sqlite.OPEN_CREATE)
+  database = await sqlite.open(process.env.DATABASE || './database.db', sqlite.OPEN_READWRITE | sqlite.OPEN_CREATE)
 }
 
 async function createTable () {
-  database.run('CREATE TABLE IF NOT EXISTS test (id INTEGER PRIMARY KEY AUTOINCREMENT)')
+  await database.run('CREATE TABLE IF NOT EXISTS test (id INTEGER PRIMARY KEY AUTOINCREMENT)')
 }
 
 async function addRowToTable () {
-  database.run('INSERT INTO test')
+  await database.run('INSERT INTO test (id) VALUES (NULL)')
 }
 
 async function getTableRows () {
-  const result = await database.run('SELECT * FROM test')
+  const result = await database.all('SELECT id FROM test')
   return result
 }
 
-function close () {
-  database.close()
+async function close () {
+  if (database !== undefined) {
+    await database.close()
+  }
 }
 
-export { open, createTable, addRowToTable, getTableRows, close }
+module.exports = { open, createTable, addRowToTable, getTableRows, close }
