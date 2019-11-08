@@ -2,12 +2,12 @@
   "name": "340ct-marshj6",
   "version": "0.0.0",
   "description": "Coventry University. Module 340CT. Coursework. Game Review. Jonathan Marsh",
-  "main": "./src/server.mjs",
+  "main": "./src/main.mjs",
   "scripts": {
     "coverage": "jest --coverage",
     "doc": "jsdoc -c ./jsdoc.conf",
     "format": "eslint ./src/* --fix",
-    "start": "node --require esm ./src/server.mjs",
+    "start": "node --require esm ./src/main.mjs",
     "test": "jest"
   },
   "repository": {
@@ -40,6 +40,7 @@
     "jest": "^24.9.0",
     "jsdoc": "^3.6.3",
     "jsdoc-route-plugin": "^0.1.0",
+    "sqlite-async": "^1.0.12",
     "supertest": "^4.0.2"
   },
   "eslintConfig": {
@@ -48,7 +49,9 @@
       "es6": true,
       "jest": true
     },
-    "extends": ["standard"],
+    "extends": [
+      "standard"
+    ],
     "globals": {
       "Atomics": "readonly",
       "SharedArrayBuffer": "readonly"
