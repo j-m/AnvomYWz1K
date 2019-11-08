@@ -3,7 +3,7 @@ const sqlite = require('sqlite-async')
 let database
 
 async function open () {
-  database = await sqlite.open(process.env.DATABASE || './database.db', sqlite.OPEN_READWRITE | sqlite.OPEN_CREATE)
+  database = await sqlite.open(process.env.DATABASE, sqlite.OPEN_READWRITE | sqlite.OPEN_CREATE)
 }
 
 async function createTable () {
