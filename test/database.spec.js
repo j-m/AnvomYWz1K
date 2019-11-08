@@ -17,9 +17,9 @@ describe('database', () => {
 
   describe('.createTable()', () => {
     test('should create a table', async done => {
-      expect(database.getTableRows).toThrow()
+      await expect(database.getTableRows()).rejects.toThrow()
       await database.createTable()
-      expect(await database.getTableRows()).toBe([{ id: 1 }])
+      expect(await database.getTableRows()).toEqual([])
       done()
     })
   })
