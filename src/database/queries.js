@@ -1,0 +1,32 @@
+const { promisify } = require('util')
+const fs = require('fs')
+const glob = require('glob')
+const readFilePromise = promisify(fs.readFile)
+const globPromise = promisify(glob)
+
+let sql = { }
+
+async function addSQLStatement (path, data) {
+  const trimmedPath = path.replace('./src/database/sql/', '').replace('.sql', '')
+  let headObj = sql
+  trimmedPath.split('/').forEach((key, index, keys) => {
+    headObj[key] = index === keys.length - 1 ? data : headObj[key] || {}
+    headObj = headObj[key]
+  })
+}
+
+async function load () {
+  sql = { }
+  const files = await globPromise('./src/database/sql/**/*.sql')
+  const promises = []
+  for (const file of files) {
+    promises.push(readFilePromise(file, 'utf-8').then(data => addSQLStatement(file, data)))
+  }
+  await Promise.all(promises)
+}
+
+function close () {
+  sql = { }
+}
+
+module.exports = { sql, load, close }
