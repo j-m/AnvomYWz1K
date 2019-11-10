@@ -1,10 +1,16 @@
 const sqlite = require('sqlite-async')
 const queries = require('./queries.js')
+const setup = require('./setup.js')
+
 let database
 
 async function open () {
-  database = await sqlite.open(process.env.DATABASE, sqlite.OPEN_READWRITE | sqlite.OPEN_CREATE)
-  await queries.load()
+  await Promise.all([
+    database = sqlite.open(process.env.DATABASE),
+    queries.load()
+  ])
+  console.log(database)
+  await setup()
 }
 
 async function close () {

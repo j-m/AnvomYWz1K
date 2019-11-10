@@ -1,10 +1,6 @@
 const database = require('../connection.js').database
 const sql = require('../queries.js').sql
 
-async function createTable () {
-  return database.run(sql.create.members)
-}
-
 async function insertMember () {
   return database.run(sql.insert.member)
 }
@@ -13,4 +9,4 @@ async function selectAll () {
   return database.all(sql.select.allMembers)
 }
 
-module.exports = { createTable, insertMember, selectAll }
+module.exports = { insertMember, selectAll }
