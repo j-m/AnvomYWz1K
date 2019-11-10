@@ -3,7 +3,7 @@ const members = require('../../../src/database/table/members.js')
 
 let originalDatabaseName = process.env.DATABASE
 
-describe('database/table/members', () => {
+describe('database table members', () => {
   beforeAll(async () => {
     jest.resetModules()
     originalDatabaseName = process.env.DATABASE
@@ -16,21 +16,15 @@ describe('database/table/members', () => {
     process.env.DATABASE = originalDatabaseName
   })
 
-  describe('.createTable()', () => {
-    test('creates a table called members', async done => {
-      expect(await members.selectAll()).rejects.toThrow()
-      await members.createTable()
-      expect(await members.selectAll()).toEqual([])
-      done()
-    })
-  })
-
   describe('.insertMember()', () => {
     test('inserts a row into the members table', async done => {
-      await members.createTable()
       expect(await members.selectAll()).toEqual([])
-      await members.insertMember()
-      expect(await members.selectAll()).toEqual([{ id: 1 }])
+      await members.insertMember('a@b.com', 'username', 'password')
+      expect(await members.selectAll()).toEqual([{ 
+        email: 'a@b.com',
+        username: 'username',
+        password: 'password'
+      }])
       done()
     })
   })

@@ -1,1 +1,1 @@
-SELECT username FROM members;
+SELECT email, username, password FROM members;

@@ -1,10 +1,11 @@
 CREATE TABLE IF NOT EXISTS assessments (
-  id TEXT PRIMARY KEY UNIQUE NOT NULL,
+  id TEXT UNIQUE NOT NULL,
   reviewer TEXT NOT NULL,
   flag TEXT NOT NULL,
   date DATETIME DEFAULT CURRENT_TIMESTAMP,
   action_taken TEXT NOT NULL,
   justification TEXT NOT NULL,
+  PRIMARY KEY(id),
   FOREIGN KEY(reviewer) REFERENCES members(username),
   FOREIGN KEY(flag) REFERENCES flags(id)
 ) WITHOUT ROWID;

@@ -1,12 +1,11 @@
-const database = require('../connection.js').database
-const sql = require('../queries.js').sql
+const connection = require('../connection.js')
 
-async function insertMember () {
-  return database.run(sql.insert.member)
+async function insertMember (email, username, password) {
+  return connection.run('insert.member', email, username, password)
 }
 
 async function selectAll () {
-  return database.all(sql.select.allMembers)
+  return connection.all('select.allMembers')
 }
 
 module.exports = { insertMember, selectAll }

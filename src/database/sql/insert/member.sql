@@ -1,1 +1,1 @@
-INSERT INTO members (username, password, email) VALUES (?, ?, ?);
+INSERT INTO members (email, username, password) VALUES (?, ?, ?);

@@ -1,1 +1,1 @@
-SELECT username FROM members WHERE username=? LIMIT 1;
+SELECT email, username, password FROM members WHERE username=? LIMIT 1;

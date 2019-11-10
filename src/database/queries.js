@@ -7,12 +7,8 @@ const globPromise = promisify(glob)
 let sql = { }
 
 async function addSQLStatement (path, data) {
-  const trimmedPath = path.replace('./src/database/sql/', '').replace('.sql', '')
-  let headObj = sql
-  trimmedPath.split('/').forEach((key, index, keys) => {
-    headObj[key] = index === keys.length - 1 ? data : headObj[key] || {}
-    headObj = headObj[key]
-  })
+  const trimmedPath = path.replace('./src/database/sql/', '').replace('.sql', '').replace('/', '.')
+  sql[trimmedPath] = data
 }
 
 async function load () {
@@ -29,4 +25,14 @@ function close () {
   sql = { }
 }
 
-module.exports = { sql, load, close }
+function get (file) {
+  if (file === undefined) {
+    return sql
+  }
+  if (sql[file] === undefined) {
+    throw Error(`Unknown query '${file}'`)
+  }
+  return sql[file]
+}
+
+module.exports = { get, load, close }

@@ -1,9 +1,10 @@
 CREATE TABLE IF NOT EXISTS comments (
-  review TEXT PRIMARY KEY NOT NULL,
-  id TEXT PRIMARY KEY NOT NULL,
+  review TEXT NOT NULL,
+  id TEXT NOT NULL,
   author TEXT NOT NULL,
   posted DATETIME DEFAULT CURRENT_TIMESTAMP,
   message TEXT NOT NULL,
+  PRIMARY KEY(review, id),
   FOREIGN KEY(review) REFERENCES reviews(id),
   FOREIGN KEY(author) REFERENCES members(username)
 ) WITHOUT ROWID;
