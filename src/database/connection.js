@@ -33,18 +33,14 @@ async function close () {
 
 async function run (file, ...values) {
   const query = queries.get(file)
-  return database.run(query, values).catch(err => {
-    console.log(`Error running '${file}' with values '${values}'.`)
-    throw err
+  return database.run(query, values).catch(error => {
+    throw Error(`Error running '${file}' with values '${values}'. Error: ${error}`)
   })
 }
 
 async function all (file, ...values) {
   const query = queries.get(file)
-  return database.all(query, values).catch(err => {
-    console.log(`Error running '${file}' with values '${values}'.`)
-    throw err
-  })
+  return database.all(query, values)
 }
 
 module.exports = { run, all, open, close }

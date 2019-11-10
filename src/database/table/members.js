@@ -8,4 +8,11 @@ async function selectAll () {
   return connection.all('select.allMembers')
 }
 
-module.exports = { insertMember, selectAll }
+async function selectMember (username) {
+  if (username === undefined) {
+    throw Error('members.selectMember requires a username')
+  }
+  return connection.all('select.member', username)
+}
+
+module.exports = { insertMember, selectAll, selectMember }
