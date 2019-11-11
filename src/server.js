@@ -4,8 +4,19 @@ const app = require('./app.js')
 const host = process.env.HOST
 const port = process.env.PORT
 
-const server = http.createServer(app.callback()).listen(port, host, () => {
-  console.log(`Listening on http://${host}:${port}`)
-}).on('error', error => console.log(error))
+let server
 
-module.exports = server
+function open () {
+  server = http.createServer(app.callback())
+  server.listen(port, host, () => {
+    console.log(`Listening on http://${host}:${port}`)
+  }).on('error', error => console.log(error))
+}
+
+function close () {
+  if (server !== undefined) {
+    server.close()
+  }
+}
+
+module.exports = { open, close }
