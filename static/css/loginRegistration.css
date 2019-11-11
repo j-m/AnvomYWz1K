@@ -1,0 +1,66 @@
+#loginRegistration {
+  display: inline-block;
+  background: #eeeeee;
+  box-shadow: 0 1rem 1rem -1rem black;
+  z-index: 2;
+  padding: 1rem;
+  border-radius: 0.25rem;
+  margin: auto;
+  width: 20rem;
+}
+
+#loginRegistration input[type="Submit"] {
+  width: 100%;
+}
+
+#loginOrRegister {
+  display: none;
+}
+
+#username,
+#password,
+#email,
+#name {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+label[for="loginOrRegister"] {
+  display: inline-flex;
+  width: 100%;
+  padding: .5rem;
+  box-sizing: border-box;
+}
+
+label[for=loginOrRegister] div {
+  user-select: none;
+  padding: .75rem .25rem;
+  margin: 0 0.5rem;
+  text-align: center;
+}
+
+label[for=loginOrRegister] div:first-child,
+label[for=loginOrRegister] div:last-child {
+  background: linear-gradient(to bottom, rgba(255,255,255,1) 0%,rgba(100, 100, 100, 0.25) 100%);
+  cursor: pointer;
+  flex: 1;
+  border: 1px solid grey;
+  border-radius: 0.25rem;
+}
+
+#loginOrRegister:checked + label[for=loginOrRegister] div:last-child {
+  text-decoration: underline;
+}
+
+#loginOrRegister:checked ~ #login{
+  display: none;
+}
+
+#loginOrRegister:not(:checked) ~ #register{
+  display: none;
+}
+
+#loginOrRegister:not(:checked) + label[for=loginOrRegister] div:first-child {
+  text-decoration: underline;
+}
+
