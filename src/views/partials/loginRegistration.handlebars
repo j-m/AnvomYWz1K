@@ -1,0 +1,34 @@
+<div id="loginRegistration">
+  <input type="checkbox" id="loginOrRegister" name="loginOrRegister">
+  <label for="loginOrRegister">
+    <div>Login</div>
+    <div>or</div>
+    <div>Register</div>
+  </label>
+  <form id="login" action="javascript:void(0);">
+  	<label for="username">Username</label>
+    <input type="text" id="username" name="username" required/>
+  	<label for="password">Password</label>
+    <input type="password" id="password" name="password" required/>
+  	<input type="submit" value="Log in"/>
+    <a href="#forgot">Forgot password</a>
+  </form>
+  <form id="register" action="javascript:void(0);">
+  	<label for="email">Email</label>
+    <input type="email" id="email" name="email" required/>
+  	<label for="username">Username</label>
+    <input type="text" id="username" name="username" required/>
+  	<label for="password">Password</label>
+    <input type="password" id="password" name="password" required/>
+    <fieldset id="extended">
+      <legend>Optional</legend>
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name">
+      <label for="profanity">Profanity filter</label>
+      <input type="checkbox" id="profanity" name="profanity">
+      <label for="nudity">Nudity filter</label>
+      <input type="checkbox" id="nudity" name="nudity">
+    </fieldset>
+  	<p><input type="submit" value="Register"></p>
+  </form>
+</div>

@@ -1,1 +1,24 @@
-<h1>This should say 'test': {{text}}</h1>
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Game Reviews - Home</title>
+    <link href="css/global.css" type="text/css" rel="stylesheet" />
+		<link href="css/loginRegistration.css" type="text/css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+	</head>
+  <body>
+    <div id="welcome">
+      {{#if username}} 
+      <p>Welcome, {{username}}! <a href="#logout">Logout</a></p>
+      {{else}}
+      <p>Welcome, guest! <a href="#login">Login</a> or <a href="#register">Register</a> </p>
+      {{/if}}
+    </div>
+    <div id="popups">
+      {{> loginRegistration }}
+    </div>
+  </body>
+
+</html>

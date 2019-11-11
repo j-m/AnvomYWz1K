@@ -1,7 +1,3 @@
-const Router = require('koa-router')
-
-const router = new Router()
-
 /**
  * The landing page visible to visitors.
  *
@@ -9,8 +5,8 @@ const router = new Router()
  * @route {GET} /
  * @authentication None.
  */
-router.get('/', async context => {
+async function game (context, next) {
   await context.render('index', { text: 'test' })
-})
+}
 
-module.exports = router
+module.exports = game
