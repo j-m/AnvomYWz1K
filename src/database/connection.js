@@ -34,7 +34,7 @@ async function close () {
 async function run (file, ...values) {
   const query = queries.get(file)
   return database.run(query, values).catch(error => {
-    throw Error(`Error running '${file}' with values '${values}'. Error: ${error}`)
+    throw Error(`Error running '${file}' with values '${values}'. ${error}`)
   })
 }
 

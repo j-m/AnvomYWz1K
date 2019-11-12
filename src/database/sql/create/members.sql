@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS members (
   name TEXT, 
   joined DATETIME DEFAULT CURRENT_TIMESTAMP,
   last_seen DATETIME DEFAULT CURRENT_TIMESTAMP,
-  nudity BOOLEAN NOT NULL DEFAULT 0 CHECK (nudity IN (0,1)),
-  profanity BOOLEAN NOT NULL DEFAULT 0 CHECK (profanity IN (0,1)),
+  hide_nudity BOOLEAN NOT NULL DEFAULT 1 CHECK (hide_nudity IN (0,1)),
+  hide_profanity BOOLEAN NOT NULL DEFAULT 1 CHECK (hide_profanity IN (0,1)),
   PRIMARY KEY(username)
 ) WITHOUT ROWID;

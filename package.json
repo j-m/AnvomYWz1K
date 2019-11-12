@@ -5,6 +5,7 @@
   "main": "./src/main.js",
   "scripts": {
     "coverage": "jest --coverage",
+    "debug": "node --inspect ./src/main.js",
     "doc": "jsdoc -c ./jsdoc.conf",
     "format": "eslint ./src/* --fix",
     "start": "node ./src/main.js",
@@ -23,12 +24,14 @@
   "author": "Jonathan Marsh <marshj6@coventry.ac.uk>",
   "license": "UNLICENSED",
   "dependencies": {
+    "bcrypt": "^3.0.6",
     "bcrypt-promise": "^2.0.0",
     "glob": "^7.1.6",
     "handlebars": "^4.5.1",
     "koa": "^2.11.0",
     "koa-bodyparser": "^4.2.1",
     "koa-router": "^7.4.0",
+    "koa-session": "^5.12.3",
     "koa-static": "^5.0.0",
     "koa-views": "^6.2.1"
   },

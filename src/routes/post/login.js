@@ -2,9 +2,9 @@ const bcrypt = require('bcrypt-promise')
 const connection = require('../../database/connection.js')
 
 async function checkPassword (username, password) {
-  const records = await connection.run('select.memberByUsername')
+  const records = await connection.all('select.memberByUsername', username)
   if (records.length === 0) {
-    throw new Error(`USERNAME_UNKNOWN`)
+    throw new Error('USERNAME_UNKNOWN')
   }
   const valid = await bcrypt.compare(password, records[0].password)
   if (valid === false) {
@@ -13,7 +13,6 @@ async function checkPassword (username, password) {
 }
 
 async function login (context, next) {
-  context.response.type = 'json'
   try {
     const body = context.request.body
     const username = body.username
@@ -27,9 +26,9 @@ async function login (context, next) {
     checkPassword(username, password)
     context.session.authorised = true
     context.session.username = username
-    return context.body({ success: true })
+    context.body = { success: true }
   } catch (error) {
-    return context.body({ success: false, message: error.message })
+    context.body = { success: false, message: error.message }
   }
 }
 
