@@ -20,5 +20,4 @@ body {
   z-index: -1;
   min-width: 100vw;
   min-height: 100vh;
-  pointer-events: none;
 }

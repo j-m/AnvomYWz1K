@@ -8,8 +8,7 @@ const router = require('./router.js')
 const app = new Koa()
 app.use(staticDir('static'))
 app.use(bodyParser())
-app.use((context, next) => handlebars.getViews(context, next))
-app.use(async (context, next) => { await handlebars.registerPartials() })
+app.use(async (context, next) => { await handlebars.getViews(context, next) })
 app.use(router.routes())
 
 module.exports = app
