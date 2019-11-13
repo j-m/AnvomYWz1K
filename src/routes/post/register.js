@@ -33,7 +33,7 @@ async function register (context, next) {
     validateEmail(email)
     await validateUsername(username)
     validatePassword(password)
-    insert(email, username, password)
+    await insert(email, username, password)
     context.session.authorised = true
     context.session.username = username
     context.body = { success: true }

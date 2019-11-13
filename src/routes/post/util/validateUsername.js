@@ -1,4 +1,4 @@
-const connection = require('../../../database/connection.js')
+const members = require('../../../database/table/members.js')
 
 async function validateUsername (username) {
   if (username === undefined || username === '') {
@@ -8,7 +8,7 @@ async function validateUsername (username) {
   if (matches === null || matches.length !== 1) {
     throw Error('NEW_USERNAME_BAD_REGEX')
   }
-  const records = await connection.all('select.memberByUsername', username)
+  const records = await members.selectMember(username)
   if (records.length !== 0) {
     throw Error('NEW_USERNAME_IN_USE')
   }

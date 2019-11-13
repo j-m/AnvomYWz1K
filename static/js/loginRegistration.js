@@ -47,6 +47,7 @@ async function login (event) {
     document.getElementById(result.message).classList.add('show')
   } else {
     hide('login')
+    location.reload()
   }
 
   return false
@@ -82,6 +83,7 @@ async function register (event) {
     document.getElementById(result.message).classList.add('show')
   } else {
     hide('register')
+    location.reload()
   }
 
   return false
@@ -99,6 +101,8 @@ async function logout (event) {
 
   if (result.success === false) {
     console.log(result.message)
+  } else {
+    location.reload()
   }
 }
 

@@ -23,7 +23,7 @@ async function login (context, next) {
     if (password === undefined) {
       throw new Error('PASSWORD_MISSING')
     }
-    checkPassword(username, password)
+    await checkPassword(username, password)
     context.session.authorised = true
     context.session.username = username
     context.body = { success: true }

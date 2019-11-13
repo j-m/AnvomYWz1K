@@ -17,23 +17,15 @@ describe('database table members', () => {
   })
 
   describe('.insertMember', () => {
-    describe('(..., ..., ...)', () => {
-      test('inserts a row into the members table', async done => {
-        expect(await members.selectAll()).toEqual([])
-        await members.insertMember('a@b.com', 'username', 'password')
-        expect(await members.selectAll()).toEqual([{
-          email: 'a@b.com',
-          username: 'username',
-          password: 'password'
-        }])
-        done()
-      })
-    })
-    describe('()', () => {
-      test('throws if params missing', async done => {
-        expect(members.insertMember()).rejects.toThrow()
-        done()
-      })
+    test('inserts a row into the members table', async done => {
+      expect(await members.selectAll()).toEqual([])
+      await members.insertMember('a@b.com', 'username', 'password')
+      expect(await members.selectAll()).toEqual([{
+        email: 'a@b.com',
+        username: 'username',
+        password: 'password'
+      }])
+      done()
     })
   })
 
@@ -47,18 +39,13 @@ describe('database table members', () => {
   })
 
   describe('.selectMember', () => {
-    test('(...) finds a member by username', async done => {
+    test('finds a member by username', async done => {
       await members.insertMember('a@b.com', 'selectMember', 'password')
       expect(await members.selectMember('selectMember')).toEqual([{
         email: 'a@b.com',
         username: 'selectMember',
         password: 'password'
       }])
-      done()
-    })
-
-    test('() throws', async done => {
-      expect(members.selectMember()).rejects.toThrow(Error)
       done()
     })
   })
