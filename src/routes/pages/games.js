@@ -1,3 +1,5 @@
+const authorisation = require('./util/authorisation')
+
 /**
  * The landing page visible to visitors.
  *
@@ -6,7 +8,8 @@
  * @authentication None.
  */
 async function game (context, next) {
-  await context.render('index', { username: context.session.username })
+  const parameters = authorisation(context, {})
+  await context.render('games', parameters)
 }
 
 module.exports = game

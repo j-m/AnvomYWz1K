@@ -12,6 +12,7 @@ async function checkPassword (username, password) {
   if (valid === false) {
     throw new Error(ErrorEnum.PASSWORD_INCORRECT)
   }
+  return records
 }
 
 async function login (context, next) {
@@ -25,9 +26,10 @@ async function login (context, next) {
     if (password === undefined) {
       throw new Error(ErrorEnum.PASSWORD_MISSING)
     }
-    await checkPassword(username, password)
+    const records = await checkPassword(username, password)
     context.session.authorised = true
-    context.session.username = username
+    context.session.username = records[0].username
+    context.session.privileges = records[0].privileges
     context.body = { success: true }
   } catch (error) {
     if (ErrorEnum.has(error.message)) {

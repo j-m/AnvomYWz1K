@@ -8,5 +8,6 @@ CREATE TABLE IF NOT EXISTS members (
   last_seen DATETIME DEFAULT CURRENT_TIMESTAMP,
   hide_nudity BOOLEAN NOT NULL DEFAULT 1 CHECK (hide_nudity IN (0,1)),
   hide_profanity BOOLEAN NOT NULL DEFAULT 1 CHECK (hide_profanity IN (0,1)),
+  privileges TEXT NOT NULL DEFAULT 'none' CHECK (privileges IN ('none', 'moderator', 'administrator')),
   PRIMARY KEY(username)
 ) WITHOUT ROWID;

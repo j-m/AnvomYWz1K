@@ -1,0 +1,71 @@
+<div id="games">
+  {{#each games}}
+    <div class="game">
+      <h1>{{title}}</h1>
+      <img src={{thumbnail}}/>
+    </div>
+  {{/each}}
+  {{#if administrator}}
+  <button onclick="show('addGame')">Add game</button>
+  {{/if}}
+</div>
+
+
+<div class="popup" onclick="hide('addGame', event)">
+  <form id="addGame" onsubmit="addGame(event)">
+    <h1>Create new game</h1>
+    <hr/>
+    <fieldset>
+      <div class="input_header">
+      	<label for="title">Title</label>
+        <p class="error" id="TITLE_MISSING">This field is required.</p>
+      </div>
+      <input type="text" id="title" name="title" required/>
+    
+      <div class="input_header">
+      	<label for="summary">Summary</label>
+        <p class="error" id="SUMMARY_MISSING">This field is required.</p>
+      </div>
+      <input type="text" id="summary" name="summary" required/>
+      
+      <div class="input_header">
+      	<label for="thumbnail">Thumbnail</label>
+        <p class="error" id="THUMBNAIL_MISSING">This field is required.</p>
+      </div>
+      <input type="url" id="thumbnail" name="thumbnail" required/>
+    </fieldset>
+    
+    <fieldset>
+      <legend>Optional</legend>
+      
+      <div>
+      	<label for="developer">Developer</label>
+        <input type="text" id="developer" name="developer"/>
+        
+      	<label for="publisher">Publisher</label>
+        <input type="text" id="publisher" name="publisher"/>
+        
+        <label for="releaseDate">Release date</label>
+        <input type="date" id="releaseDate" name="releaseDate"/>
+        
+      	<label for="description">Description</label>
+        <input type="text" id="description" name="description"/>
+      </div>
+      
+      <div>
+      	<label for="store">Store</label>
+        <input type="text" id="store" name="store"/>
+        
+        <label for="steam">Steam APP ID</label>
+        <input type="text" id="steamAppID" name="steamAppID"/>
+        
+        <label for="tags">Tags</label>
+        <input type="text" id="tags" name="tags"/>
+      </div>
+
+    </fieldset>
+    
+  	<input type="submit" value="Create">
+  </form>
+</div>
+

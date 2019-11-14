@@ -1,21 +1,53 @@
+var randomstring = require('randomstring')
+
 const connection = require('../database/connection')
 const ErrorEnum = require('../util/ErrorEnum')
-const base64 = require('../util/base64')
+
+async function generateID () {
+  let results
+  let id
+  while (results === undefined || results.length !== 0) {
+    id = randomstring.generate(8)
+    results = await connection.all('select.gameByID', id)
+  }
+  return id
+}
 
 class Game {
-  async generateID () {
-    let results
-    let id
-    while (results === undefined || results.length !== 0) {
-      id = base64()
-      results = await connection.all('select.gameByID', id)
-    }
-    return id
+  get data () {
+    return [
+      this.id,
+      this.title,
+      this.summary,
+      this.thumbnail,
+      this.publisher,
+      this.description,
+      this.store,
+      this.steamAppID,
+      this.tags,
+      this.releaseDate
+    ]
   }
 
-  async create (title, summary, publisher) {
-    await connection.run('insert.game', this.generateID(), title, summary, publisher)
-    await this.get(title)
+  async create (game) {
+    if (game === undefined) {
+      throw Error(ErrorEnum.GAME_MISSING)
+    }
+    if (game.title === undefined) {
+      throw Error(ErrorEnum.GAME_TITLE_MISSING)
+    }
+    if (game.summary === undefined) {
+      throw Error(ErrorEnum.GAME_SUMMARY_MISSING)
+    }
+    if (game.thumbnail === undefined) {
+      throw Error(ErrorEnum.GAME_THUMBNAIL_MISSING)
+    }
+    const results = await connection.all('select.gameByTitle', game.title)
+    if (results !== undefined && results.length !== 0) {
+      throw Error(ErrorEnum.GAME_TITLE_IN_USE)
+    }
+    await connection.run('insert.game', await generateID(), game.title, game.summary, game.thumbnail, game.publisher, game.description, game.store, game.steamAppID, game.tags, game.releaseDate)
+    await this.get(game.title)
     this.loaded = true
   }
 
@@ -32,7 +64,7 @@ class Game {
     if (this.loaded !== true) {
       throw Error(ErrorEnum.GAME_NOT_LOADED)
     }
-    await connection.run('update.game', this.id, this.title, this.summary, this.publisher, this.description, this.store, this.tags, this.released)
+    await connection.run('update.game', this.data)
   }
 }
 

@@ -6,7 +6,8 @@ function getViews (context, next) {
     extension: 'hbs',
     options: {
       partials: {
-        loginRegistration: './partials/loginRegistration'
+        loginRegistration: './partials/loginRegistration',
+        games: './partials/games'
       },
       settings: {
         views: path.join(__dirname, '../views')
