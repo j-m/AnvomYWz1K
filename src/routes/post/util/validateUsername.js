@@ -1,4 +1,4 @@
-const members = require('../../../database/table/members.js')
+const members = require('../../../models/member')
 
 async function validateUsername (username) {
   if (username === undefined || username === '') {
