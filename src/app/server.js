@@ -1,5 +1,5 @@
 const http = require('http')
-const app = require('./koa.js')
+const app = require('./koa')
 
 const host = process.env.HOST
 const port = process.env.PORT

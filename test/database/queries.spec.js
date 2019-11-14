@@ -1,5 +1,5 @@
-const connection = require('../../src/database/connection.js')
-const queries = require('../../src/database/queries.js')
+const connection = require('../../src/database/connection')
+const queries = require('../../src/database/queries')
 
 describe('database', () => {
   beforeAll(async () => {

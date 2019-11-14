@@ -1,4 +1,4 @@
-const connection = require('../database/connection.js')
+const connection = require('../database/connection')
 const ErrorEnum = require('../util/ErrorEnum')
 
 class Member {

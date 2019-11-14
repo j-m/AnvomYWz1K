@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt-promise')
 
-const connection = require('../../database/connection.js')
+const connection = require('../../database/connection')
 const ErrorEnum = require('../../util/ErrorEnum')
 
 async function checkPassword (username, password) {

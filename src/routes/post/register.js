@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt-promise')
 
-const connection = require('../../database/connection.js')
-const validateUsername = require('./util/validateUsername.js')
+const connection = require('../../database/connection')
+const validateUsername = require('./util/validateUsername')
 const ErrorEnum = require('../../util/ErrorEnum')
 
 async function insert (email, username, password) {

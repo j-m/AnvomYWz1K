@@ -1,7 +1,7 @@
 const request = require('supertest')
 
-const app = require('../../../src/app/koa.js')
-const connection = require('../../../src/database/connection.js')
+const app = require('../../../src/app/koa')
+const connection = require('../../../src/database/connection')
 
 beforeAll(async () => {
   jest.resetModules()

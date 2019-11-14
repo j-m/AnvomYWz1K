@@ -1,5 +1,6 @@
 const sqlite = require('sqlite-async')
-const queries = require('./queries.js')
+
+const queries = require('./queries')
 
 let database
 

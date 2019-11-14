@@ -1,5 +1,5 @@
-const connection = require('../../src/database/connection.js')
-const Member = require('../../src/models/member.js')
+const connection = require('../../src/database/connection')
+const Member = require('../../src/models/member')
 
 describe('database models member', () => {
   beforeAll(async () => {

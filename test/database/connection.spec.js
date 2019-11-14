@@ -1,4 +1,4 @@
-const connection = require('../../src/database/connection.js')
+const connection = require('../../src/database/connection')
 
 describe('database', () => {
   describe('connection', () => {

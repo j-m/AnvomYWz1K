@@ -1,4 +1,4 @@
-const validateUsername = require('./util/validateUsername.js')
+const validateUsername = require('./util/validateUsername')
 
 async function username (context, next) {
   const body = context.request.body

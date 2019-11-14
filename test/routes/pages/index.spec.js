@@ -1,6 +1,6 @@
 const request = require('supertest')
 
-const app = require('../../../src/app/koa.js')
+const app = require('../../../src/app/koa')
 
 describe('routes get index', () => {
   test('should contain templated text', async () => {

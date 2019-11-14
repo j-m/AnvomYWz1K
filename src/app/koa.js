@@ -3,8 +3,8 @@ const staticDir = require('koa-static')
 const bodyParser = require('koa-bodyparser')
 const session = require('koa-session')
 
-const handlebars = require('./handlebars.js')
-const router = require('./router.js')
+const handlebars = require('./handlebars')
+const router = require('./router')
 
 const app = new Koa()
 app.keys = ['Jonathan Marsh']
