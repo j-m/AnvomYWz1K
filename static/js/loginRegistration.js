@@ -15,8 +15,10 @@ async function checkUsernameAvailability () {
   document.getElementById('NEW_USERNAME_AVAILABLE').classList.remove('show')
 
   if (result.success === false) {
-    console.log(result.message)
-    document.getElementById(result.message).classList.add('show')
+    console.log(result)
+    if (result.code !== undefined) {
+      document.getElementById('NEW_' + result.code).classList.add('show')
+    }
   } else {
     document.getElementById('NEW_USERNAME_AVAILABLE').classList.add('show')
   }
@@ -43,8 +45,10 @@ async function login (event) {
   document.getElementById('PASSWORD_INCORRECT').classList.remove('show')
 
   if (result.success === false) {
-    console.log(result.message)
-    document.getElementById(result.message).classList.add('show')
+    console.log(result)
+    if (result.code !== undefined) {
+      document.getElementById(result.code).classList.add('show')
+    }
   } else {
     hide('login')
     location.reload()
@@ -79,8 +83,10 @@ async function register (event) {
   document.getElementById('NEW_PASSWORD_TOO_SHORT').classList.remove('show')
 
   if (result.success === false) {
-    console.log(result.message)
-    document.getElementById(result.message).classList.add('show')
+    console.log(result)
+    if (result.code !== undefined) {
+      document.getElementById('NEW_' + result.code).classList.add('show')
+    }
   } else {
     hide('register')
     location.reload()
@@ -100,7 +106,7 @@ async function logout (event) {
   }).then(res => res.json())
 
   if (result.success === false) {
-    console.log(result.message)
+    console.log(result)
   } else {
     location.reload()
   }

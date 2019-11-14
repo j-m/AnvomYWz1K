@@ -39,7 +39,11 @@ async function register (context, next) {
     context.session.username = username
     context.body = { success: true }
   } catch (error) {
-    context.body = { success: false, message: error.message }
+    if (ErrorEnum.has(error.message)) {
+      context.body = { success: false, code: error.message }
+    } else {
+      context.body = { success: false, message: error.message }
+    }
   }
 }
 

@@ -20,7 +20,7 @@ describe('routes post login', () => {
     const response = await request(app.callback()).post('/login').send({ })
     expect(response.status).toEqual(200)
     expect(response.type).toEqual('application/json')
-    expect(response.body).toEqual({ success: false, message: 'USERNAME_MISSING' })
+    expect(response.body).toEqual({ success: false, code: 'USERNAME_MISSING' })
     done()
   })
 
@@ -28,7 +28,7 @@ describe('routes post login', () => {
     const response = await request(app.callback()).post('/login').send({ username: 'fake' })
     expect(response.status).toEqual(200)
     expect(response.type).toEqual('application/json')
-    expect(response.body).toEqual({ success: false, message: 'PASSWORD_MISSING' })
+    expect(response.body).toEqual({ success: false, code: 'PASSWORD_MISSING' })
     done()
   })
 
@@ -36,7 +36,7 @@ describe('routes post login', () => {
     const response = await request(app.callback()).post('/login').send({ username: 'fake', password: 'incorrect' })
     expect(response.status).toEqual(200)
     expect(response.type).toEqual('application/json')
-    expect(response.body).toEqual({ success: false, message: 'USERNAME_UNKNOWN' })
+    expect(response.body).toEqual({ success: false, code: 'USERNAME_UNKNOWN' })
     done()
   })
 
@@ -44,7 +44,7 @@ describe('routes post login', () => {
     const response = await request(app.callback()).post('/login').send({ username: 'real', password: 'incorrect' })
     expect(response.status).toEqual(200)
     expect(response.type).toEqual('application/json')
-    expect(response.body).toEqual({ success: false, message: 'PASSWORD_INCORRECT' })
+    expect(response.body).toEqual({ success: false, code: 'PASSWORD_INCORRECT' })
     done()
   })
 

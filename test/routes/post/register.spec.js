@@ -21,7 +21,7 @@ describe('routes post register', () => {
     const response = await request(app.callback()).post('/register').send({ })
     expect(response.status).toEqual(200)
     expect(response.type).toEqual('application/json')
-    expect(response.body).toEqual({ success: false, message: ErrorEnum.EMAIL_MISSING })
+    expect(response.body).toEqual({ success: false, code: ErrorEnum.EMAIL_MISSING })
     done()
   })
 
@@ -29,7 +29,7 @@ describe('routes post register', () => {
     const response = await request(app.callback()).post('/register').send({ email: 'test@test.test' })
     expect(response.status).toEqual(200)
     expect(response.type).toEqual('application/json')
-    expect(response.body).toEqual({ success: false, message: ErrorEnum.USERNAME_MISSING })
+    expect(response.body).toEqual({ success: false, code: ErrorEnum.USERNAME_MISSING })
     done()
   })
 
@@ -37,7 +37,7 @@ describe('routes post register', () => {
     const response = await request(app.callback()).post('/register').send({ email: 'test@test.test', username: 'real' })
     expect(response.status).toEqual(200)
     expect(response.type).toEqual('application/json')
-    expect(response.body).toEqual({ success: false, message: ErrorEnum.PASSWORD_MISSING })
+    expect(response.body).toEqual({ success: false, code: ErrorEnum.PASSWORD_MISSING })
     done()
   })
 
@@ -45,7 +45,7 @@ describe('routes post register', () => {
     const response = await request(app.callback()).post('/register').send({ email: 'test@test.test', username: 'real', password: 'short' })
     expect(response.status).toEqual(200)
     expect(response.type).toEqual('application/json')
-    expect(response.body).toEqual({ success: false, message: ErrorEnum.PASSWORD_TOO_SHORT })
+    expect(response.body).toEqual({ success: false, code: ErrorEnum.PASSWORD_TOO_SHORT })
     done()
   })
 

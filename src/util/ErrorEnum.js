@@ -12,7 +12,11 @@ const ErrorEnum = {
   EMAIL_MISSING: 'EMAIL_MISSING',
 
   GAME_UNKNOWN: 'GAME_UNKNOWN',
-  GAME_NOT_LOADED: 'GAME_NOT_LOADED'
+  GAME_NOT_LOADED: 'GAME_NOT_LOADED',
+
+  has: string => {
+    return Object.prototype.hasOwnProperty.call(ErrorEnum, string)
+  }
 }
 
 Object.freeze(ErrorEnum)

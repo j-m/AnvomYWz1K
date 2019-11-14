@@ -21,7 +21,7 @@ describe('routes post username', () => {
     const response = await request(app.callback()).post('/username').send({ username: 'real' })
     expect(response.status).toEqual(200)
     expect(response.type).toEqual('application/json')
-    expect(response.body).toEqual({ success: false, message: ErrorEnum.USERNAME_IN_USE })
+    expect(response.body).toEqual({ success: false, code: ErrorEnum.USERNAME_IN_USE })
     done()
   })
 
