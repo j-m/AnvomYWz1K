@@ -1,19 +1,15 @@
 const connection = require('../../src/database/connection.js')
 const queries = require('../../src/database/queries.js')
 
-let originalDatabaseName = process.env.DATABASE
-
 describe('database', () => {
   beforeAll(async () => {
     jest.resetModules()
-    originalDatabaseName = process.env.DATABASE
     process.env.DATABASE = ':memory:'
     await connection.open()
   })
 
   afterAll(async () => {
     await connection.close()
-    process.env.DATABASE = originalDatabaseName
   })
 
   describe('queries', () => {
