@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt-promise')
 
 const connection = require('../../database/connection.js')
 const validateUsername = require('./util/validateUsername.js')
+const ErrorEnum = require('../../util/ErrorEnum')
 
 async function insert (email, username, password) {
   const salt = await bcrypt.genSalt(Number(process.env.SALT_ROUNDS))
@@ -11,16 +12,16 @@ async function insert (email, username, password) {
 
 function validateEmail (email) {
   if (email === undefined) {
-    throw new Error('NEW_EMAIL_MISSING')
+    throw new Error(ErrorEnum.USERNAME_MISSING)
   }
 }
 
 function validatePassword (password) {
   if (password === undefined) {
-    throw new Error('NEW_PASSWORD_MISSING')
+    throw new Error(ErrorEnum.PASSWORD_MISSING)
   }
   if (password.length < process.env.MINIMUM_PASSWORD_LENGTH) {
-    throw new Error('NEW_PASSWORD_TOO_SHORT')
+    throw new Error(ErrorEnum.PASSWORD_TOO_SHORT)
   }
 }
 

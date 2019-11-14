@@ -1,14 +1,16 @@
 const bcrypt = require('bcrypt-promise')
+
 const connection = require('../../database/connection.js')
+const ErrorEnum = require('../../util/ErrorEnum')
 
 async function checkPassword (username, password) {
   const records = await connection.all('select.memberByUsername', username)
   if (records.length === 0) {
-    throw new Error('USERNAME_UNKNOWN')
+    throw new Error(ErrorEnum.USERNAME_UNKNOWN)
   }
   const valid = await bcrypt.compare(password, records[0].password)
   if (valid === false) {
-    throw new Error('PASSWORD_INCORRECT')
+    throw new Error(ErrorEnum.PASSWORD_INCORRECT)
   }
 }
 
@@ -18,10 +20,10 @@ async function login (context, next) {
     const username = body.username
     const password = body.password
     if (username === undefined) {
-      throw new Error('USERNAME_MISSING')
+      throw new Error(ErrorEnum.USERNAME_MISSING)
     }
     if (password === undefined) {
-      throw new Error('PASSWORD_MISSING')
+      throw new Error(ErrorEnum.PASSWORD_MISSING)
     }
     await checkPassword(username, password)
     context.session.authorised = true
