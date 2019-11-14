@@ -1,0 +1,49 @@
+<div class="popup" onclick="hide('login', event)">
+  <form id="login" onsubmit="login(event)">
+    <div class="input_header">
+    	<label for="username">Username</label>
+      <p class="error" id="USERNAME_MISSING">This field is required. </p>
+    </div>
+    <input type="text" id="username" name="username" autocomplete="current-username" required/>
+    <p class="error" id="USERNAME_UNKNOWN">This username does not exist. </p>
+    
+    <div class="input_header">
+    	<label for="password">Password</label>
+      <p class="error" id="PASSWORD_MISSING">This field is required. </p>
+    </div>
+    <input type="password" id="password" name="password" autocomplete="current-password" required/>
+    <p class="error" id="PASSWORD_INCORRECT">Incorrect password. </p>
+    
+  	<input type="submit" value="Log in"/>
+    <a href="#forgot">Forgot password</a>
+  </form>
+</div>
+
+<div class="popup" onclick="hide('register', event)">
+  <form id="register" onsubmit="register(event)">
+    <div class="input_header">
+    	<label for="email">Email</label>
+      <p class="error" id="NEW_EMAIL_MISSING">This field is required. </p>
+    </div>
+    <input type="email" id="email" name="email" autocomplete="email" required/>
+    
+    <div class="input_header">
+    	<label for="new-username">Username</label>
+      <p class="error" id="NEW_USERNAME_MISSING">This field is required. </p>
+      <p class="error" id="NEW_USERNAME_AVAILABLE">Username available. </p>
+    </div>
+    <input type="text" id="new-username" name="new-username" autocomplete="none" required/>
+    <button type="button" onclick="checkUsernameAvailability()">&#x21bb;</button>
+    <p class="error" id="NEW_USERNAME_IN_USE">This username is already in use. </p>
+    <p class="info" id="NEW_USERNAME_BAD_REGEX">Usernames can only contain letters and numbers. <br/> They may contain, but not start or end with, hyphens(-). </p>
+    
+    <div class="input_header">
+    	<label for="new-password">Password</label>
+      <p class="error" id="NEW_PASSWORD_MISSING">This field is required. </p>
+    </div>
+    <input type="password" id="new-password" name="new-password" minlength="10" autocomplete="new-password" required/>
+    <p class="info" id="NEW_PASSWORD_TOO_SHORT">Passwords must be at least 10 characters long. </p>
+    
+  	<input type="submit" value="Register">
+  </form>
+</div>
