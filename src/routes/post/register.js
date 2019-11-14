@@ -12,7 +12,7 @@ async function insert (email, username, password) {
 
 function validateEmail (email) {
   if (email === undefined) {
-    throw new Error(ErrorEnum.USERNAME_MISSING)
+    throw new Error(ErrorEnum.EMAIL_MISSING)
   }
 }
 

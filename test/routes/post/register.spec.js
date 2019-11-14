@@ -2,6 +2,7 @@ const request = require('supertest')
 
 const app = require('../../../src/app/koa')
 const connection = require('../../../src/database/connection')
+const ErrorEnum = require('../../../src/util/ErrorEnum')
 
 beforeAll(async () => {
   jest.resetModules()
@@ -20,7 +21,7 @@ describe('routes post register', () => {
     const response = await request(app.callback()).post('/register').send({ })
     expect(response.status).toEqual(200)
     expect(response.type).toEqual('application/json')
-    expect(response.body).toEqual({ success: false, message: 'NEW_EMAIL_MISSING' })
+    expect(response.body).toEqual({ success: false, message: ErrorEnum.EMAIL_MISSING })
     done()
   })
 
@@ -28,7 +29,7 @@ describe('routes post register', () => {
     const response = await request(app.callback()).post('/register').send({ email: 'test@test.test' })
     expect(response.status).toEqual(200)
     expect(response.type).toEqual('application/json')
-    expect(response.body).toEqual({ success: false, message: 'NEW_USERNAME_MISSING' })
+    expect(response.body).toEqual({ success: false, message: ErrorEnum.USERNAME_MISSING })
     done()
   })
 
@@ -36,7 +37,7 @@ describe('routes post register', () => {
     const response = await request(app.callback()).post('/register').send({ email: 'test@test.test', username: 'real' })
     expect(response.status).toEqual(200)
     expect(response.type).toEqual('application/json')
-    expect(response.body).toEqual({ success: false, message: 'NEW_PASSWORD_MISSING' })
+    expect(response.body).toEqual({ success: false, message: ErrorEnum.PASSWORD_MISSING })
     done()
   })
 
@@ -44,7 +45,7 @@ describe('routes post register', () => {
     const response = await request(app.callback()).post('/register').send({ email: 'test@test.test', username: 'real', password: 'short' })
     expect(response.status).toEqual(200)
     expect(response.type).toEqual('application/json')
-    expect(response.body).toEqual({ success: false, message: 'NEW_PASSWORD_TOO_SHORT' })
+    expect(response.body).toEqual({ success: false, message: ErrorEnum.PASSWORD_TOO_SHORT })
     done()
   })
 

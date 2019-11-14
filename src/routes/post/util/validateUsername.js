@@ -9,7 +9,7 @@ async function validateUsername (username) {
   if (matches === null || matches.length !== 1) {
     throw Error(ErrorEnum.USERNAME_BAD_REGEX)
   }
-  const records = await connection.run('select.memberByUsername', username)
+  const records = await connection.all('select.memberByUsername', username)
   if (records.length !== 0) {
     throw Error(ErrorEnum.USERNAME_IN_USE)
   }

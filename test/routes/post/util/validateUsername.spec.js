@@ -1,5 +1,6 @@
 const validateUsername = require('../../../../src/routes/post/util/validateUsername')
 const connection = require('../../../../src/database/connection')
+const ErrorEnum = require('../../../../src/util/ErrorEnum')
 
 beforeAll(async () => {
   jest.resetModules()
@@ -15,15 +16,15 @@ afterAll(async () => {
 
 describe('routes post util validateUsername', () => {
   test('requires username', async () => {
-    await expect(validateUsername()).rejects.toThrow('NEW_USERNAME_MISSING')
+    await expect(validateUsername()).rejects.toThrow(ErrorEnum.USERNAME_MISSING)
   })
 
   test('username cannot start with -', async () => {
-    await expect(validateUsername('-bad')).rejects.toThrow('NEW_USERNAME_BAD_REGEX')
+    await expect(validateUsername('-bad')).rejects.toThrow(ErrorEnum.USERNAME_BAD_REGEX)
   })
 
   test('username cannot end with -', async () => {
-    await expect(validateUsername('bad-')).rejects.toThrow('NEW_USERNAME_BAD_REGEX')
+    await expect(validateUsername('bad-')).rejects.toThrow(ErrorEnum.USERNAME_BAD_REGEX)
   })
 
   test('username can contain -', async () => {
@@ -31,7 +32,7 @@ describe('routes post util validateUsername', () => {
   })
 
   test('username is not in use', async () => {
-    await expect(validateUsername('real')).rejects.toThrow('NEW_USERNAME_IN_USE')
+    await expect(validateUsername('real')).rejects.toThrow(ErrorEnum.USERNAME_IN_USE)
   })
 
   test('does not throw if username not in use and valid', async () => {

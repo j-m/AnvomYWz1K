@@ -2,6 +2,7 @@ const request = require('supertest')
 
 const app = require('../../../src/app/koa')
 const connection = require('../../../src/database/connection')
+const ErrorEnum = require('../../../src/util/ErrorEnum')
 
 beforeAll(async () => {
   jest.resetModules()
@@ -20,7 +21,7 @@ describe('routes post username', () => {
     const response = await request(app.callback()).post('/username').send({ username: 'real' })
     expect(response.status).toEqual(200)
     expect(response.type).toEqual('application/json')
-    expect(response.body).toEqual({ success: false, message: 'NEW_USERNAME_IN_USE' })
+    expect(response.body).toEqual({ success: false, message: ErrorEnum.USERNAME_IN_USE })
     done()
   })
 
