@@ -3,7 +3,7 @@ CREATE TABLE IF NOT EXISTS games (
   title TEXT UNIQUE NOT NULL,
   summary TEXT NOT NULL,
   thumbnail TEXT NOT NULL,
-  publisher TEXT NOT NULL,
+  publisher TEXT,
   description TEXT,
   store TEXT,
   steamAppID TEXT,

@@ -16,7 +16,6 @@ async function generateID () {
 class Game {
   get data () {
     return [
-      this.id,
       this.title,
       this.summary,
       this.thumbnail,
@@ -31,7 +30,7 @@ class Game {
 
   async create (game) {
     if (game === undefined) {
-      throw Error(ErrorEnum.GAME_MISSING)
+      throw Error(ErrorEnum.FUNCTION_MISUSE_PARAM_MISSING)
     }
     if (game.title === undefined) {
       throw Error(ErrorEnum.GAME_TITLE_MISSING)
@@ -64,7 +63,7 @@ class Game {
     if (this.loaded !== true) {
       throw Error(ErrorEnum.GAME_NOT_LOADED)
     }
-    await connection.run('update.game', this.data)
+    await connection.run('update.game', ...this.data, this.id)
   }
 }
 
