@@ -1,3 +1,44 @@
+#games {
+ display: flex; 
+}
+
+.game {
+  width: 12rem;
+  height: 18rem;
+  margin: 1rem;
+  transition: width 0.2s ease-in, margin 0.2s ease-in;
+}
+
+.game:hover {
+  width: 13rem;
+  height: 18rem;
+  margin: 0.5rem;
+}
+
+.game img {
+  width: 100%;
+}
+
+#addGameButton {
+  width: 6rem;
+  height: 6rem;
+  margin: auto 2rem;
+  box-sizing: border-box;
+  border: 0.5rem solid #cccccc;
+  border-radius: 50%;
+  background: none;
+  font-size: 4rem;
+  color: #cccccc;
+  transition: color 0.2s ease-in, border-color 0.2s ease-in;
+  cursor: pointer;
+}
+
+#addGameButton:hover {
+  border-color: #aaaaaa;
+  color: #aaaaaa;
+}
+
+
 #addGame {
   display: grid;
   grid-template-columns: 1fr 2fr;
