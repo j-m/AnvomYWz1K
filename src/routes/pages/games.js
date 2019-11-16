@@ -1,5 +1,6 @@
+'use strict'
+
 const authorisation = require('./util/authorisation')
-const games = require('../api/games')
 
 /**
  * The landing page visible to visitors.
@@ -8,9 +9,8 @@ const games = require('../api/games')
  * @route {GET} /
  * @authentication None.
  */
-async function game (context, next) {
+async function game(context) {
   const parameters = authorisation(context, {})
-  parameters.games = await games()
   await context.render('games', parameters)
 }
 

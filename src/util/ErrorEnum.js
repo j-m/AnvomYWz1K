@@ -1,3 +1,5 @@
+'use strict'
+
 const ErrorEnum = {
   FUNCTION_MISUSE_PARAM_MISSING: 'FUNCTION_MISUSE_PARAM_MISSING',
 
@@ -19,10 +21,9 @@ const ErrorEnum = {
   GAME_TITLE_MISSING: 'GAME_TITLE_MISSING',
   GAME_SUMMARY_MISSING: 'GAME_SUMMARY_MISSING',
   GAME_THUMBNAIL_MISSING: 'GAME_THUMBNAIL_MISSING',
+  GAME_UNEXPECTED_KEY: 'GAME_UNEXPECTED_KEY',
 
-  has: string => {
-    return Object.prototype.hasOwnProperty.call(ErrorEnum, string)
-  }
+  has: property => Object.prototype.hasOwnProperty.call(ErrorEnum, property)
 }
 
 Object.freeze(ErrorEnum)

@@ -1,20 +1,60 @@
-var randomstring = require('randomstring')
+'use strict'
 
 const connection = require('../database/connection')
 const ErrorEnum = require('../util/ErrorEnum')
+const random = require('../util/random')
 
-async function generateID () {
+async function generateID() {
   let results
   let id
   while (results === undefined || results.length !== 0) {
-    id = randomstring.generate(8)
+    id = random.base64String()
     results = await connection.all('select.gameByID', id)
   }
   return id
 }
 
+function hasRequiredProperties(game) {
+  if (game === undefined) {
+    throw Error(ErrorEnum.FUNCTION_MISUSE_PARAM_MISSING)
+  }
+  if (game.title === undefined) {
+    throw Error(ErrorEnum.GAME_TITLE_MISSING)
+  }
+  if (game.summary === undefined) {
+    throw Error(ErrorEnum.GAME_SUMMARY_MISSING)
+  }
+  if (game.thumbnail === undefined) {
+    throw Error(ErrorEnum.GAME_THUMBNAIL_MISSING)
+  }
+}
+
+function isExpectedProperty(key) {
+  const expectedKeys = [
+    'title',
+    'summary',
+    'thumbnail',
+    'publisher',
+    'description',
+    'store',
+    'steamAppID',
+    'tags',
+    'releaseDate'
+  ]
+  if (expectedKeys.includes(key) === false) {
+    throw Error(ErrorEnum.GAME_UNEXPECTED_KEY)
+  }
+}
+
+function onlyHasExpectedProperties(game) {
+  const keys = Object.keys(game)
+  for (const key of keys) {
+    isExpectedProperty(key)
+  }
+}
+
 class Game {
-  get data () {
+  get data() {
     return [
       this.title,
       this.summary,
@@ -28,29 +68,19 @@ class Game {
     ]
   }
 
-  async create (game) {
-    if (game === undefined) {
-      throw Error(ErrorEnum.FUNCTION_MISUSE_PARAM_MISSING)
-    }
-    if (game.title === undefined) {
-      throw Error(ErrorEnum.GAME_TITLE_MISSING)
-    }
-    if (game.summary === undefined) {
-      throw Error(ErrorEnum.GAME_SUMMARY_MISSING)
-    }
-    if (game.thumbnail === undefined) {
-      throw Error(ErrorEnum.GAME_THUMBNAIL_MISSING)
-    }
+  async create(game) {
+    hasRequiredProperties(game)
+    onlyHasExpectedProperties(game)
     const results = await connection.all('select.gameByTitle', game.title)
     if (results !== undefined && results.length !== 0) {
       throw Error(ErrorEnum.GAME_TITLE_IN_USE)
     }
-    await connection.run('insert.game', await generateID(), game.title, game.summary, game.thumbnail, game.publisher, game.description, game.store, game.steamAppID, game.tags, game.releaseDate)
-    await this.get(game.title)
+    Object.assign(this, game)
+    await connection.run('insert.game', await generateID(), ...this.data)
     this.loaded = true
   }
 
-  async get (title) {
+  async get(title) {
     const results = await connection.all('select.gameByTitle', title)
     if (results === undefined || results.length !== 1) {
       throw Error(ErrorEnum.GAME_UNKNOWN)
@@ -59,7 +89,7 @@ class Game {
     this.loaded = true
   }
 
-  async updateRecord () {
+  async updateRecord() {
     if (this.loaded !== true) {
       throw Error(ErrorEnum.GAME_NOT_LOADED)
     }

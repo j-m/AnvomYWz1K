@@ -1,3 +1,5 @@
+'use strict'
+
 const Router = require('koa-router')
 
 const gamesPage = require('../routes/pages/games')
@@ -13,14 +15,14 @@ const game = require('../routes/post/game')
 const router = new Router()
 
 router.redirect('/', '/games/')
-router.get('/games', async (context, next) => { await gamesPage(context, next) })
+router.get('/games', async(context, next) => await gamesPage(context, next))
 
-router.get('/api/games', async (context, next) => { await gamesAPI(context, next) })
+router.get('/api/games', async(context, next) => await gamesAPI(context, next))
 
-router.post('/login', async (context, next) => { await login(context, next) })
-router.post('/register', async (context, next) => { await register(context, next) })
-router.post('/logout', async (context, next) => { await logout(context, next) })
-router.post('/username', async (context, next) => { await username(context, next) })
-router.post('/game', async (context, next) => { await game(context, next) })
+router.post('/login', async(context, next) => await login(context, next))
+router.post('/register', async(context, next) => await register(context, next))
+router.post('/logout', async(context, next) => await logout(context, next))
+router.post('/username', async(context, next) => await username(context, next))
+router.post('/game', async(context, next) => await game(context, next))
 
 module.exports = router

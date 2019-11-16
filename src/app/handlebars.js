@@ -1,7 +1,9 @@
+'use strict'
+
 const path = require('path')
 const views = require('koa-views')
 
-function getViews (context, next) {
+function getViews(context, next) {
   const middleware = views(path.join(__dirname, '../views'), {
     extension: 'hbs',
     options: {

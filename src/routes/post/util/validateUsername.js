@@ -1,7 +1,9 @@
+'use strict'
+
 const connection = require('../../../database/connection')
 const ErrorEnum = require('../../../util/ErrorEnum')
 
-async function validateUsername (username) {
+async function validateUsername(username) {
   if (username === undefined || username === '') {
     throw Error(ErrorEnum.USERNAME_MISSING)
   }

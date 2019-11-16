@@ -1,4 +1,6 @@
-async function addGame (event) {
+'use strict'
+
+async function addGame(event) {
   event.preventDefault()
 
   const formData = new FormData(document.querySelector('#addGame'))

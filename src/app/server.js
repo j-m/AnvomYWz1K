@@ -1,3 +1,5 @@
+'use strict'
+
 const http = require('http')
 const app = require('./koa')
 
@@ -6,14 +8,14 @@ const port = process.env.PORT
 
 let server
 
-function open () {
+function open() {
   server = http.createServer(app.callback())
   server.listen(port, host, () => {
     console.log(`Listening on http://${host}:${port}`)
   }).on('error', error => console.log(error))
 }
 
-function close () {
+function close() {
   if (server !== undefined) {
     server.close()
   }

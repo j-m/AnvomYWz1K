@@ -1,3 +1,5 @@
+'use strict'
+
 async function checkUsernameAvailability () {
   const username = document.getElementById('new-username').value
   const result = await fetch('/username', {
@@ -95,7 +97,7 @@ async function register (event) {
   return false
 }
 
-async function logout (event) {
+async function logout() {
   const result = await fetch('/logout', {
     method: 'POST',
     cache: 'no-cache',

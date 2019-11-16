@@ -1,14 +1,16 @@
+'use strict'
+
 const connection = require('../../src/database/connection')
 const Member = require('../../src/models/member')
 
 describe('database models member', () => {
-  beforeAll(async () => {
+  beforeAll(async() => {
     jest.resetModules()
     process.env.DATABASE = ':memory:'
     await connection.open()
   })
 
-  afterAll(async () => {
+  afterAll(async() => {
     await connection.close()
   })
 

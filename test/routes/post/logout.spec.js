@@ -1,15 +1,17 @@
+'use strict'
+
 const request = require('supertest')
 
 const app = require('../../../src/app/koa')
 const connection = require('../../../src/database/connection')
 
-beforeAll(async () => {
+beforeAll(async() => {
   jest.resetModules()
   process.env.DATABASE = ':memory:'
   await connection.open()
 })
 
-afterAll(async () => {
+afterAll(async() => {
   await connection.close()
 })
 

@@ -1,17 +1,15 @@
-const ErrorEnum = require('../../util/ErrorEnum')
+'use strict'
+
+const handleError = require('./util/handleError')
 const Game = require('../../models/game')
 
-async function game (context, next) {
+async function game(context) {
   try {
     const body = context.request.body
     await new Game().create(body)
     context.body = { success: true }
   } catch (error) {
-    if (ErrorEnum.has(error.message)) {
-      context.body = { success: false, code: error.message }
-    } else {
-      context.body = { success: false, message: error.message }
-    }
+    handleError(context, error)
   }
 }
 

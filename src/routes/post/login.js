@@ -1,9 +1,12 @@
+'use strict'
+
 const bcrypt = require('bcrypt-promise')
 
 const connection = require('../../database/connection')
 const ErrorEnum = require('../../util/ErrorEnum')
+const handleError = require('./util/handleError')
 
-async function checkPassword (username, password) {
+async function checkPassword(username, password) {
   const records = await connection.all('select.memberByUsername', username)
   if (records.length === 0) {
     throw new Error(ErrorEnum.USERNAME_UNKNOWN)
@@ -15,7 +18,7 @@ async function checkPassword (username, password) {
   return records
 }
 
-async function login (context, next) {
+async function login(context) {
   try {
     const body = context.request.body
     const username = body.username
@@ -32,11 +35,7 @@ async function login (context, next) {
     context.session.privileges = records[0].privileges
     context.body = { success: true }
   } catch (error) {
-    if (ErrorEnum.has(error.message)) {
-      context.body = { success: false, code: error.message }
-    } else {
-      context.body = { success: false, message: error.message }
-    }
+    handleError(context, error)
   }
 }
 

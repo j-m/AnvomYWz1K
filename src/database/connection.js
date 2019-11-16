@@ -1,18 +1,22 @@
+'use strict'
+
 const sqlite = require('sqlite-async')
 
 const queries = require('./queries')
 
 let database
 
-async function open () {
+async function open() {
   await Promise.all([
-    sqlite.open(process.env.DATABASE).then(db => { database = db }),
+    sqlite.open(process.env.DATABASE).then(db => {
+      database = db
+    }),
     queries.load()
   ])
   await createTables()
 }
 
-async function createTables () {
+async function createTables() {
   const games = run('create.games')
   const flags = run('create.flags')
   const members = run('create.members')
@@ -25,21 +29,21 @@ async function createTables () {
   await Promise.all([games, flags, members, reviews, comments, assessments])
 }
 
-async function close () {
+async function close() {
   if (database !== undefined) {
     await database.close()
   }
   queries.close()
 }
 
-async function run (file, ...values) {
+async function run(file, ...values) {
   const query = queries.get(file)
   return database.run(query, values).catch(error => {
     throw Error(`Error running '${file}' with values '${values}'. ${error}`)
   })
 }
 
-async function all (file, ...values) {
+async function all(file, ...values) {
   const query = queries.get(file)
   return database.all(query, values)
 }

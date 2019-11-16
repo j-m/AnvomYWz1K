@@ -1,4 +1,6 @@
-function authorisation (context, parameters) {
+'use strict'
+
+function authorisation(context, parameters) {
   parameters.username = context.session.username
   if (context.session.privileges === 'administrator') {
     parameters.administrator = true
