@@ -1,12 +1,15 @@
+'use strict'
+
 const path = require('path')
 const views = require('koa-views')
 
-function getViews (context, next) {
+function getViews(context, next) {
   const middleware = views(path.join(__dirname, '../views'), {
     extension: 'hbs',
     options: {
       partials: {
-        loginRegistration: './partials/loginRegistration'
+        loginRegistration: './partials/loginRegistration',
+        games: './partials/games'
       },
       settings: {
         views: path.join(__dirname, '../views')

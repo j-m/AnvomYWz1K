@@ -1,3 +1,5 @@
+'use strict'
+
 async function checkUsernameAvailability () {
   const username = document.getElementById('new-username').value
   const result = await fetch('/username', {
@@ -9,16 +11,20 @@ async function checkUsernameAvailability () {
     body: JSON.stringify({ username })
   }).then(res => res.json())
 
-  document.getElementById('NEW_USERNAME_MISSING').classList.remove('show')
-  document.getElementById('NEW_USERNAME_IN_USE').classList.remove('show')
-  document.getElementById('NEW_USERNAME_BAD_REGEX').classList.remove('show')
-  document.getElementById('NEW_USERNAME_AVAILABLE').classList.remove('show')
+  const shown = document.querySelector('#register .show')
+  if (shown !== null) {
+    shown.forEach(item => {
+      item.classList.remove('show')
+    })
+  }
 
   if (result.success === false) {
-    console.log(result.message)
-    document.getElementById(result.message).classList.add('show')
+    console.log(result)
+    if (result.code !== undefined) {
+      document.querySelector('#register .' + result.code).classList.add('show')
+    }
   } else {
-    document.getElementById('NEW_USERNAME_AVAILABLE').classList.add('show')
+    document.querySelector('#register .USERNAME_AVAILABLE').classList.add('show')
   }
 }
 
@@ -36,15 +42,18 @@ async function login (event) {
     body: JSON.stringify({ username, password })
   }).then(res => res.json())
 
-  document.getElementById('USERNAME_MISSING').classList.remove('show')
-  document.getElementById('USERNAME_UNKNOWN').classList.remove('show')
-
-  document.getElementById('PASSWORD_MISSING').classList.remove('show')
-  document.getElementById('PASSWORD_INCORRECT').classList.remove('show')
+  const shown = document.querySelector('#login .show')
+  if (shown !== null) {
+    shown.forEach(item => {
+      item.classList.remove('show')
+    })
+  }
 
   if (result.success === false) {
-    console.log(result.message)
-    document.getElementById(result.message).classList.add('show')
+    console.log(result)
+    if (result.code !== undefined) {
+      document.querySelector('#login .' + result.code).classList.add('show')
+    }
   } else {
     hide('login')
     location.reload()
@@ -68,19 +77,18 @@ async function register (event) {
     body: JSON.stringify({ email, username, password })
   }).then(res => res.json())
 
-  document.getElementById('NEW_EMAIL_MISSING').classList.remove('show')
-
-  document.getElementById('NEW_USERNAME_MISSING').classList.remove('show')
-  document.getElementById('NEW_USERNAME_IN_USE').classList.remove('show')
-  document.getElementById('NEW_USERNAME_BAD_REGEX').classList.remove('show')
-  document.getElementById('NEW_USERNAME_AVAILABLE').classList.remove('show')
-
-  document.getElementById('NEW_PASSWORD_MISSING').classList.remove('show')
-  document.getElementById('NEW_PASSWORD_TOO_SHORT').classList.remove('show')
+  const shown = document.querySelector('#register .show')
+  if (shown !== null) {
+    shown.forEach(item => {
+      item.classList.remove('show')
+    })
+  }
 
   if (result.success === false) {
-    console.log(result.message)
-    document.getElementById(result.message).classList.add('show')
+    console.log(result)
+    if (result.code !== undefined) {
+      document.querySelector('#register .' + result.code).classList.add('show')
+    }
   } else {
     hide('register')
     location.reload()
@@ -89,7 +97,7 @@ async function register (event) {
   return false
 }
 
-async function logout (event) {
+async function logout() {
   const result = await fetch('/logout', {
     method: 'POST',
     cache: 'no-cache',
@@ -100,20 +108,8 @@ async function logout (event) {
   }).then(res => res.json())
 
   if (result.success === false) {
-    console.log(result.message)
+    console.log(result)
   } else {
     location.reload()
   }
-}
-
-function hide (popup, event) {
-  if (event && event.target !== document.getElementById(popup).parentElement) {
-    return
-  }
-  document.getElementById(popup).parentElement.classList.remove('show')
-}
-
-function show (popup) {
-  document.getElementById(popup).parentElement.classList.add('show')
-  return false
 }

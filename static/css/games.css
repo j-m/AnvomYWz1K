@@ -1,0 +1,85 @@
+#games {
+ display: flex; 
+}
+
+.game {
+  width: 12rem;
+  height: 18rem;
+  margin: 1rem;
+  transition: width 0.2s ease-in, margin 0.2s ease-in;
+}
+
+.game:hover {
+  width: 13rem;
+  height: 18rem;
+  margin: 0.5rem;
+}
+
+.game img {
+  width: 100%;
+}
+
+#addGameButton {
+  width: 6rem;
+  height: 6rem;
+  margin: auto 2rem;
+  box-sizing: border-box;
+  border: 0.5rem solid #cccccc;
+  border-radius: 50%;
+  background: none;
+  font-size: 4rem;
+  color: #cccccc;
+  transition: color 0.2s ease-in, border-color 0.2s ease-in;
+  cursor: pointer;
+}
+
+#addGameButton:hover {
+  border-color: #aaaaaa;
+  color: #aaaaaa;
+}
+
+
+#addGame {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  width: 50rem;
+}
+
+#addGame h1 {
+  grid-column: 1/4;
+  margin: 0;
+  font-weight: normal;
+}
+
+#addGame hr {
+  grid-column: 1/4;
+  margin: 0.5rem 0;
+}
+
+#addGame fieldset:nth-of-type(1) {
+  border:0;
+  padding: 0;
+  grid-column: 1/2;
+}
+
+#addGame fieldset:nth-of-type(2) {
+  grid-column: 2/4;
+  margin: 0.5rem;
+}
+
+#addGame fieldset:nth-of-type(2) div {
+  width: 48%;
+}
+
+#addGame fieldset:nth-of-type(2) div:nth-of-type(1) {
+  float: left;
+}
+
+#addGame fieldset:nth-of-type(2) div:nth-of-type(2) {
+  float: right;
+}
+
+#addGame input[type="submit"] {
+  margin-top: 0.25rem;
+  grid-column: 1/4;
+}
