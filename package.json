@@ -6,7 +6,6 @@
   "scripts": {
     "coverage": "jest --coverage --detectOpenHandles",
     "debug": "node --inspect ./src/main.js",
-    "doc": "jsdoc -c ./jsdoc.conf",
     "format": "eslint ./src/* --fix",
     "start": "node ./src/main.js",
     "test": "jest --detectOpenHandles"
@@ -37,11 +36,8 @@
   },
   "devDependencies": {
     "eslint": "^6.6.0",
-    "husky": "^3.0.9",
     "jest": "^24.9.0",
     "jest-extended": "^0.11.2",
-    "jsdoc": "^3.6.3",
-    "jsdoc-route-plugin": "^0.1.0",
     "sqlite-async": "^1.0.12",
     "supertest": "^4.0.2"
   },
@@ -124,13 +120,6 @@
         }
       }
     ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run format",
-      "pre-push": "npm run coverage",
-      "pre-merge": "npm run doc"
-    }
   },
   "jest": {
     "coverageThreshold": {
