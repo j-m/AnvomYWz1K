@@ -1,9 +1,12 @@
+'use strict'
+
 const request = require('supertest')
 
-const app = require('../../../src/app/koa.js')
-const connection = require('../../../src/database/connection.js')
+const app = require('../../../src/app/koa')
+const connection = require('../../../src/database/connection')
+const ErrorEnum = require('../../../src/util/ErrorEnum')
 
-beforeAll(async () => {
+beforeAll(async() => {
   jest.resetModules()
   process.env.DATABASE = ':memory:'
   process.env.SALT_ROUNDS = 12
@@ -11,7 +14,7 @@ beforeAll(async () => {
   await connection.open()
 })
 
-afterAll(async () => {
+afterAll(async() => {
   await connection.close()
 })
 
@@ -20,36 +23,49 @@ describe('routes post register', () => {
     const response = await request(app.callback()).post('/register').send({ })
     expect(response.status).toEqual(200)
     expect(response.type).toEqual('application/json')
-    expect(response.body).toEqual({ success: false, message: 'NEW_EMAIL_MISSING' })
+    expect(response.body).toEqual({ success: false, code: ErrorEnum.EMAIL_MISSING })
     done()
   })
 
   test('validates username', async done => {
-    const response = await request(app.callback()).post('/register').send({ email: 'test@test.test' })
+    const response = await request(app.callback()).post('/register').send({
+      email: 'test@test.test'
+    })
     expect(response.status).toEqual(200)
     expect(response.type).toEqual('application/json')
-    expect(response.body).toEqual({ success: false, message: 'NEW_USERNAME_MISSING' })
+    expect(response.body).toEqual({ success: false, code: ErrorEnum.USERNAME_MISSING })
     done()
   })
 
   test('requires password', async done => {
-    const response = await request(app.callback()).post('/register').send({ email: 'test@test.test', username: 'real' })
+    const response = await request(app.callback()).post('/register').send({
+      email: 'test@test.test',
+      username: 'real'
+    })
     expect(response.status).toEqual(200)
     expect(response.type).toEqual('application/json')
-    expect(response.body).toEqual({ success: false, message: 'NEW_PASSWORD_MISSING' })
+    expect(response.body).toEqual({ success: false, code: ErrorEnum.PASSWORD_MISSING })
     done()
   })
 
   test('password minimum length', async done => {
-    const response = await request(app.callback()).post('/register').send({ email: 'test@test.test', username: 'real', password: 'short' })
+    const response = await request(app.callback()).post('/register').send({
+      email: 'test@test.test',
+      username: 'real',
+      password: 'short'
+    })
     expect(response.status).toEqual(200)
     expect(response.type).toEqual('application/json')
-    expect(response.body).toEqual({ success: false, message: 'NEW_PASSWORD_TOO_SHORT' })
+    expect(response.body).toEqual({ success: false, code: ErrorEnum.PASSWORD_TOO_SHORT })
     done()
   })
 
   test('adds user to database', async done => {
-    const response = await request(app.callback()).post('/register').send({ email: 'test@test.test', username: 'real', password: 'longenough' })
+    const response = await request(app.callback()).post('/register').send({
+      email: 'test@test.test',
+      username: 'real',
+      password: 'longenough'
+    })
     expect(response.status).toEqual(200)
     expect(response.type).toEqual('application/json')
     expect(response.body).toEqual({ success: true })

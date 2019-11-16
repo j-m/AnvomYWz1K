@@ -2,10 +2,12 @@ CREATE TABLE IF NOT EXISTS games (
   id TEXT UNIQUE NOT NULL,
   title TEXT UNIQUE NOT NULL,
   summary TEXT NOT NULL,
-  publisher TEXT NOT NULL,
+  thumbnail TEXT NOT NULL,
+  publisher TEXT,
   description TEXT,
   store TEXT,
+  steamAppID TEXT,
   tags TEXT,
-  released DATETIME,
+  releaseDate DATETIME,
   PRIMARY KEY(id)
 ) WITHOUT ROWID;
