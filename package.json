@@ -1,6 +1,6 @@
 {
   "name": "340ct-marshj6",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Coventry University. Module 340CT. Coursework. Game Review. Jonathan Marsh",
   "main": "./src/main.js",
   "scripts": {
@@ -54,25 +54,82 @@
     },
     "rules": {
       "arrow-body-style": "error",
-      "arrow-spacing": ["error",{"before": true,"after": true}],
+      "arrow-spacing": [
+        "error",
+        {
+          "before": true,
+          "after": true
+        }
+      ],
       "brace-style": "error",
-      "camelcase": ["error"],
-      "complexity": ["error",5],
+      "camelcase": [
+        "error"
+      ],
+      "complexity": [
+        "error",
+        5
+      ],
       "eol-last": "error",
       "eqeqeq": "error",
-      "func-call-spacing": ["error","never"],
+      "func-call-spacing": [
+        "error",
+        "never"
+      ],
       "global-require": "error",
       "handle-callback-err": "error",
-      "indent": ["error",2,{"SwitchCase": 1}],
-      "key-spacing": ["error",{"beforeColon": false,"afterColon": true}],
-      "linebreak-style": ["error","windows"],
-      "max-depth": ["error",2],
-      "max-len": ["error",{"code": 120,"tabWidth": 2}],
-      "max-lines-per-function": ["error",20],
-      "max-lines": ["error",{"max": 150,"skipBlankLines": true,"skipComments": true}],
-      "max-nested-callbacks": ["error",2],
-      "max-params": ["error",4],
-      "max-statements": ["error",20],
+      "indent": [
+        "error",
+        2,
+        {
+          "SwitchCase": 1
+        }
+      ],
+      "key-spacing": [
+        "error",
+        {
+          "beforeColon": false,
+          "afterColon": true
+        }
+      ],
+      "linebreak-style": [
+        "error",
+        "windows"
+      ],
+      "max-depth": [
+        "error",
+        2
+      ],
+      "max-len": [
+        "error",
+        {
+          "code": 120,
+          "tabWidth": 2
+        }
+      ],
+      "max-lines-per-function": [
+        "error",
+        20
+      ],
+      "max-lines": [
+        "error",
+        {
+          "max": 150,
+          "skipBlankLines": true,
+          "skipComments": true
+        }
+      ],
+      "max-nested-callbacks": [
+        "error",
+        2
+      ],
+      "max-params": [
+        "error",
+        4
+      ],
+      "max-statements": [
+        "error",
+        20
+      ],
       "no-cond-assign": "error",
       "no-dupe-args": "error",
       "no-dupe-keys": "error",
@@ -82,7 +139,16 @@
       "no-extra-parens": "error",
       "no-func-assign": "error",
       "no-irregular-whitespace": "error",
-      "no-magic-numbers": ["error",{"ignore": [-1,0,1]}],
+      "no-magic-numbers": [
+        "error",
+        {
+          "ignore": [
+            -1,
+            0,
+            1
+          ]
+        }
+      ],
       "no-multi-spaces": "error",
       "no-multi-str": "off",
       "no-multiple-empty-lines": "error",
@@ -96,11 +162,26 @@
       "prefer-arrow-callback": "error",
       "prefer-const": "error",
       "prefer-template": "error",
-      "quotes": ["error","single"],
-      "semi": ["error","never"],
-      "space-before-blocks": ["error","always"],
-      "space-before-function-paren": ["error","never"],
-      "strict": ["error","global"],
+      "quotes": [
+        "error",
+        "single"
+      ],
+      "semi": [
+        "error",
+        "never"
+      ],
+      "space-before-blocks": [
+        "error",
+        "always"
+      ],
+      "space-before-function-paren": [
+        "error",
+        "never"
+      ],
+      "strict": [
+        "error",
+        "global"
+      ],
       "yoda": "error"
     },
     "overrides": [
@@ -114,7 +195,10 @@
           "global-require": "off",
           "max-lines-per-function": "off",
           "max-lines": "off",
-          "max-nested-callbacks": ["error", 4],
+          "max-nested-callbacks": [
+            "error",
+            4
+          ],
           "max-statements": "off",
           "no-magic-numbers": "off"
         }
