@@ -1,0 +1,34 @@
+#game {
+  position: relative;
+  color: white;
+}
+
+#banner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 15rem;
+}
+
+#title {
+  font-size: 10rem;
+  font-weight: bolder;
+  text-shadow: 0 0 0.5rem black;
+  margin: 0;
+  white-space: nowrap;
+  position: absolute;
+  left: 2.5rem;
+  top: 2.5rem;
+}
+
+#info {
+  background: rgba(0, 0, 0, 0.25);
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 15rem;
+}
+
+#summary {
+  
+}

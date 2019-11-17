@@ -48,16 +48,16 @@ describe('database models game', () => {
     test('throws if unexpected property', async done => {
       const game = await new Game()
       await expect(
-        game.create({ title: 'title', summary: 'summary', thumbnail: 'thumbnail', food: 'cheese' })
+        game.create({ steamAppID: 'steam', title: 'title', summary: 'summary', food: 'cheese' })
       ).rejects.toThrow(ErrorEnum.GAME_UNEXPECTED_KEY)
       done()
     })
 
     test('throws if game title not unique', async done => {
-      await connection.run('insert.game', 'id', 'title', 'summary', 'thumbnail')
+      await connection.run('insert.game', 'id', 'steam', 'title', 'summary')
       const game = await new Game()
       await expect(
-        game.create({ title: 'title', summary: 'summary', thumbnail: 'thumbnail' })
+        game.create({ steamAppID: 'steam', title: 'title', summary: 'summary'})
       ).rejects.toThrow(ErrorEnum.GAME_TITLE_IN_USE)
       connection.run('delete.gameByTitle', 'title')
       done()
@@ -65,7 +65,7 @@ describe('database models game', () => {
 
     test('successfully inserts a row into the games table', async done => {
       const game = await new Game()
-      await game.create({ title: 'title', summary: 'summary', thumbnail: 'thumbnail' })
+      await game.create({ steamAppID: 'steam', title: 'title', summary: 'summary' })
       const records = await connection.all('select.gameByTitle', 'title')
       expect(records.length).toEqual(1)
       connection.run('delete.gameByTitle', 'title')
@@ -81,7 +81,7 @@ describe('database models game', () => {
     })
 
     test('finds a game by title', async done => {
-      await connection.run('insert.game', 'id', 'title', 'summary', 'thumbnail')
+      await connection.run('insert.game', 'id', 'steam', 'title', 'summary')
       const game = await new Game()
       await game.get('title')
       expect(game.loaded).toEqual(true)
@@ -98,7 +98,7 @@ describe('database models game', () => {
     })
 
     test('updates a field', async done => {
-      await connection.run('insert.game', 'id', 'title', 'summary', 'thumbnail')
+      await connection.run('insert.game', 'id', 'steam', 'title', 'summary')
       const game = await new Game()
       await game.get('title')
       expect(game.loaded).toEqual(true)

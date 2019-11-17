@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Game Reviews - Game - {{ game.title }}</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    
+    <link href="../css/global.css" type="text/css" rel="stylesheet" />
+    <script src="../js/global.js" type="text/javascript"></script>
+    
+		<link href="../css/loginRegistration.css" type="text/css" rel="stylesheet" />
+    <script src="../js/loginRegistration.js" type="text/javascript"></script>
+    
+    <link href="../css/game.css" type="text/css" rel="stylesheet" />
+    <script src="../js/game.js" type="text/javascript"></script>
+	</head>
+  <body>
+    {{> loginRegistration }}
+
+    <div id="game">
+      <img id="banner" src="https://steamcdn-a.akamaihd.net/steam/apps/{{game.steamAppID}}/library_hero.jpg"/>
+      <h1 id="title">{{game.title}}</h1>
+      <div id="info">
+        <p id="summary">{{ game.summary}} </p>
+        <p id="developer">PUBLISHER {{ game.publisher }} </p>
+        <p id="publisher">PUBLISHER {{ game.publisher }} </p>
+        <p id="description">DESCRIPTION {{ game.description }} </p>
+        <p id="store">STORE {{ game.store }} </p>
+        <p id="tags">TAGS {{ game.tags }} </p>
+        <p id="releaseDate">YYYY/MM/DD {{ game.releaseDate }} </p>
+      </div>
+    </div>
+    
+  </body>
+
+</html>
