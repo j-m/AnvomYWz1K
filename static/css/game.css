@@ -54,6 +54,13 @@
 #info > a {
   position: relative;
   top: .5rem;
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-style: dashed;
+}
+
+#info > a:hover {
+  text-decoration-style: solid;
 }
 
 #info p span {
@@ -66,4 +73,9 @@
 
 #store a img {
   height: 2rem;
+}
+
+#fullDescription {
+  white-space: pre-line;
+  width: initial;
 }

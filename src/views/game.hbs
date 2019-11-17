@@ -24,13 +24,17 @@
       <div id="info">
         <p id="developer"><span>Developer</span>{{game.developer}}</p>
         <p id="publisher"><span>Publisher</span>{{game.publisher}}</p>
-        <p id="store"><span>Store</span><a href="{{game.store}}"><img src="../img/steam-logo.png"/></a></p>
+        <p id="store"><span>Store</span><a href="{{game.store}}" target="_blank"><img src="../img/steam-logo.png"/></a></p>
         <p id="releaseDate"><span>Release Date</span><time datetime="{{game.releaseDate}}">{{game.releaseDate}}</time></p>
         <p id="tags"><span>Tags</span>{{game.tags}}</p>
         <p id="summary"><span>Summary</span>{{game.summary}}</p>
         <p id="description"><span>Description</span>{{game.description}}</p>
-        <a>Read <br/> more</a>
+        <a onclick="show('fullDescription', event)">Read <br/> more</a>
       </div>
+    </div>
+    
+    <div class="popup" onclick="hide('fullDescription', event)">
+      <div id="fullDescription">{{game.description}}</div>
     </div>
     
   </body>
