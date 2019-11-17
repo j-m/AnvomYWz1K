@@ -22,13 +22,14 @@
       <img id="banner" src="https://steamcdn-a.akamaihd.net/steam/apps/{{game.steamAppID}}/library_hero.jpg"/>
       <h1 id="title">{{game.title}}</h1>
       <div id="info">
-        <p id="summary">{{ game.summary}} </p>
-        <p id="developer">PUBLISHER {{ game.publisher }} </p>
-        <p id="publisher">PUBLISHER {{ game.publisher }} </p>
-        <p id="description">DESCRIPTION {{ game.description }} </p>
-        <p id="store">STORE {{ game.store }} </p>
-        <p id="tags">TAGS {{ game.tags }} </p>
-        <p id="releaseDate">YYYY/MM/DD {{ game.releaseDate }} </p>
+        <p id="developer"><span>Developer</span>{{game.developer}}</p>
+        <p id="publisher"><span>Publisher</span>{{game.publisher}}</p>
+        <p id="store"><span>Store</span><a href="{{game.store}}"><img src="../img/steam-logo.png"/></a></p>
+        <p id="releaseDate"><span>Release Date</span><time datetime="{{game.releaseDate}}">{{game.releaseDate}}</time></p>
+        <p id="tags"><span>Tags</span>{{game.tags}}</p>
+        <p id="summary"><span>Summary</span>{{game.summary}}</p>
+        <p id="description"><span>Description</span>{{game.description}}</p>
+        <a>Read <br/> more</a>
       </div>
     </div>
     
