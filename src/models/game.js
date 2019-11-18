@@ -37,9 +37,11 @@ function isExpectedProperty(key) {
     'developer',
     'publisher',
     'description',
-    'store',
     'tags',
-    'releaseDate'
+    'releaseDate',
+    'store',
+    'thumbnail',
+    'banner'
   ]
   if (expectedKeys.includes(key) === false) {
     throw Error(ErrorEnum.GAME_UNEXPECTED_KEY)
@@ -62,9 +64,11 @@ class Game {
       this.developer,
       this.publisher,
       this.description,
-      this.store,
       this.tags,
-      this.releaseDate
+      this.releaseDate,
+      this.store,
+      this.thumbnail,
+      this.banner
     ]
   }
 

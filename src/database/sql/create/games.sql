@@ -6,8 +6,10 @@ CREATE TABLE IF NOT EXISTS games (
   developer TEXT,
   publisher TEXT,
   description TEXT,
-  store TEXT,
   tags TEXT,
   releaseDate DATETIME,
+  store TEXT,
+  thumbnail TEXT,
+  banner TEXT,
   PRIMARY KEY(id)
 ) WITHOUT ROWID;
