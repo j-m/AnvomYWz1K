@@ -22,25 +22,25 @@ describe('database models game', () => {
       done()
     })
 
+    test('throws if steam app id missing', async done => {
+      const game = await new Game()
+      await expect(game.create({ })).rejects.toThrow(ErrorEnum.GAME_STEAM_APP_ID_MISSING)
+      done()
+    })
+
     test('throws if game title missing', async done => {
       const game = await new Game()
-      await expect(game.create({ })).rejects.toThrow(ErrorEnum.GAME_TITLE_MISSING)
+      await expect(
+        game.create({ steamAppID: 'steam' })
+      ).rejects.toThrow(ErrorEnum.GAME_TITLE_MISSING)
       done()
     })
 
     test('throws if game summary missing', async done => {
       const game = await new Game()
       await expect(
-        game.create({ title: 'title' })
+        game.create({ steamAppID: 'steam', title: 'title' })
       ).rejects.toThrow(ErrorEnum.GAME_SUMMARY_MISSING)
-      done()
-    })
-
-    test('throws if game thumbnail missing', async done => {
-      const game = await new Game()
-      await expect(
-        game.create({ title: 'title', summary: 'summary' })
-      ).rejects.toThrow(ErrorEnum.GAME_THUMBNAIL_MISSING)
       connection.run('delete.gameByTitle', 'title')
       done()
     })
