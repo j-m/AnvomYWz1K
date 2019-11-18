@@ -93,6 +93,13 @@ class Game {
     this.loaded = true
   }
 
+  update(game) {
+    hasRequiredProperties(game)
+    onlyHasExpectedProperties(game)
+    Object.assign(this, game)
+    this.updateRecord()
+  }
+
   async updateRecord() {
     if (this.loaded !== true) {
       throw Error(ErrorEnum.GAME_NOT_LOADED)
