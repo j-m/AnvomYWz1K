@@ -5,7 +5,7 @@ function base64String() {
   let output = ''
   const times = 10
   for(let i = 0; i < times; i++) {
-    output += BASE64[Math.round(Math.random() * BASE64.length)]
+    output += BASE64[Math.floor(Math.random() * BASE64.length)]
   }
   return output
 }

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Game Reviews - Game - {{ game.title }}</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    
+    <link href="../css/global.css" type="text/css" rel="stylesheet" />
+    <script src="../js/global.js" type="text/javascript"></script>
+    
+		<link href="../css/loginRegistration.css" type="text/css" rel="stylesheet" />
+    <script src="../js/loginRegistration.js" type="text/javascript"></script>
+    
+    <link href="../css/game.css" type="text/css" rel="stylesheet" />
+    <script src="../js/game.js" type="text/javascript"></script>
+	</head>
+  <body>
+    {{> loginRegistration }}
+
+    <div id="game">
+      <img id="gameBanner" src="{{game.banner}}"/>
+      <h1 id="gameTitle">{{game.title}}</h1>
+      <div id="gameInfo">
+        <p><span>Developer</span>{{game.developer}}</p>
+        <p><span>Publisher</span>{{game.publisher}}</p>
+        <p id="gameStore"><span>Store</span><a href="{{game.store}}" target="_blank"><img src="../img/steam-logo.png"/></a></p>
+        <p><span>Release Date</span><time datetime="{{game.releaseDate}}">{{game.releaseDate}}</time></p>
+        <p><span>Tags</span>{{game.tags}}</p>
+        <p><span>Summary</span>{{game.summary}}</p>
+        <p><span>Description</span>{{game.description}}</p>
+        <a onclick="show('fullDescription', event)">Read <br/> more</a>
+      </div>
+      {{#if administrator}}
+      <button id="edit" onclick="show('updateGame', event)">Edit</button>
+      {{/if}}
+    </div>
+    
+    <div class="popup" onclick="hide('fullDescription', event)">
+      <div id="fullDescription">{{game.description}}</div>
+    </div>
+    
+    <div class="popup" onclick="hide('updateGame', event)">
+      <form id="updateGame" onsubmit="updateGame(event)">
+        <h1>Create new game</h1>
+        <hr/>
+        <fieldset>
+          <div class="input_header">
+          	<label for="steamAppID">Steam App ID</label>
+            <p class="error GAME_STEAM_APP_ID_MISSING">This field is required</p>
+          </div>
+          <input type="text" id="steamAppID" name="steamAppID" value="{{game.steamAppID}}" required/>
+          
+          <div class="input_header">
+          	<label for="title">Title</label>
+            <p class="error GAME_TITLE_MISSING">This field is required</p>
+          </div>
+          <input type="text" id="title" name="title" value="{{game.title}}" required/>
+          <p class="error GAME_TITLE_IN_USE">Title in use</p>
+        
+          <div class="input_header">
+          	<label for="summary">Summary</label>
+            <p class="error GAME_SUMMARY_MISSING">This field is required</p>
+          </div>
+          <input type="text" id="summary" name="summary" value="{{game.summary}}" required/>
+        </fieldset>
+        
+        <fieldset>
+          <legend>Optional</legend>
+          
+          <div>
+          	<label for="developer">Developer</label>
+            <input type="text" id="developer" name="developer" value="{{game.developer}}"/>
+            
+          	<label for="publisher">Publisher</label>
+            <input type="text" id="publisher" name="publisher" value="{{game.publisher}}"/>
+            
+            <label for="tags">Tags</label>
+            <input type="text" id="tags" name="tags" value="{{game.tags}}"/>
+            
+          	<label for="description">Description</label>
+            <textarea id="description" name="description" rows="1">{{game.description}}</textarea>
+          </div>
+          
+          <div>
+          	<label for="store">Store</label>
+            <input type="text" id="store" name="store" value="{{game.store}}"/>
+            
+           	<label for="thumbnail">Thumbnail</label>
+            <input type="text" id="thumbnail" name="thumbnail" value="{{game.thumbnail}}"/>
+          
+           	<label for="banner">Banner</label>
+            <input type="text" id="banner" name="banner" value="{{game.banner}}"/>
+
+            <label for="releaseDate">Release date</label>
+            <input type="date" id="releaseDate" name="releaseDate" value="{{game.releaseDate}}"/>
+          </div>
+
+        </fieldset>
+        
+      	<input type="submit" value="Update">
+      </form>
+    </div>
+    
+  </body>
+
+</html>

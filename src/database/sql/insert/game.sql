@@ -1,3 +1,3 @@
 INSERT INTO games 
-(id, title, summary, thumbnail, publisher, description, store, steamAppID, tags, releaseDate) 
-VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+(id, steamAppID, title, summary, developer, publisher, description, tags, releaseDate, store, thumbnail, banner) 
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);

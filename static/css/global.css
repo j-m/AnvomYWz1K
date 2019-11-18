@@ -27,7 +27,8 @@ body {
   visibility: visible;
 }
 
-.popup > form {
+.popup > form,
+.popup > div {
   display: inline-block;
   background: #eeeeee;
   box-shadow: 0 1rem 1rem -1rem black;

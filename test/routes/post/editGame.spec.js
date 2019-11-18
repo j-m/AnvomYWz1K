@@ -10,6 +10,12 @@ beforeAll(async() => {
   jest.resetModules()
   process.env.DATABASE = ':memory:'
   await connection.open()
+  await connection.run('insert.game', ...[
+    'id',
+    'steamAppId',
+    'title',
+    'summary'
+  ])
 })
 
 afterAll(async() => {
@@ -18,7 +24,7 @@ afterAll(async() => {
 
 describe('routes post game', () => {
   test('returns success', async done => {
-    const response = await request(app.callback()).post('/game').send({
+    const response = await request(app.callback()).post('/editGame').send({
       steamAppID: 'steam',
       title: 'title',
       summary: 'new summary'
@@ -30,10 +36,10 @@ describe('routes post game', () => {
   })
 
   test('returns error from Game model', async done => {
-    const response = await request(app.callback()).post('/game').send({ })
+    const response = await request(app.callback()).post('/editGame').send({ })
     expect(response.status).toEqual(200)
     expect(response.type).toEqual('application/json')
-    expect(response.body).toEqual({ success: false, code: ErrorEnum.GAME_STEAM_APP_ID_MISSING })
+    expect(response.body).toEqual({ success: false, code: ErrorEnum.GAME_UNKNOWN })
     done()
   })
 })
