@@ -18,28 +18,30 @@ function hasRequiredProperties(game) {
   if (game === undefined) {
     throw Error(ErrorEnum.FUNCTION_MISUSE_PARAM_MISSING)
   }
+  if (game.steamAppID === undefined) {
+    throw Error(ErrorEnum.GAME_STEAM_APP_ID_MISSING)
+  }
   if (game.title === undefined) {
     throw Error(ErrorEnum.GAME_TITLE_MISSING)
   }
   if (game.summary === undefined) {
     throw Error(ErrorEnum.GAME_SUMMARY_MISSING)
   }
-  if (game.thumbnail === undefined) {
-    throw Error(ErrorEnum.GAME_THUMBNAIL_MISSING)
-  }
 }
 
 function isExpectedProperty(key) {
   const expectedKeys = [
+    'steamAppID',
     'title',
     'summary',
-    'thumbnail',
+    'developer',
     'publisher',
     'description',
-    'store',
-    'steamAppID',
     'tags',
-    'releaseDate'
+    'releaseDate',
+    'store',
+    'thumbnail',
+    'banner'
   ]
   if (expectedKeys.includes(key) === false) {
     throw Error(ErrorEnum.GAME_UNEXPECTED_KEY)
@@ -56,15 +58,17 @@ function onlyHasExpectedProperties(game) {
 class Game {
   get data() {
     return [
+      this.steamAppID,
       this.title,
       this.summary,
-      this.thumbnail,
+      this.developer,
       this.publisher,
       this.description,
-      this.store,
-      this.steamAppID,
       this.tags,
-      this.releaseDate
+      this.releaseDate,
+      this.store,
+      this.thumbnail,
+      this.banner
     ]
   }
 
@@ -87,6 +91,13 @@ class Game {
     }
     Object.assign(this, results[0])
     this.loaded = true
+  }
+
+  update(game) {
+    hasRequiredProperties(game)
+    onlyHasExpectedProperties(game)
+    Object.assign(this, game)
+    this.updateRecord()
   }
 
   async updateRecord() {
