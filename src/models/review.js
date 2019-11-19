@@ -32,7 +32,8 @@ function isExpectedProperty(key) {
     'body',
     'type',
     'rating',
-    'created'
+    'posted',
+    'visibility'
   ]
   if (expectedKeys.includes(key) === false) {
     throw Error(ErrorEnum.REVIEW_UNEXPECTED_KEY)
@@ -54,14 +55,15 @@ class Review {
       this.rating,
       this.body,
       this.type,
-      this.created
+      this.posted,
+      this.visibility
     ]
   }
 
   async create(review) {
     hasRequiredProperties(review)
     onlyHasExpectedProperties(review)
-    const results = await connection.all('select.reviewsByGameAndAuthorAndType', ...[
+    const results = await connection.all('select.reviewByGameAndAuthorAndType', ...[
       review.game,
       review.author,
       review.type
@@ -75,7 +77,7 @@ class Review {
   }
 
   async get(game, author, type) {
-    const results = await connection.all('select.reviewsByGameAndAuthorAndType', game, author, type)
+    const results = await connection.all('select.reviewByGameAndAuthorAndType', game, author, type)
     if (results || results.length !== 1) {
       throw Error(ErrorEnum.REVIEW_NOT_FOUND)
     }

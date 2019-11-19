@@ -1,11 +1,11 @@
 /* eslint-disable max-lines-per-function */
 'use strict'
 
-async function writeShortReview(event) {
+async function writeShortReview(game, event) {
   event.preventDefault()
 
   const formData = new FormData(document.querySelector('#writeShortReview'))
-  const object = {type: 'short'}
+  const object = {game: game, type: 'short'}
   formData.forEach((value, key) => object[key] = value)
 
   const result = await fetch('/review', {

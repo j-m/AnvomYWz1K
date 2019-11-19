@@ -52,12 +52,12 @@
       </form>
     </div>
   
-    <form id="writeShortReview" onsubmit="writeShortReview(event)">
+    <form id="writeShortReview" onsubmit="writeShortReview('{{game.id}}', event)">
       <label for="positive">👍</label>
       <input type="radio" name="rating" id="positive" value="1" required/>
       <label for="negative">👎</label>
       <input type="radio" name="rating" id="negative" value="-1" required/>
-      <textarea id="shortReviewBody" name="shortReviewBody" rows="1" required></textarea>
+      <textarea id="shortReviewBody" name="body" rows="1" required></textarea>
       <input type="submit" value="Post"/>
     </form>  
     
@@ -66,7 +66,7 @@
       <div class="shortReview">
         <p>{{author}}</p>
         <p>{{body}}</p>
-        <p>{{created}}</p>
+        <p>{{posted}}</p>
         <button>Flag</button>
         <button>Edit</button>
       </div>

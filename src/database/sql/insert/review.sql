@@ -1,1 +1,1 @@
-INSERT INTO reviews (game, author, rating, body, type, created) VALUES (?, ?, ?, ?, ?, ?);
+INSERT INTO reviews (game, author, rating, body, type) VALUES (?, ?, ?, ?, ?);
