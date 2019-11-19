@@ -17,37 +17,45 @@ function fillDefaults(parameters) {
   return parameters.game
 }
 
-function getEmoji(score) {
-  switch (score) {
-    case 10: return '🤯'
-    case 9: return '🥰'
-    case 8: return '😄'
-    case 7: return '😀'
-    case 6: return '🙂'
-    case 5: return '😐'
-    case 4: return '🤔'
-    case 3: return '🙁'
-    case 2: return '🥱'
-    case 1: return '🤢'
-    case 0: return '🤮'
-  }
+const emoji = {
+  10: '🤯',
+  9: '🥰',
+  8: '😄',
+  7: '😀',
+  6: '🙂',
+  5: '😐',
+  4: '🤔',
+  3: '🙁',
+  2: '🥱',
+  1: '🤢',
+  0: '🤮'
 }
 
+const PERCENTAGE_MULTIPLIER = 100
+
 async function getCounts(data, parameters) {
-  if (data && data.length === 2) {
-    parameters.negativeCount = data[0].count
-    parameters.positiveCount = data[1].count
-    parameters.totalCount = data[0].count + data[1].count
-    parameters.negativePercent = Math.round(data[0].count * 100 / parameters.totalCount)
-    parameters.positivePercent = Math.round(data[1].count * 100 / parameters.totalCount)
-    parameters.emoji = getEmoji(Math.round(data[1].count * 10 / parameters.totalCount))
+  parameters.negativeCount = 0
+  parameters.positiveCount = 0
+  if (data) {
+    if (data[1]) {
+      parameters.negativeCount = data[0].count
+      parameters.positiveCount = data[1].count
+    } else {
+      data[0].rating ? parameters.positiveCount = data[0].count : parameters.negativeCount = data[0].count
+    }
   }
+  parameters.totalCount = parameters.negativeCount + parameters.positiveCount
+  parameters.negativePercent = Math.round(parameters.negativeCount * PERCENTAGE_MULTIPLIER / parameters.totalCount)
+  parameters.positivePercent = Math.round(parameters.positiveCount * PERCENTAGE_MULTIPLIER / parameters.totalCount)
+  parameters.emoji = emoji[Math.round(parameters.positiveCount * Object.keys(emoji).length / parameters.totalCount)]
 }
+
+const REVIEWS_PER_PAGE = 10
 
 async function game(context) {
   const parameters = authorisation(context, {})
-  const shortReviews = connection.all('select.reviewsByGameAndType', context.params.game, 'short', (context.request.query.s || 0) * 10).then(data => parameters.shortReviews = data)
-  const longReviews = connection.all('select.reviewsByGameAndType', context.params.game, 'long', (context.request.query.l || 0) * 10).then(data => parameters.longReviews = data )
+  const shortReviews = connection.all('select.reviewsByGameAndType', context.params.game, 'short', (context.request.query.s || 0) * REVIEWS_PER_PAGE).then(data => parameters.shortReviews = data)
+  const longReviews = connection.all('select.reviewsByGameAndType', context.params.game, 'long', (context.request.query.l || 0) * REVIEWS_PER_PAGE).then(data => parameters.longReviews = data )
   const shortReviewCount = connection.all('select.countShortReviewRating', context.params.game).then(data => getCounts(data, parameters))
   const userShortReviewed = connection.all('select.reviewByGameAndAuthorAndType', context.params.game, parameters.username, 'short').then(data => parameters.userShortReviewed = data[0] )
 
@@ -57,7 +65,7 @@ async function game(context) {
 
   await Promise.all([shortReviews, longReviews, shortReviewCount, userShortReviewed])
 
-  if (context.request.query.s * 10 + 10 < parameters.totalCount) {
+  if (context.request.query.s * REVIEWS_PER_PAGE + REVIEWS_PER_PAGE < parameters.totalCount) {
     parameters.nextShortReviews = context.href.replace(`s=${context.request.query.s}`,`s=${Number(context.request.query.s) + 1}`)
   }
 

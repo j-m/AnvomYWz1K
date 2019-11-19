@@ -1,4 +1,5 @@
 SELECT
+rating,
 COUNT(*) as count
 FROM reviews
 WHERE game=?
