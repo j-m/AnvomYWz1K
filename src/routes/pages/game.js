@@ -34,12 +34,14 @@ function getEmoji(score) {
 }
 
 async function getCounts(data, parameters) {
-  parameters.negativeCount = data[0].count
-  parameters.positiveCount = data[1].count
-  parameters.totalCount = data[0].count + data[1].count
-  parameters.negativePercent = Math.round(data[0].count * 100 / parameters.totalCount)
-  parameters.positivePercent = Math.round(data[1].count * 100 / parameters.totalCount)
-  parameters.emoji = getEmoji(Math.round(data[1].count * 10 / parameters.totalCount))
+  if (data && data.length === 2) {
+    parameters.negativeCount = data[0].count
+    parameters.positiveCount = data[1].count
+    parameters.totalCount = data[0].count + data[1].count
+    parameters.negativePercent = Math.round(data[0].count * 100 / parameters.totalCount)
+    parameters.positivePercent = Math.round(data[1].count * 100 / parameters.totalCount)
+    parameters.emoji = getEmoji(Math.round(data[1].count * 10 / parameters.totalCount))
+  }
 }
 
 async function game(context) {
