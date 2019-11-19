@@ -36,16 +36,16 @@ function getEmoji(score) {
 async function getCounts(data, parameters) {
   parameters.negativeCount = data[0].count
   parameters.positiveCount = data[1].count
-  const totalCount = data[0].count + data[1].count
-  parameters.negativePercent = Math.round(data[0].count * 100 / totalCount)
-  parameters.positivePercent = Math.round(data[1].count * 100 / totalCount)
-  parameters.emoji = getEmoji(Math.round(data[1].count * 10 / totalCount))
+  parameters.totalCount = data[0].count + data[1].count
+  parameters.negativePercent = Math.round(data[0].count * 100 / parameters.totalCount)
+  parameters.positivePercent = Math.round(data[1].count * 100 / parameters.totalCount)
+  parameters.emoji = getEmoji(Math.round(data[1].count * 10 / parameters.totalCount))
 }
 
 async function game(context) {
   const parameters = authorisation(context, {})
-  const shortReviews = connection.all('select.reviewsByGameAndType', context.params.game, 'short', 0).then(data => parameters.shortReviews = data)
-  const longReviews = connection.all('select.reviewsByGameAndType', context.params.game, 'long', 0).then(data => parameters.longReviews = data )
+  const shortReviews = connection.all('select.reviewsByGameAndType', context.params.game, 'short', (context.request.query.s || 0) * 10).then(data => parameters.shortReviews = data)
+  const longReviews = connection.all('select.reviewsByGameAndType', context.params.game, 'long', (context.request.query.l || 0) * 10).then(data => parameters.longReviews = data )
   const shortReviewCount = connection.all('select.countShortReviewRating', context.params.game).then(data => getCounts(data, parameters))
   const userShortReviewed = connection.all('select.reviewByGameAndAuthorAndType', context.params.game, parameters.username, 'short').then(data => parameters.userShortReviewed = data[0] )
 
@@ -54,6 +54,11 @@ async function game(context) {
   parameters.game = fillDefaults(parameters)
 
   await Promise.all([shortReviews, longReviews, shortReviewCount, userShortReviewed])
+
+  if (context.request.query.s * 10 + 10 < parameters.totalCount) {
+    parameters.nextShortReviews = context.href.replace(`s=${context.request.query.s}`,`s=${Number(context.request.query.s) + 1}`)
+  }
+
   await context.render('game', parameters)
 }
 
