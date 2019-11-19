@@ -68,17 +68,40 @@
         <div id="shortReviews">
           {{#each shortReviews}}
           
-          <div class="shortReview">
-            {{#if (equal rating 1)}}
-              <p>👍</p>
-            {{else}}
-              <p>👎</p>
-            {{/if}}
-            <p>{{author}}</p>
-            <p>{{body}}</p>
-            <p>{{posted}}</p>
-            <button>Flag</button>
-            <button>Edit</button>
+          {{#if (equal rating 1)}}
+          <div class="shortReview positive">
+            <div class="header">
+              <p class="rating">👍 Recommended</p>
+          {{else}}
+          <div class="shortReview negative">
+            <div class="header">
+              <p class="rating ">👎 Not recommended</p>
+          {{/if}}
+              <p class="author">by <a href="/members/{{author}}">{{author}}</a></p>
+              <div class="buttons">
+                <button class="visibility">V</button>
+                <button class="flag">F</button>
+                <button class="edit">E</button>
+              </div>
+            </div>
+            <hr/>
+            <div class="middle">
+              <div class="votes">
+                <button class="upvote"></button>
+                <p class="score">0</p>
+                <button class="downvote"></button>
+              </div>
+              <p class="body">{{body}}</p>
+            </div>
+            <hr/>
+            <div class="footer">
+              <a>Read comments (12)</a>
+              <div class="dates">
+                <p class="posted">Posted: <time datetime="{{posted}}">{{posted}}</time></p>
+                <span>|</span>
+                <p class="edited">Edited: <time datetime="{{edited}}">{{edited}}</time></p>
+              </div>
+            </div>
           </div>
           {{/each}}
         </div>
