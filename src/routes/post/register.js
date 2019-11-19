@@ -14,13 +14,13 @@ async function insert(email, username, password) {
 }
 
 function validateEmail(email) {
-  if (email === undefined) {
+  if (!email) {
     throw new Error(ErrorEnum.EMAIL_MISSING)
   }
 }
 
 function validatePassword(password) {
-  if (password === undefined) {
+  if (!password) {
     throw new Error(ErrorEnum.PASSWORD_MISSING)
   }
   if (password.length < process.env.MINIMUM_PASSWORD_LENGTH) {
@@ -39,7 +39,7 @@ async function register(context) {
     context.session.username = body.username
     context.body = { success: true }
   } catch (error) {
-    handleError(context, error)
+    context.body = handleError(error)
   }
 }
 

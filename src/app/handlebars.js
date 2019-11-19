@@ -8,7 +8,8 @@ function getViews(context, next) {
     extension: 'hbs',
     options: {
       partials: {
-        loginRegistration: './partials/loginRegistration'
+        loginRegistration: './partials/loginRegistration',
+        gameFields: './partials/gameFields'
       },
       settings: {
         views: path.join(__dirname, '../views')

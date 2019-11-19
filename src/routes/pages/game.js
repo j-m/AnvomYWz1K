@@ -5,6 +5,9 @@ const connection = require('../../database/connection')
 
 async function game(context) {
   const parameters = authorisation(context, {})
+  parameters.shortReviews = connection.all('select.reviewsByGameShort', context.params.game, 0)
+  parameters.longReviews = connection.all('select.reviewsByGameLong', context.params.game, 0)
+
   parameters.game = await connection.all('select.gameByID', context.params.game)
   parameters.game = parameters.game[0]
   const id = parameters.game.steamAppID
@@ -17,6 +20,7 @@ async function game(context) {
   if (!parameters.game.store) {
     parameters.game.store = `https://store.steampowered.com/app/${id}`
   }
+  await Promise.all([parameters.shortReviews, parameters.longReviews])
   await context.render('game', parameters)
 }
 
