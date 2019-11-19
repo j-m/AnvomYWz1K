@@ -57,14 +57,13 @@
         {{#if username}}
         <form id="writeShortReview" onsubmit="writeShortReview('{{game.id}}', event)">
           <label for="positive">👍</label>
-          <input type="radio" name="rating" id="positive" value="1" required/>
+          <input type="radio" name="rating" id="positive" value="1" required {{#if (equal userShortReviewed.rating 1)}} checked{{/if}}/>
           <label for="negative">👎</label>
-          <input type="radio" name="rating" id="negative" value="-1" required/>
+          <input type="radio" name="rating" id="negative" value="-1" required {{#if (equal userShortReviewed.rating -1)}} checked{{/if}}/>
           <input type="submit" value="Post"/>
-          <textarea id="shortReviewBody" name="body" rows="1" required></textarea>
+          <textarea id="shortReviewBody" name="body" rows="1" required>{{userShortReviewed.body}}</textarea>
         </form>  
         {{/if}}
-        
         
         <div id="shortReviewCount">
           <p id="emoji">{{emoji}}</p>

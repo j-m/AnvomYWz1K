@@ -44,18 +44,16 @@ async function getCounts(data, parameters) {
 
 async function game(context) {
   const parameters = authorisation(context, {})
-  const shortReviews = connection.all('select.reviewsByGameAndType', context.params.game, 'short', 0)
-    .then(data => parameters.shortReviews = data)
-  const longReviews = connection.all('select.reviewsByGameAndType', context.params.game, 'long', 0)
-    .then(data => parameters.longReviews = data )
-  const shortReviewCount = connection.all('select.countShortReviewRating', context.params.game)
-    .then(data => getCounts(data, parameters))
+  const shortReviews = connection.all('select.reviewsByGameAndType', context.params.game, 'short', 0).then(data => parameters.shortReviews = data)
+  const longReviews = connection.all('select.reviewsByGameAndType', context.params.game, 'long', 0).then(data => parameters.longReviews = data )
+  const shortReviewCount = connection.all('select.countShortReviewRating', context.params.game).then(data => getCounts(data, parameters))
+  const userShortReviewed = connection.all('select.reviewByGameAndAuthorAndType', context.params.game, parameters.username, 'short').then(data => parameters.userShortReviewed = data[0] )
 
   parameters.game = await connection.all('select.gameByID', context.params.game)
   parameters.game = parameters.game[0]
   parameters.game = fillDefaults(parameters)
 
-  await Promise.all([shortReviews, longReviews, shortReviewCount])
+  await Promise.all([shortReviews, longReviews, shortReviewCount, userShortReviewed])
   await context.render('game', parameters)
 }
 
