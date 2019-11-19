@@ -52,38 +52,54 @@
       </form>
     </div>
   
-    <form id="writeShortReview" onsubmit="writeShortReview('{{game.id}}', event)">
-      <label for="positive">👍</label>
-      <input type="radio" name="rating" id="positive" value="1" required/>
-      <label for="negative">👎</label>
-      <input type="radio" name="rating" id="negative" value="-1" required/>
-      <textarea id="shortReviewBody" name="body" rows="1" required></textarea>
-      <input type="submit" value="Post"/>
-    </form>  
-    
-    <div id="shortReviews">
-      {{#each shortReviews}}
-      <div class="shortReview">
-        <p>{{author}}</p>
-        <p>{{body}}</p>
-        <p>{{posted}}</p>
-        <button>Flag</button>
-        <button>Edit</button>
+    <div id="reviews">
+      <div id="short">
+        {{#if username}}
+        <form id="writeShortReview" onsubmit="writeShortReview('{{game.id}}', event)">
+          <label for="positive">👍</label>
+          <input type="radio" name="rating" id="positive" value="1" required/>
+          <label for="negative">👎</label>
+          <input type="radio" name="rating" id="negative" value="-1" required/>
+          <input type="submit" value="Post"/>
+          <textarea id="shortReviewBody" name="body" rows="1" required></textarea>
+        </form>  
+        {{/if}}
+        
+        <div id="shortReviews">
+          {{#each shortReviews}}
+          
+          <div class="shortReview">
+            {{#if (equal rating 1)}}
+              <p>👍</p>
+            {{else}}
+              <p>👎</p>
+            {{/if}}
+            <p>{{author}}</p>
+            <p>{{body}}</p>
+            <p>{{posted}}</p>
+            <button>Flag</button>
+            <button>Edit</button>
+          </div>
+          {{/each}}
+        </div>
       </div>
-      {{/each}}
-    </div>
-    
-    <form id="writeLongReview" onsubmit="writeLongReview(event)">
-      <input type="number" name="rating" min="0" max="100" required/>
-      <textarea id="longReviewBody" name="longReviewBody" rows="1" required></textarea>
-      <input type="submit" value="Preview"/>
-      <input type="submit" value="Post"/>
-    </form> 
-    
-    <div id="longReviews">
       
+      <div id="long">
+        {{#if username}}
+        <form id="writeLongReview" onsubmit="writeLongReview(event)">
+          <input type="number" name="rating" min="0" max="100" required/>
+          <textarea id="longReviewBody" name="longReviewBody" rows="1" required></textarea>
+          <input type="submit" value="Preview"/>
+          <input type="submit" value="Post"/>
+        </form> 
+        {{/if}}
+      
+        
+        <div id="longReviews">
+          
+        </div>
+      </div>
     </div>
-
   </body>
 
 </html>

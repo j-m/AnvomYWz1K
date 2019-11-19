@@ -1,0 +1,62 @@
+#reviews {
+  width: 100rem;
+  margin: auto;
+  margin-top: 5rem;
+}
+
+#short {
+  float: left;
+}
+#long {
+  float:right;
+}
+#short,
+#long {
+  width: 49%;
+}
+
+#writeShortReview {
+  border: 1px solid #d6d6d6;
+  border-radius: 0.25rem;
+  background: rgb(249, 249, 249);
+  padding: 0.5rem 0.25rem;
+  margin-bottom: 1.5rem;
+}
+
+#shortReviewBody{
+  resize: vertical;
+  display: block;
+  width: 100%;
+  height: 5rem;
+  box-sizing: border-box;
+  margin-top: 0.5rem;
+}
+
+#shortReviews {
+  border: 1px solid #ddd;
+  background: #f9f9f9;
+}
+
+.shortReview {
+  display: grid;
+  grid-template-areas:
+    "picture rating posted"
+    "picture body body"
+    "author buttons buttons";
+}
+
+#writeLongReview {
+  border: 1px solid #d6d6d6;
+  border-radius: 0.25rem;
+  background: rgb(249, 249, 249);
+  padding: 0.5rem 0.25rem;
+}
+
+#longReviewBody{
+  resize: vertical;
+  display: block;
+  width: 100%;
+  height: 5rem;
+  box-sizing: border-box;
+  margin-top: 0.5rem;
+}
