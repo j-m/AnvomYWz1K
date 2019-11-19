@@ -32,6 +32,51 @@
   margin-top: 0.5rem;
 }
 
+#shortReviewCount {
+  margin-bottom: 1rem; 
+}
+
+#shortReviewCount #emoji {
+  font-size: 3rem;
+  display: inline-block;
+  margin: 0;
+}
+
+#shortReviewCount .label {
+  display: inline-block;
+  margin: 0;
+}
+
+#shortReviewCount .label p {
+  margin: 0;
+}
+
+#shortReviewCount .bars {
+  display: inline-block;
+  width: 35rem;
+}
+
+#shortReviewCount .bar {
+  display: inline-block;
+  height: 1rem;
+  position: relative;
+}
+
+#shortReviewCount .bar:nth-of-type(1) {
+  background-color: green;
+}
+
+#shortReviewCount .bar:nth-of-type(2) {
+  background-color: red;
+}
+
+#shortReviewCount .bar p {
+  margin: 0;
+  position: relative;
+  left: 100%;
+  margin-left: 1ch;
+}
+
 #shortReviews {
   border: 1px solid #ddd;
   background: #f9f9f9;

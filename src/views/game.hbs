@@ -65,6 +65,19 @@
         </form>  
         {{/if}}
         
+        
+        <div id="shortReviewCount">
+          <p id="emoji">{{emoji}}</p>
+          <div class="label">
+            <p>Positive</p>
+            <p>Negative</p>
+          </div>
+          <div class="bars">
+            <div class="bar" style="width:{{positivePercent}}%"><p>{{positiveCount}} ({{positivePercent}}%)</p></div>
+            <div class="bar" style="width:{{negativePercent}}%"><p>{{negativeCount}} ({{negativePercent}}%)</p></div>
+          </div>
+        </div>
+        
         <div id="shortReviews">
           {{#each shortReviews}}
           
@@ -98,8 +111,10 @@
               <a>Read comments (12)</a>
               <div class="dates">
                 <p class="posted">Posted: <time datetime="{{posted}}">{{posted}}</time></p>
+                {{#if edited}}
                 <span>|</span>
                 <p class="edited">Edited: <time datetime="{{edited}}">{{edited}}</time></p>
+                {{/if}}
               </div>
             </div>
           </div>
