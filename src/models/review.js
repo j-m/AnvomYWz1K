@@ -68,20 +68,12 @@ class Review {
       review.author,
       review.type
     ])
-    if (results && results.length !== 0) {
-      throw Error(ErrorEnum.REVIEW_ALREADY_WRITTEN)
-    }
     Object.assign(this, review)
-    await connection.run('insert.review', ...this.data)
-    this.loaded = true
-  }
-
-  async get(game, author, type) {
-    const results = await connection.all('select.reviewByGameAndAuthorAndType', game, author, type)
-    if (results || results.length !== 1) {
-      throw Error(ErrorEnum.REVIEW_NOT_FOUND)
+    if (results && results.length !== 0) {
+      await connection.run('update.review', this.rating, this.body, this.game, this.author, 'short')
+    } else {
+      await connection.run('insert.review', ...this.data)
     }
-    Object.assign(this, results[0])
     this.loaded = true
   }
 }
