@@ -60,8 +60,10 @@ function getCounts(data, parameters) {
 
 function getHistogram(data) {
   let count = 0
+  let sum = 0
   for (const datum of data) {
     count += datum.count
+    sum += datum.rating
   }
   const ratings = new Array(MAGIC_NUMBERS.PERCENTAGE_MULTIPLIER + 1).fill({count: 0, percent: 100})
   for (const datum of data) {
@@ -71,7 +73,7 @@ function getHistogram(data) {
       percent: MAGIC_NUMBERS.PERCENTAGE_MULTIPLIER - calculatePercentage(datum.count, count)
     }
   }
-  return ratings
+  return { ratings, average: count===0 ? '?' : Math.round(sum/count)}
 }
 
 async function reviewsPromise(gameID, type, page) {

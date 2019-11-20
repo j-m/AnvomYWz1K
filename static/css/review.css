@@ -1,7 +1,6 @@
 #reviews {
   width: 100rem;
   margin: auto;
-  margin-top: 5rem;
 }
 
 #short {
@@ -15,12 +14,11 @@
   width: 49%;
 }
 
-#writeShortReview {
-  border: 1px solid #d6d6d6;
-  border-radius: 0.25rem;
-  background: rgb(249, 249, 249);
+#writeshortReview,
+#writelongReview {
   padding: 0.5rem 0.25rem;
-  margin-bottom: 1.5rem;
+  min-height: 8rem;
+  margin: 1rem 0.5rem;
 }
 
 #shortReviewBody{
@@ -34,6 +32,7 @@
 
 #shortReviewCount {
   margin-bottom: 1rem; 
+  margin-top: 7rem;
 }
 
 #shortReviewCount #emoji {
@@ -79,9 +78,7 @@
 }
 
 #shortReviews {
-  border: 1px solid #ddd;
-  background: #f9f9f9;
-  padding: 1rem 1rem 0 1rem;
+  padding: 1rem;
 }
 
 .shortReview {
@@ -192,13 +189,6 @@
   margin: 0.25rem;
 }
 
-#writeLongReview {
-  border: 1px solid #d6d6d6;
-  border-radius: 0.25rem;
-  background: rgb(249, 249, 249);
-  padding: 0.5rem 0.25rem;
-}
-
 #longReviewBody{
   resize: vertical;
   display: block;
@@ -212,12 +202,21 @@
 #histogram {
   margin: 1rem 0;
   width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+#histogram > p {
+  display: inline;
+  font-size: 5rem;
+  margin: 0;
+  vertical-align: middle;
 }
 
 #histogram .bars {
   display: flex;
   justify-content: space-between;
-  width: 100%;
+  flex: 1;
   background: linear-gradient(0.25turn, #d20202, #efff00, #06c103);
 }
 
@@ -228,6 +227,7 @@
   height: 10rem;
   margin: 0;
   flex: 1;
+  outline: 1px solid #d2d2d2;
 }
 
 #histogram .bar .filled {
@@ -256,4 +256,8 @@
 
 #preview {
   width: auto;
+}
+
+#longReviews {
+  padding: 1rem;
 }

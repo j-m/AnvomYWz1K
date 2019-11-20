@@ -65,18 +65,7 @@
   
     <div id="reviews">
       <div id="short">
-        {{#if username}}
-        <form id="writeshortReview" onsubmit="review('{{game.id}}', 'short', event)">
-          <label for="positive">👍</label>
-          <input type="radio" name="rating" id="positive" value="1" required {{#if (equal userShortReviewed.rating 1)}} checked{{/if}}/>
-          <label for="negative">👎</label>
-          <input type="radio" name="rating" id="negative" value="-1" required {{#if (equal userShortReviewed.rating -1)}} checked{{/if}}/>
-          <input type="submit" value="{{#if userShortReviewed.body}}Update{{else}}Post{{/if}}"/>
-          <textarea id="shortReviewBody" name="body" rows="1" required>{{userShortReviewed.body}}</textarea>
-        </form>  
-        {{/if}}
-        
-        <div id="shortReviewCount">
+         <div id="shortReviewCount">
           <p id="emoji">{{emoji}}</p>
           <div class="label">
             <p>Positive</p>
@@ -87,6 +76,21 @@
             <div class="bar" style="width:{{negativePercent}}%"><p>{{negativeCount}} ({{negativePercent}}%)</p></div>
           </div>
         </div>
+        
+        <hr/>
+        
+        {{#if username}}
+        <form id="writeshortReview" onsubmit="review('{{game.id}}', 'short', event)">
+          <label for="positive">👍</label>
+          <input type="radio" name="rating" id="positive" value="1" required {{#if (equal userShortReviewed.rating 1)}} checked{{/if}}/>
+          <label for="negative">👎</label>
+          <input type="radio" name="rating" id="negative" value="-1" required {{#if (equal userShortReviewed.rating -1)}} checked{{/if}}/>
+          <input type="submit" value="{{#if userShortReviewed.body}}Update{{else}}Post{{/if}}"/>
+          <textarea id="shortReviewBody" name="body" rows="1" required>{{userShortReviewed.body}}</textarea>
+        </form>  
+        
+        <hr/>
+        {{/if}}
         
         <div id="shortReviews">
           {{#each shortReviews}}
@@ -137,18 +141,10 @@
       </div>
       
       <div id="long">
-        {{#if username}}
-        <form id="writelongReview" onsubmit="review('{{game.id}}', 'long', event)">
-          <input type="number" name="rating" min="0" max="100" required value="{{userLongReviewed.rating}}"/>
-          <textarea id="longReviewBody" name="body" rows="1" required>{{userLongReviewed.body}}</textarea>
-          <input type="button" value="Preview" onclick="preview()"/>
-          <input type="submit" value="Post"/>
-        </form> 
-        {{/if}}
-        
         <div id="histogram">
+          <p>{{histogram.average}}</p>
           <div class="bars">
-            {{#each histogram}}
+            {{#each histogram.ratings}}
             <div class="bar">
               <div class="filled" style="height:{{percent}}%">
                 {{#if (equal count 0)}}{{else}}
@@ -162,7 +158,21 @@
             {{/each}}
           </div>
         </div>
-      
+        
+        <hr/>
+        
+        {{#if username}}
+        <form id="writelongReview" onsubmit="review('{{game.id}}', 'long', event)">
+          Rating: 
+          <input type="number" name="rating" min="0" max="100" required value="{{userLongReviewed.rating}}"/>
+          (Higher is better)
+          <input type="button" value="Preview" onclick="preview()"/>
+          <input type="submit" value="Post"/>
+          <textarea id="longReviewBody" name="body" rows="1" required>{{userLongReviewed.body}}</textarea>
+        </form> 
+        <hr/>
+        {{/if}}
+        
         <div id="longReviews">
           {{#each longReviews}}
           
