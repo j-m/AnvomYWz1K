@@ -55,7 +55,7 @@
     <div id="reviews">
       <div id="short">
         {{#if username}}
-        <form id="writeShortReview" onsubmit="writeShortReview('{{game.id}}', event)">
+        <form id="writeshortReview" onsubmit="review('{{game.id}}', 'short', event)">
           <label for="positive">👍</label>
           <input type="radio" name="rating" id="positive" value="1" required {{#if (equal userShortReviewed.rating 1)}} checked{{/if}}/>
           <label for="negative">👎</label>
@@ -127,17 +127,69 @@
       
       <div id="long">
         {{#if username}}
-        <form id="writeLongReview" onsubmit="writeLongReview(event)">
+        <form id="writelongReview" onsubmit="review('{{game.id}}', 'long', event)">
           <input type="number" name="rating" min="0" max="100" required/>
-          <textarea id="longReviewBody" name="longReviewBody" rows="1" required></textarea>
+          <textarea id="longReviewBody" name="body" rows="1" required></textarea>
           <input type="submit" value="Preview"/>
           <input type="submit" value="Post"/>
         </form> 
         {{/if}}
-      
         
+        <div id="histogram">
+          <div class="bars">
+            {{#each histogram}}
+            <div class="bar">
+              {{#if (equal count 0)}}{{else}}
+              <div class="filled" style="height:{{percent}}%">
+                <span>{{rating}}</span>
+              </div>
+              <p>{{count}}</p>
+              {{/if}}
+            </div>
+            {{/each}}
+          </div>
+        </div>
+      
         <div id="longReviews">
+          {{#each longReviews}}
           
+          <div class="shortReview positive">
+            <div class="header">
+              <p class="rating">{{rating}}</p>
+              <p class="author">by <a href="/members/{{author}}">{{author}}</a></p>
+              <div class="buttons">
+                <button class="visibility">V</button>
+                <button class="flag">F</button>
+                <button class="edit">E</button>
+              </div>
+            </div>
+            <hr/>
+            <div class="middle">
+              <div class="votes">
+                <button class="upvote"></button>
+                <p class="score">0</p>
+                <button class="downvote"></button>
+              </div>
+              <p class="body">{{body}}</p>
+            </div>
+            <hr/>
+            <div class="footer">
+              <a>Read comments (12)</a>
+              <div class="dates">
+                <p class="posted">Posted: <time datetime="{{posted}}">{{posted}}</time></p>
+                {{#if edited}}
+                <span>|</span>
+                <p class="edited">Edited: <time datetime="{{edited}}">{{edited}}</time></p>
+                {{/if}}
+              </div>
+            </div>
+          </div>
+          {{/each}}
+        </div>
+        
+        {{#if nextShortReviews}}
+        <a href="{{nextShortReviews}}">More reviews</a>
+        {{/if}}
         </div>
       </div>
     </div>

@@ -1,11 +1,10 @@
-/* eslint-disable max-lines-per-function */
 'use strict'
 
-async function writeShortReview(game, event) {
+async function review(game, type, event) {
   event.preventDefault()
 
-  const formData = new FormData(document.querySelector('#writeShortReview'))
-  const object = {game: game, type: 'short'}
+  const formData = new FormData(document.querySelector(`#write${type}Review`))
+  const object = {game, type}
   formData.forEach((value, key) => object[key] = value)
 
   const result = await fetch('/review', {
@@ -15,17 +14,16 @@ async function writeShortReview(game, event) {
     body: JSON.stringify(object)
   }).then(res => res.json()).catch(err => console.log(err))
 
-  document.querySelector('#writeShortReview').querySelectorAll('.show').forEach(item => {
+  document.querySelector(`#write${type}Review`).querySelectorAll('.show').forEach(item => {
     item.classList.remove('show')
   })
 
   if (result.success === false) {
     console.log(result)
     if (result.code !== undefined) {
-      document.querySelector('#writeShortReview').querySelector(`.${result.code}`).classList.add('show')
+      document.querySelector(`#write${type}Review`).querySelector(`.${result.code}`).classList.add('show')
     }
   } else {
-    hide('writeShortReview')
     location.reload()
   }
 

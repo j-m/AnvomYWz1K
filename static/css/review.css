@@ -207,3 +207,47 @@
   box-sizing: border-box;
   margin-top: 0.5rem;
 }
+
+
+#histogram {
+  margin: 1rem 0;
+  width: 100%;
+}
+
+#histogram .bars {
+  display: inline-block;
+  width: 100%;
+}
+
+#histogram .bar {
+  display: inline-block;
+  vertical-align: bottom;
+  position: relative;
+  height: 10rem;
+  margin: 0;
+  width: 0.2rem;
+  background-color: white;
+}
+
+#histogram .bar .filled {
+  background-color: lightblue;
+  width: 0.2rem;
+  position: absolute;
+  bottom: 0;
+}
+
+#histogram .bar p {
+  margin: 0;
+  height: 0;
+  font-size: small;
+  width: 0;
+}
+
+#histogram .bar span {
+  margin: 0;
+  height: 0;
+  width: 0;
+  font-size: small;
+  position: absolute;
+  bottom: 0;
+}
