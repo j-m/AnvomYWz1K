@@ -86,9 +86,9 @@ async function reviewsPromise(gameID, type, page) {
 }
 
 function getReviewPromises(parameters, gameID, query) {
-  const shortReviews = reviewsPromise(gameID,'short', query.s[0])
+  const shortReviews = reviewsPromise(gameID,'short', query.s)
     .then(data => parameters.shortReviews = data)
-  const longReviews = reviewsPromise(gameID,'long', query.l[0])
+  const longReviews = reviewsPromise(gameID,'long', query.l)
     .then(data => parameters.longReviews = data )
   const shortReviewCount = connection.all('select.countReviews', gameID, 'short')
     .then(data => getCounts(data, parameters))
@@ -102,14 +102,14 @@ function getReviewPromises(parameters, gameID, query) {
 }
 
 function checkShortReviewPages(total, href, query) {
-  const shortReviewPage = Number(query.s[0]) || 0
+  const shortReviewPage = Number(query.s) || 0
   if ((shortReviewPage + 1) * Number(process.env.REVIEWS_PER_PAGE) < total) {
     return updateQueryParam(href, 's', shortReviewPage + 1, shortReviewPage)
   }
 }
 
 function checkLongReviewPages(total, href, query) {
-  const longReviewPage = Number(query.l[0]) || 0
+  const longReviewPage = Number(query.l) || 0
   if ((longReviewPage + 1) * Number(process.env.REVIEWS_PER_PAGE) < total) {
     return updateQueryParam(href, 'l', longReviewPage + 1, longReviewPage)
   }
