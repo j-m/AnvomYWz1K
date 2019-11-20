@@ -54,7 +54,8 @@ describe('database models game', () => {
     })
 
     test('throws if game title not unique', async done => {
-      await connection.run('insert.game', 'id', 'steam', 'title', 'summary')
+      const creation = await new Game()
+      await creation.create({ steamAppID: 'steam', title: 'title', summary: 'summary' })
       const game = await new Game()
       await expect(
         game.create({ steamAppID: 'steam', title: 'title', summary: 'summary'})
@@ -81,7 +82,8 @@ describe('database models game', () => {
     })
 
     test('finds a game by title', async done => {
-      await connection.run('insert.game', 'id', 'steam', 'title', 'summary')
+      const creation = await new Game()
+      await creation.create({ steamAppID: 'steam', title: 'title', summary: 'summary' })
       const game = await new Game()
       await game.get('title')
       expect(game.loaded).toEqual(true)
@@ -98,15 +100,16 @@ describe('database models game', () => {
     })
 
     test('updates a field', async done => {
-      await connection.run('insert.game', 'id', 'steam', 'title', 'summary')
+      const creation = await new Game()
+      await creation.create({ steamAppID: 'steam', title: 'title', summary: 'summary' })
       const game = await new Game()
       await game.get('title')
       expect(game.loaded).toEqual(true)
       game.title = 'new title'
-      const previousRecords = await connection.all('select.gameByID', 'id')
+      const previousRecords = await connection.all('select.gameByTitle', 'title')
       expect(previousRecords[0].title).toEqual('title')
       await game.updateRecord()
-      const records = await connection.all('select.gameByID', 'id')
+      const records = await connection.all('select.gameByID', previousRecords[0].id)
       expect(records[0].title).toEqual('new title')
       connection.run('delete.gameByID', 'id')
       done()

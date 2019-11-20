@@ -166,8 +166,8 @@ exports[`routes get game should contain templated text with defined thumbnail, b
             <p>Negative</p>
           </div>
           <div class=\\"bars\\">
-            <div class=\\"bar\\" style=\\"width:%\\"><p> (%)</p></div>
-            <div class=\\"bar\\" style=\\"width:%\\"><p> (%)</p></div>
+            <div class=\\"bar\\" style=\\"width:NaN%\\"><p>0 (NaN%)</p></div>
+            <div class=\\"bar\\" style=\\"width:NaN%\\"><p>0 (NaN%)</p></div>
           </div>
         </div>
         
@@ -356,14 +356,1196 @@ exports[`routes get game should contain templated text with generated thumbnail,
             <p>Negative</p>
           </div>
           <div class=\\"bars\\">
-            <div class=\\"bar\\" style=\\"width:%\\"><p> (%)</p></div>
-            <div class=\\"bar\\" style=\\"width:%\\"><p> (%)</p></div>
+            <div class=\\"bar\\" style=\\"width:NaN%\\"><p>0 (NaN%)</p></div>
+            <div class=\\"bar\\" style=\\"width:NaN%\\"><p>0 (NaN%)</p></div>
           </div>
         </div>
         
         <div id=\\"shortReviews\\">
         </div>
         
+      </div>
+      
+      <div id=\\"long\\">
+      
+        
+        <div id=\\"longReviews\\">
+          
+        </div>
+      </div>
+    </div>
+  </body>
+
+</html>
+"
+`;
+
+exports[`routes get game with multiple pages of reviews 1`] = `
+"<!DOCTYPE html>
+
+<html lang=\\"en\\">
+	<head>
+		<meta charset=\\"utf-8\\">
+		<title>Game Reviews - Game - titleUnique</title>
+    <link href=\\"https://fonts.googleapis.com/css?family=Roboto&display=swap\\" rel=\\"stylesheet\\">
+    
+    <link href=\\"../css/global.css\\" type=\\"text/css\\" rel=\\"stylesheet\\" />
+    <script src=\\"../js/global.js\\" type=\\"text/javascript\\"></script>
+    
+		<link href=\\"../css/loginRegistration.css\\" type=\\"text/css\\" rel=\\"stylesheet\\" />
+    <script src=\\"../js/loginRegistration.js\\" type=\\"text/javascript\\"></script>
+    
+    <link href=\\"../css/game.css\\" type=\\"text/css\\" rel=\\"stylesheet\\" />
+    <script src=\\"../js/game.js\\" type=\\"text/javascript\\"></script>
+    
+    <link href=\\"../css/review.css\\" type=\\"text/css\\" rel=\\"stylesheet\\" />
+    <script src=\\"../js/review.js\\" type=\\"text/javascript\\"></script>
+	</head>
+  <body>
+    <div id=\\"welcome\\">
+      <p>Welcome, guest! <a href=\\"#\\" onclick=\\"show('login')\\">Login</a> or <a href=\\"#\\" onclick=\\"show('register')\\">Register</a> </p>
+    </div>
+    
+    <div class=\\"popup\\" onclick=\\"hide('login', event)\\">
+      <form id=\\"login\\" onsubmit=\\"login(event)\\">
+        <div class=\\"input_header\\">
+        	<label for=\\"username\\">Username</label>
+          <p class=\\"error USERNAME_MISSING\\">This field is required. </p>
+        </div>
+        <input type=\\"text\\" id=\\"username\\" name=\\"username\\" autocomplete=\\"current-username\\" required/>
+        <p class=\\"error USERNAME_UNKNOWN\\">This username does not exist. </p>
+        
+        <div class=\\"input_header\\">
+        	<label for=\\"password\\">Password</label>
+          <p class=\\"error PASSWORD_MISSING\\">This field is required. </p>
+        </div>
+        <input type=\\"password\\" id=\\"password\\" name=\\"password\\" autocomplete=\\"current-password\\" required/>
+        <p class=\\"error PASSWORD_INCORRECT\\">Incorrect password. </p>
+        
+      	<input type=\\"submit\\" value=\\"Log in\\"/>
+        <a href=\\"#forgot\\">Forgot password</a>
+      </form>
+    </div>
+    
+    <div class=\\"popup\\" onclick=\\"hide('register', event)\\">
+      <form id=\\"register\\" onsubmit=\\"register(event)\\">
+        <div class=\\"input_header\\">
+        	<label for=\\"email\\">Email</label>
+          <p class=\\"error EMAIL_MISSING\\">This field is required. </p>
+        </div>
+        <input type=\\"email\\" id=\\"email\\" name=\\"email\\" autocomplete=\\"email\\" required/>
+        
+        <div class=\\"input_header\\">
+        	<label for=\\"new-username\\">Username</label>
+          <p class=\\"error USERNAME_MISSING\\">This field is required. </p>
+          <p class=\\"error USERNAME_AVAILABLE\\">Username available. </p>
+        </div>
+        <input type=\\"text\\" id=\\"new-username\\" name=\\"new-username\\" autocomplete=\\"none\\" required/>
+        <button type=\\"button\\" onclick=\\"checkUsernameAvailability()\\">&#x21bb;</button>
+        <p class=\\"error USERNAME_IN_USE\\">This username is already in use. </p>
+        <p class=\\"info USERNAME_BAD_REGEX\\">Usernames can only contain letters and numbers. <br/> They may contain, but not start or end with, hyphens(-). </p>
+        
+        <div class=\\"input_header\\">
+        	<label for=\\"new-password\\">Password</label>
+          <p class=\\"error PASSWORD_MISSING\\">This field is required. </p>
+        </div>
+        <input type=\\"password\\" id=\\"new-password\\" name=\\"new-password\\" minlength=\\"10\\" autocomplete=\\"new-password\\" required/>
+        <p class=\\"info PASSWORD_TOO_SHORT\\">Passwords must be at least 10 characters long. </p>
+        
+      	<input type=\\"submit\\" value=\\"Register\\">
+      </form>
+    </div>
+
+    <div id=\\"game\\">
+      <img id=\\"gameBanner\\" src=\\"banner\\"/>
+      <h1 id=\\"gameTitle\\">titleUnique</h1>
+      <div id=\\"gameInfo\\">
+        <p><span>Developer</span>developer</p>
+        <p><span>Publisher</span>publisher</p>
+        <p id=\\"gameStore\\"><span>Store</span><a href=\\"store\\" target=\\"_blank\\"><img src=\\"../img/steam-logo.png\\"/></a></p>
+        <p><span>Release Date</span><time datetime=\\"releaseDate\\">releaseDate</time></p>
+        <p><span>Tags</span>tags</p>
+        <p><span>Summary</span>summary</p>
+        <p><span>Description</span>description</p>
+        <a onclick=\\"show('fullDescription', event)\\">Read <br/> more</a>
+      </div>
+    </div>
+    
+    <div class=\\"popup\\" onclick=\\"hide('fullDescription', event)\\">
+      <div id=\\"fullDescription\\">description</div>
+    </div>
+    
+    <div class=\\"popup\\" onclick=\\"hide('updateGame', event)\\">
+      <form id=\\"updateGame\\" onsubmit=\\"updateGame(event)\\">
+        <h1>Create new game</h1>
+        <hr/>
+        <fieldset>
+          <div class=\\"input_header\\">
+          	<label for=\\"steamAppID\\">Steam App ID</label>
+            <p class=\\"error GAME_STEAM_APP_ID_MISSING\\">This field is required</p>
+          </div>
+          <input type=\\"text\\" id=\\"steamAppID\\" name=\\"steamAppID\\" value=\\"steamAppIDUnique\\" required/>
+          
+          <div class=\\"input_header\\">
+          	<label for=\\"title\\">Title</label>
+            <p class=\\"error GAME_TITLE_MISSING\\">This field is required</p>
+          </div>
+          <input type=\\"text\\" id=\\"title\\" name=\\"title\\" value=\\"titleUnique\\" required/>
+          <p class=\\"error GAME_TITLE_IN_USE\\">Title in use</p>
+        
+          <div class=\\"input_header\\">
+          	<label for=\\"summary\\">Summary</label>
+            <p class=\\"error GAME_SUMMARY_MISSING\\">This field is required</p>
+          </div>
+          <input type=\\"text\\" id=\\"summary\\" name=\\"summary\\" value=\\"summary\\" required/>
+        </fieldset>
+        
+        <fieldset>
+          <legend>Optional</legend>
+          
+          <div>
+          	<label for=\\"developer\\">Developer</label>
+            <input type=\\"text\\" id=\\"developer\\" name=\\"developer\\" value=\\"developer\\"/>
+            
+          	<label for=\\"publisher\\">Publisher</label>
+            <input type=\\"text\\" id=\\"publisher\\" name=\\"publisher\\" value=\\"publisher\\"/>
+            
+            <label for=\\"tags\\">Tags</label>
+            <input type=\\"text\\" id=\\"tags\\" name=\\"tags\\" value=\\"tags\\"/>
+            
+          	<label for=\\"description\\">Description</label>
+            <textarea id=\\"description\\" name=\\"description\\" rows=\\"1\\">description</textarea>
+          </div>
+          
+          <div>
+          	<label for=\\"store\\">Store</label>
+            <input type=\\"text\\" id=\\"store\\" name=\\"store\\" value=\\"store\\"/>
+            
+           	<label for=\\"thumbnail\\">Thumbnail</label>
+            <input type=\\"text\\" id=\\"thumbnail\\" name=\\"thumbnail\\" value=\\"thumbnail\\"/>
+          
+           	<label for=\\"banner\\">Banner</label>
+            <input type=\\"text\\" id=\\"banner\\" name=\\"banner\\" value=\\"banner\\"/>
+        
+            <label for=\\"releaseDate\\">Release date</label>
+            <input type=\\"date\\" id=\\"releaseDate\\" name=\\"releaseDate\\" value=\\"releaseDate\\"/>
+          </div>
+        
+        </fieldset>
+      	<input type=\\"submit\\" value=\\"Update\\">
+      </form>
+    </div>
+  
+    <div id=\\"reviews\\">
+      <div id=\\"short\\">
+        
+        <div id=\\"shortReviewCount\\">
+          <p id=\\"emoji\\">😐</p>
+          <div class=\\"label\\">
+            <p>Positive</p>
+            <p>Negative</p>
+          </div>
+          <div class=\\"bars\\">
+            <div class=\\"bar\\" style=\\"width:50%\\"><p>4 (50%)</p></div>
+            <div class=\\"bar\\" style=\\"width:50%\\"><p>4 (50%)</p></div>
+          </div>
+        </div>
+        
+        <div id=\\"shortReviews\\">
+          
+          <div class=\\"shortReview positive\\">
+            <div class=\\"header\\">
+              <p class=\\"rating\\">👍 Recommended</p>
+              <p class=\\"author\\">by <a href=\\"/members/1\\">1</a></p>
+              <div class=\\"buttons\\">
+                <button class=\\"visibility\\">V</button>
+                <button class=\\"flag\\">F</button>
+                <button class=\\"edit\\">E</button>
+              </div>
+            </div>
+            <hr/>
+            <div class=\\"middle\\">
+              <div class=\\"votes\\">
+                <button class=\\"upvote\\"></button>
+                <p class=\\"score\\">0</p>
+                <button class=\\"downvote\\"></button>
+              </div>
+              <p class=\\"body\\">body</p>
+            </div>
+            <hr/>
+            <div class=\\"footer\\">
+              <a>Read comments (12)</a>
+              <div class=\\"dates\\">
+                <p class=\\"posted\\">Posted: <time datetime=\\"2019-11-20 14:22:52\\">2019-11-20 14:22:52</time></p>
+              </div>
+            </div>
+          </div>
+          
+          <div class=\\"shortReview negative\\">
+            <div class=\\"header\\">
+              <p class=\\"rating \\">👎 Not recommended</p>
+              <p class=\\"author\\">by <a href=\\"/members/2\\">2</a></p>
+              <div class=\\"buttons\\">
+                <button class=\\"visibility\\">V</button>
+                <button class=\\"flag\\">F</button>
+                <button class=\\"edit\\">E</button>
+              </div>
+            </div>
+            <hr/>
+            <div class=\\"middle\\">
+              <div class=\\"votes\\">
+                <button class=\\"upvote\\"></button>
+                <p class=\\"score\\">0</p>
+                <button class=\\"downvote\\"></button>
+              </div>
+              <p class=\\"body\\">body</p>
+            </div>
+            <hr/>
+            <div class=\\"footer\\">
+              <a>Read comments (12)</a>
+              <div class=\\"dates\\">
+                <p class=\\"posted\\">Posted: <time datetime=\\"2019-11-20 14:22:52\\">2019-11-20 14:22:52</time></p>
+              </div>
+            </div>
+          </div>
+          
+          <div class=\\"shortReview positive\\">
+            <div class=\\"header\\">
+              <p class=\\"rating\\">👍 Recommended</p>
+              <p class=\\"author\\">by <a href=\\"/members/3\\">3</a></p>
+              <div class=\\"buttons\\">
+                <button class=\\"visibility\\">V</button>
+                <button class=\\"flag\\">F</button>
+                <button class=\\"edit\\">E</button>
+              </div>
+            </div>
+            <hr/>
+            <div class=\\"middle\\">
+              <div class=\\"votes\\">
+                <button class=\\"upvote\\"></button>
+                <p class=\\"score\\">0</p>
+                <button class=\\"downvote\\"></button>
+              </div>
+              <p class=\\"body\\">body</p>
+            </div>
+            <hr/>
+            <div class=\\"footer\\">
+              <a>Read comments (12)</a>
+              <div class=\\"dates\\">
+                <p class=\\"posted\\">Posted: <time datetime=\\"2019-11-20 14:22:52\\">2019-11-20 14:22:52</time></p>
+              </div>
+            </div>
+          </div>
+          
+          <div class=\\"shortReview negative\\">
+            <div class=\\"header\\">
+              <p class=\\"rating \\">👎 Not recommended</p>
+              <p class=\\"author\\">by <a href=\\"/members/4\\">4</a></p>
+              <div class=\\"buttons\\">
+                <button class=\\"visibility\\">V</button>
+                <button class=\\"flag\\">F</button>
+                <button class=\\"edit\\">E</button>
+              </div>
+            </div>
+            <hr/>
+            <div class=\\"middle\\">
+              <div class=\\"votes\\">
+                <button class=\\"upvote\\"></button>
+                <p class=\\"score\\">0</p>
+                <button class=\\"downvote\\"></button>
+              </div>
+              <p class=\\"body\\">body</p>
+            </div>
+            <hr/>
+            <div class=\\"footer\\">
+              <a>Read comments (12)</a>
+              <div class=\\"dates\\">
+                <p class=\\"posted\\">Posted: <time datetime=\\"2019-11-20 14:22:52\\">2019-11-20 14:22:52</time></p>
+              </div>
+            </div>
+          </div>
+          
+          <div class=\\"shortReview positive\\">
+            <div class=\\"header\\">
+              <p class=\\"rating\\">👍 Recommended</p>
+              <p class=\\"author\\">by <a href=\\"/members/5\\">5</a></p>
+              <div class=\\"buttons\\">
+                <button class=\\"visibility\\">V</button>
+                <button class=\\"flag\\">F</button>
+                <button class=\\"edit\\">E</button>
+              </div>
+            </div>
+            <hr/>
+            <div class=\\"middle\\">
+              <div class=\\"votes\\">
+                <button class=\\"upvote\\"></button>
+                <p class=\\"score\\">0</p>
+                <button class=\\"downvote\\"></button>
+              </div>
+              <p class=\\"body\\">body</p>
+            </div>
+            <hr/>
+            <div class=\\"footer\\">
+              <a>Read comments (12)</a>
+              <div class=\\"dates\\">
+                <p class=\\"posted\\">Posted: <time datetime=\\"2019-11-20 14:22:52\\">2019-11-20 14:22:52</time></p>
+              </div>
+            </div>
+          </div>
+          
+          <div class=\\"shortReview negative\\">
+            <div class=\\"header\\">
+              <p class=\\"rating \\">👎 Not recommended</p>
+              <p class=\\"author\\">by <a href=\\"/members/6\\">6</a></p>
+              <div class=\\"buttons\\">
+                <button class=\\"visibility\\">V</button>
+                <button class=\\"flag\\">F</button>
+                <button class=\\"edit\\">E</button>
+              </div>
+            </div>
+            <hr/>
+            <div class=\\"middle\\">
+              <div class=\\"votes\\">
+                <button class=\\"upvote\\"></button>
+                <p class=\\"score\\">0</p>
+                <button class=\\"downvote\\"></button>
+              </div>
+              <p class=\\"body\\">body</p>
+            </div>
+            <hr/>
+            <div class=\\"footer\\">
+              <a>Read comments (12)</a>
+              <div class=\\"dates\\">
+                <p class=\\"posted\\">Posted: <time datetime=\\"2019-11-20 14:22:52\\">2019-11-20 14:22:52</time></p>
+              </div>
+            </div>
+          </div>
+          
+          <div class=\\"shortReview positive\\">
+            <div class=\\"header\\">
+              <p class=\\"rating\\">👍 Recommended</p>
+              <p class=\\"author\\">by <a href=\\"/members/7\\">7</a></p>
+              <div class=\\"buttons\\">
+                <button class=\\"visibility\\">V</button>
+                <button class=\\"flag\\">F</button>
+                <button class=\\"edit\\">E</button>
+              </div>
+            </div>
+            <hr/>
+            <div class=\\"middle\\">
+              <div class=\\"votes\\">
+                <button class=\\"upvote\\"></button>
+                <p class=\\"score\\">0</p>
+                <button class=\\"downvote\\"></button>
+              </div>
+              <p class=\\"body\\">body</p>
+            </div>
+            <hr/>
+            <div class=\\"footer\\">
+              <a>Read comments (12)</a>
+              <div class=\\"dates\\">
+                <p class=\\"posted\\">Posted: <time datetime=\\"2019-11-20 14:22:52\\">2019-11-20 14:22:52</time></p>
+              </div>
+            </div>
+          </div>
+          
+          <div class=\\"shortReview negative\\">
+            <div class=\\"header\\">
+              <p class=\\"rating \\">👎 Not recommended</p>
+              <p class=\\"author\\">by <a href=\\"/members/8\\">8</a></p>
+              <div class=\\"buttons\\">
+                <button class=\\"visibility\\">V</button>
+                <button class=\\"flag\\">F</button>
+                <button class=\\"edit\\">E</button>
+              </div>
+            </div>
+            <hr/>
+            <div class=\\"middle\\">
+              <div class=\\"votes\\">
+                <button class=\\"upvote\\"></button>
+                <p class=\\"score\\">0</p>
+                <button class=\\"downvote\\"></button>
+              </div>
+              <p class=\\"body\\">body</p>
+            </div>
+            <hr/>
+            <div class=\\"footer\\">
+              <a>Read comments (12)</a>
+              <div class=\\"dates\\">
+                <p class=\\"posted\\">Posted: <time datetime=\\"2019-11-20 14:22:52\\">2019-11-20 14:22:52</time></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <a href=\\"http://127.0.0.1:50218/games/idUnique?s&#x3D;1\\">More reviews</a>
+      </div>
+      
+      <div id=\\"long\\">
+      
+        
+        <div id=\\"longReviews\\">
+          
+        </div>
+      </div>
+    </div>
+  </body>
+
+</html>
+"
+`;
+
+exports[`routes get game with only negative short reviews 1`] = `
+"<!DOCTYPE html>
+
+<html lang=\\"en\\">
+	<head>
+		<meta charset=\\"utf-8\\">
+		<title>Game Reviews - Game - titleUnique</title>
+    <link href=\\"https://fonts.googleapis.com/css?family=Roboto&display=swap\\" rel=\\"stylesheet\\">
+    
+    <link href=\\"../css/global.css\\" type=\\"text/css\\" rel=\\"stylesheet\\" />
+    <script src=\\"../js/global.js\\" type=\\"text/javascript\\"></script>
+    
+		<link href=\\"../css/loginRegistration.css\\" type=\\"text/css\\" rel=\\"stylesheet\\" />
+    <script src=\\"../js/loginRegistration.js\\" type=\\"text/javascript\\"></script>
+    
+    <link href=\\"../css/game.css\\" type=\\"text/css\\" rel=\\"stylesheet\\" />
+    <script src=\\"../js/game.js\\" type=\\"text/javascript\\"></script>
+    
+    <link href=\\"../css/review.css\\" type=\\"text/css\\" rel=\\"stylesheet\\" />
+    <script src=\\"../js/review.js\\" type=\\"text/javascript\\"></script>
+	</head>
+  <body>
+    <div id=\\"welcome\\">
+      <p>Welcome, guest! <a href=\\"#\\" onclick=\\"show('login')\\">Login</a> or <a href=\\"#\\" onclick=\\"show('register')\\">Register</a> </p>
+    </div>
+    
+    <div class=\\"popup\\" onclick=\\"hide('login', event)\\">
+      <form id=\\"login\\" onsubmit=\\"login(event)\\">
+        <div class=\\"input_header\\">
+        	<label for=\\"username\\">Username</label>
+          <p class=\\"error USERNAME_MISSING\\">This field is required. </p>
+        </div>
+        <input type=\\"text\\" id=\\"username\\" name=\\"username\\" autocomplete=\\"current-username\\" required/>
+        <p class=\\"error USERNAME_UNKNOWN\\">This username does not exist. </p>
+        
+        <div class=\\"input_header\\">
+        	<label for=\\"password\\">Password</label>
+          <p class=\\"error PASSWORD_MISSING\\">This field is required. </p>
+        </div>
+        <input type=\\"password\\" id=\\"password\\" name=\\"password\\" autocomplete=\\"current-password\\" required/>
+        <p class=\\"error PASSWORD_INCORRECT\\">Incorrect password. </p>
+        
+      	<input type=\\"submit\\" value=\\"Log in\\"/>
+        <a href=\\"#forgot\\">Forgot password</a>
+      </form>
+    </div>
+    
+    <div class=\\"popup\\" onclick=\\"hide('register', event)\\">
+      <form id=\\"register\\" onsubmit=\\"register(event)\\">
+        <div class=\\"input_header\\">
+        	<label for=\\"email\\">Email</label>
+          <p class=\\"error EMAIL_MISSING\\">This field is required. </p>
+        </div>
+        <input type=\\"email\\" id=\\"email\\" name=\\"email\\" autocomplete=\\"email\\" required/>
+        
+        <div class=\\"input_header\\">
+        	<label for=\\"new-username\\">Username</label>
+          <p class=\\"error USERNAME_MISSING\\">This field is required. </p>
+          <p class=\\"error USERNAME_AVAILABLE\\">Username available. </p>
+        </div>
+        <input type=\\"text\\" id=\\"new-username\\" name=\\"new-username\\" autocomplete=\\"none\\" required/>
+        <button type=\\"button\\" onclick=\\"checkUsernameAvailability()\\">&#x21bb;</button>
+        <p class=\\"error USERNAME_IN_USE\\">This username is already in use. </p>
+        <p class=\\"info USERNAME_BAD_REGEX\\">Usernames can only contain letters and numbers. <br/> They may contain, but not start or end with, hyphens(-). </p>
+        
+        <div class=\\"input_header\\">
+        	<label for=\\"new-password\\">Password</label>
+          <p class=\\"error PASSWORD_MISSING\\">This field is required. </p>
+        </div>
+        <input type=\\"password\\" id=\\"new-password\\" name=\\"new-password\\" minlength=\\"10\\" autocomplete=\\"new-password\\" required/>
+        <p class=\\"info PASSWORD_TOO_SHORT\\">Passwords must be at least 10 characters long. </p>
+        
+      	<input type=\\"submit\\" value=\\"Register\\">
+      </form>
+    </div>
+
+    <div id=\\"game\\">
+      <img id=\\"gameBanner\\" src=\\"banner\\"/>
+      <h1 id=\\"gameTitle\\">titleUnique</h1>
+      <div id=\\"gameInfo\\">
+        <p><span>Developer</span>developer</p>
+        <p><span>Publisher</span>publisher</p>
+        <p id=\\"gameStore\\"><span>Store</span><a href=\\"store\\" target=\\"_blank\\"><img src=\\"../img/steam-logo.png\\"/></a></p>
+        <p><span>Release Date</span><time datetime=\\"releaseDate\\">releaseDate</time></p>
+        <p><span>Tags</span>tags</p>
+        <p><span>Summary</span>summary</p>
+        <p><span>Description</span>description</p>
+        <a onclick=\\"show('fullDescription', event)\\">Read <br/> more</a>
+      </div>
+    </div>
+    
+    <div class=\\"popup\\" onclick=\\"hide('fullDescription', event)\\">
+      <div id=\\"fullDescription\\">description</div>
+    </div>
+    
+    <div class=\\"popup\\" onclick=\\"hide('updateGame', event)\\">
+      <form id=\\"updateGame\\" onsubmit=\\"updateGame(event)\\">
+        <h1>Create new game</h1>
+        <hr/>
+        <fieldset>
+          <div class=\\"input_header\\">
+          	<label for=\\"steamAppID\\">Steam App ID</label>
+            <p class=\\"error GAME_STEAM_APP_ID_MISSING\\">This field is required</p>
+          </div>
+          <input type=\\"text\\" id=\\"steamAppID\\" name=\\"steamAppID\\" value=\\"steamAppIDUnique\\" required/>
+          
+          <div class=\\"input_header\\">
+          	<label for=\\"title\\">Title</label>
+            <p class=\\"error GAME_TITLE_MISSING\\">This field is required</p>
+          </div>
+          <input type=\\"text\\" id=\\"title\\" name=\\"title\\" value=\\"titleUnique\\" required/>
+          <p class=\\"error GAME_TITLE_IN_USE\\">Title in use</p>
+        
+          <div class=\\"input_header\\">
+          	<label for=\\"summary\\">Summary</label>
+            <p class=\\"error GAME_SUMMARY_MISSING\\">This field is required</p>
+          </div>
+          <input type=\\"text\\" id=\\"summary\\" name=\\"summary\\" value=\\"summary\\" required/>
+        </fieldset>
+        
+        <fieldset>
+          <legend>Optional</legend>
+          
+          <div>
+          	<label for=\\"developer\\">Developer</label>
+            <input type=\\"text\\" id=\\"developer\\" name=\\"developer\\" value=\\"developer\\"/>
+            
+          	<label for=\\"publisher\\">Publisher</label>
+            <input type=\\"text\\" id=\\"publisher\\" name=\\"publisher\\" value=\\"publisher\\"/>
+            
+            <label for=\\"tags\\">Tags</label>
+            <input type=\\"text\\" id=\\"tags\\" name=\\"tags\\" value=\\"tags\\"/>
+            
+          	<label for=\\"description\\">Description</label>
+            <textarea id=\\"description\\" name=\\"description\\" rows=\\"1\\">description</textarea>
+          </div>
+          
+          <div>
+          	<label for=\\"store\\">Store</label>
+            <input type=\\"text\\" id=\\"store\\" name=\\"store\\" value=\\"store\\"/>
+            
+           	<label for=\\"thumbnail\\">Thumbnail</label>
+            <input type=\\"text\\" id=\\"thumbnail\\" name=\\"thumbnail\\" value=\\"thumbnail\\"/>
+          
+           	<label for=\\"banner\\">Banner</label>
+            <input type=\\"text\\" id=\\"banner\\" name=\\"banner\\" value=\\"banner\\"/>
+        
+            <label for=\\"releaseDate\\">Release date</label>
+            <input type=\\"date\\" id=\\"releaseDate\\" name=\\"releaseDate\\" value=\\"releaseDate\\"/>
+          </div>
+        
+        </fieldset>
+      	<input type=\\"submit\\" value=\\"Update\\">
+      </form>
+    </div>
+  
+    <div id=\\"reviews\\">
+      <div id=\\"short\\">
+        
+        <div id=\\"shortReviewCount\\">
+          <p id=\\"emoji\\">😐</p>
+          <div class=\\"label\\">
+            <p>Positive</p>
+            <p>Negative</p>
+          </div>
+          <div class=\\"bars\\">
+            <div class=\\"bar\\" style=\\"width:50%\\"><p>1 (50%)</p></div>
+            <div class=\\"bar\\" style=\\"width:50%\\"><p>1 (50%)</p></div>
+          </div>
+        </div>
+        
+        <div id=\\"shortReviews\\">
+          
+          <div class=\\"shortReview positive\\">
+            <div class=\\"header\\">
+              <p class=\\"rating\\">👍 Recommended</p>
+              <p class=\\"author\\">by <a href=\\"/members/1\\">1</a></p>
+              <div class=\\"buttons\\">
+                <button class=\\"visibility\\">V</button>
+                <button class=\\"flag\\">F</button>
+                <button class=\\"edit\\">E</button>
+              </div>
+            </div>
+            <hr/>
+            <div class=\\"middle\\">
+              <div class=\\"votes\\">
+                <button class=\\"upvote\\"></button>
+                <p class=\\"score\\">0</p>
+                <button class=\\"downvote\\"></button>
+              </div>
+              <p class=\\"body\\">body</p>
+            </div>
+            <hr/>
+            <div class=\\"footer\\">
+              <a>Read comments (12)</a>
+              <div class=\\"dates\\">
+                <p class=\\"posted\\">Posted: <time datetime=\\"timestamp\\">timestamp</time></p>
+              </div>
+            </div>
+          </div>
+          
+          <div class=\\"shortReview negative\\">
+            <div class=\\"header\\">
+              <p class=\\"rating \\">👎 Not recommended</p>
+              <p class=\\"author\\">by <a href=\\"/members/2\\">2</a></p>
+              <div class=\\"buttons\\">
+                <button class=\\"visibility\\">V</button>
+                <button class=\\"flag\\">F</button>
+                <button class=\\"edit\\">E</button>
+              </div>
+            </div>
+            <hr/>
+            <div class=\\"middle\\">
+              <div class=\\"votes\\">
+                <button class=\\"upvote\\"></button>
+                <p class=\\"score\\">0</p>
+                <button class=\\"downvote\\"></button>
+              </div>
+              <p class=\\"body\\">body</p>
+            </div>
+            <hr/>
+            <div class=\\"footer\\">
+              <a>Read comments (12)</a>
+              <div class=\\"dates\\">
+                <p class=\\"posted\\">Posted: <time datetime=\\"timestamp\\">timestamp</time></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+      
+      <div id=\\"long\\">
+      
+        
+        <div id=\\"longReviews\\">
+          
+        </div>
+      </div>
+    </div>
+  </body>
+
+</html>
+"
+`;
+
+exports[`routes get game with only positive short reviews 1`] = `
+"<!DOCTYPE html>
+
+<html lang=\\"en\\">
+	<head>
+		<meta charset=\\"utf-8\\">
+		<title>Game Reviews - Game - titleUnique</title>
+    <link href=\\"https://fonts.googleapis.com/css?family=Roboto&display=swap\\" rel=\\"stylesheet\\">
+    
+    <link href=\\"../css/global.css\\" type=\\"text/css\\" rel=\\"stylesheet\\" />
+    <script src=\\"../js/global.js\\" type=\\"text/javascript\\"></script>
+    
+		<link href=\\"../css/loginRegistration.css\\" type=\\"text/css\\" rel=\\"stylesheet\\" />
+    <script src=\\"../js/loginRegistration.js\\" type=\\"text/javascript\\"></script>
+    
+    <link href=\\"../css/game.css\\" type=\\"text/css\\" rel=\\"stylesheet\\" />
+    <script src=\\"../js/game.js\\" type=\\"text/javascript\\"></script>
+    
+    <link href=\\"../css/review.css\\" type=\\"text/css\\" rel=\\"stylesheet\\" />
+    <script src=\\"../js/review.js\\" type=\\"text/javascript\\"></script>
+	</head>
+  <body>
+    <div id=\\"welcome\\">
+      <p>Welcome, guest! <a href=\\"#\\" onclick=\\"show('login')\\">Login</a> or <a href=\\"#\\" onclick=\\"show('register')\\">Register</a> </p>
+    </div>
+    
+    <div class=\\"popup\\" onclick=\\"hide('login', event)\\">
+      <form id=\\"login\\" onsubmit=\\"login(event)\\">
+        <div class=\\"input_header\\">
+        	<label for=\\"username\\">Username</label>
+          <p class=\\"error USERNAME_MISSING\\">This field is required. </p>
+        </div>
+        <input type=\\"text\\" id=\\"username\\" name=\\"username\\" autocomplete=\\"current-username\\" required/>
+        <p class=\\"error USERNAME_UNKNOWN\\">This username does not exist. </p>
+        
+        <div class=\\"input_header\\">
+        	<label for=\\"password\\">Password</label>
+          <p class=\\"error PASSWORD_MISSING\\">This field is required. </p>
+        </div>
+        <input type=\\"password\\" id=\\"password\\" name=\\"password\\" autocomplete=\\"current-password\\" required/>
+        <p class=\\"error PASSWORD_INCORRECT\\">Incorrect password. </p>
+        
+      	<input type=\\"submit\\" value=\\"Log in\\"/>
+        <a href=\\"#forgot\\">Forgot password</a>
+      </form>
+    </div>
+    
+    <div class=\\"popup\\" onclick=\\"hide('register', event)\\">
+      <form id=\\"register\\" onsubmit=\\"register(event)\\">
+        <div class=\\"input_header\\">
+        	<label for=\\"email\\">Email</label>
+          <p class=\\"error EMAIL_MISSING\\">This field is required. </p>
+        </div>
+        <input type=\\"email\\" id=\\"email\\" name=\\"email\\" autocomplete=\\"email\\" required/>
+        
+        <div class=\\"input_header\\">
+        	<label for=\\"new-username\\">Username</label>
+          <p class=\\"error USERNAME_MISSING\\">This field is required. </p>
+          <p class=\\"error USERNAME_AVAILABLE\\">Username available. </p>
+        </div>
+        <input type=\\"text\\" id=\\"new-username\\" name=\\"new-username\\" autocomplete=\\"none\\" required/>
+        <button type=\\"button\\" onclick=\\"checkUsernameAvailability()\\">&#x21bb;</button>
+        <p class=\\"error USERNAME_IN_USE\\">This username is already in use. </p>
+        <p class=\\"info USERNAME_BAD_REGEX\\">Usernames can only contain letters and numbers. <br/> They may contain, but not start or end with, hyphens(-). </p>
+        
+        <div class=\\"input_header\\">
+        	<label for=\\"new-password\\">Password</label>
+          <p class=\\"error PASSWORD_MISSING\\">This field is required. </p>
+        </div>
+        <input type=\\"password\\" id=\\"new-password\\" name=\\"new-password\\" minlength=\\"10\\" autocomplete=\\"new-password\\" required/>
+        <p class=\\"info PASSWORD_TOO_SHORT\\">Passwords must be at least 10 characters long. </p>
+        
+      	<input type=\\"submit\\" value=\\"Register\\">
+      </form>
+    </div>
+
+    <div id=\\"game\\">
+      <img id=\\"gameBanner\\" src=\\"banner\\"/>
+      <h1 id=\\"gameTitle\\">titleUnique</h1>
+      <div id=\\"gameInfo\\">
+        <p><span>Developer</span>developer</p>
+        <p><span>Publisher</span>publisher</p>
+        <p id=\\"gameStore\\"><span>Store</span><a href=\\"store\\" target=\\"_blank\\"><img src=\\"../img/steam-logo.png\\"/></a></p>
+        <p><span>Release Date</span><time datetime=\\"releaseDate\\">releaseDate</time></p>
+        <p><span>Tags</span>tags</p>
+        <p><span>Summary</span>summary</p>
+        <p><span>Description</span>description</p>
+        <a onclick=\\"show('fullDescription', event)\\">Read <br/> more</a>
+      </div>
+    </div>
+    
+    <div class=\\"popup\\" onclick=\\"hide('fullDescription', event)\\">
+      <div id=\\"fullDescription\\">description</div>
+    </div>
+    
+    <div class=\\"popup\\" onclick=\\"hide('updateGame', event)\\">
+      <form id=\\"updateGame\\" onsubmit=\\"updateGame(event)\\">
+        <h1>Create new game</h1>
+        <hr/>
+        <fieldset>
+          <div class=\\"input_header\\">
+          	<label for=\\"steamAppID\\">Steam App ID</label>
+            <p class=\\"error GAME_STEAM_APP_ID_MISSING\\">This field is required</p>
+          </div>
+          <input type=\\"text\\" id=\\"steamAppID\\" name=\\"steamAppID\\" value=\\"steamAppIDUnique\\" required/>
+          
+          <div class=\\"input_header\\">
+          	<label for=\\"title\\">Title</label>
+            <p class=\\"error GAME_TITLE_MISSING\\">This field is required</p>
+          </div>
+          <input type=\\"text\\" id=\\"title\\" name=\\"title\\" value=\\"titleUnique\\" required/>
+          <p class=\\"error GAME_TITLE_IN_USE\\">Title in use</p>
+        
+          <div class=\\"input_header\\">
+          	<label for=\\"summary\\">Summary</label>
+            <p class=\\"error GAME_SUMMARY_MISSING\\">This field is required</p>
+          </div>
+          <input type=\\"text\\" id=\\"summary\\" name=\\"summary\\" value=\\"summary\\" required/>
+        </fieldset>
+        
+        <fieldset>
+          <legend>Optional</legend>
+          
+          <div>
+          	<label for=\\"developer\\">Developer</label>
+            <input type=\\"text\\" id=\\"developer\\" name=\\"developer\\" value=\\"developer\\"/>
+            
+          	<label for=\\"publisher\\">Publisher</label>
+            <input type=\\"text\\" id=\\"publisher\\" name=\\"publisher\\" value=\\"publisher\\"/>
+            
+            <label for=\\"tags\\">Tags</label>
+            <input type=\\"text\\" id=\\"tags\\" name=\\"tags\\" value=\\"tags\\"/>
+            
+          	<label for=\\"description\\">Description</label>
+            <textarea id=\\"description\\" name=\\"description\\" rows=\\"1\\">description</textarea>
+          </div>
+          
+          <div>
+          	<label for=\\"store\\">Store</label>
+            <input type=\\"text\\" id=\\"store\\" name=\\"store\\" value=\\"store\\"/>
+            
+           	<label for=\\"thumbnail\\">Thumbnail</label>
+            <input type=\\"text\\" id=\\"thumbnail\\" name=\\"thumbnail\\" value=\\"thumbnail\\"/>
+          
+           	<label for=\\"banner\\">Banner</label>
+            <input type=\\"text\\" id=\\"banner\\" name=\\"banner\\" value=\\"banner\\"/>
+        
+            <label for=\\"releaseDate\\">Release date</label>
+            <input type=\\"date\\" id=\\"releaseDate\\" name=\\"releaseDate\\" value=\\"releaseDate\\"/>
+          </div>
+        
+        </fieldset>
+      	<input type=\\"submit\\" value=\\"Update\\">
+      </form>
+    </div>
+  
+    <div id=\\"reviews\\">
+      <div id=\\"short\\">
+        
+        <div id=\\"shortReviewCount\\">
+          <p id=\\"emoji\\">🤯</p>
+          <div class=\\"label\\">
+            <p>Positive</p>
+            <p>Negative</p>
+          </div>
+          <div class=\\"bars\\">
+            <div class=\\"bar\\" style=\\"width:100%\\"><p>1 (100%)</p></div>
+            <div class=\\"bar\\" style=\\"width:0%\\"><p>0 (0%)</p></div>
+          </div>
+        </div>
+        
+        <div id=\\"shortReviews\\">
+          
+          <div class=\\"shortReview positive\\">
+            <div class=\\"header\\">
+              <p class=\\"rating\\">👍 Recommended</p>
+              <p class=\\"author\\">by <a href=\\"/members/1\\">1</a></p>
+              <div class=\\"buttons\\">
+                <button class=\\"visibility\\">V</button>
+                <button class=\\"flag\\">F</button>
+                <button class=\\"edit\\">E</button>
+              </div>
+            </div>
+            <hr/>
+            <div class=\\"middle\\">
+              <div class=\\"votes\\">
+                <button class=\\"upvote\\"></button>
+                <p class=\\"score\\">0</p>
+                <button class=\\"downvote\\"></button>
+              </div>
+              <p class=\\"body\\">body</p>
+            </div>
+            <hr/>
+            <div class=\\"footer\\">
+              <a>Read comments (12)</a>
+              <div class=\\"dates\\">
+                <p class=\\"posted\\">Posted: <time datetime=\\"timestamp\\">timestamp</time></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+      
+      <div id=\\"long\\">
+      
+        
+        <div id=\\"longReviews\\">
+          
+        </div>
+      </div>
+    </div>
+  </body>
+
+</html>
+"
+`;
+
+exports[`routes get game with positive and negative short reviews 1`] = `
+"<!DOCTYPE html>
+
+<html lang=\\"en\\">
+	<head>
+		<meta charset=\\"utf-8\\">
+		<title>Game Reviews - Game - titleUnique</title>
+    <link href=\\"https://fonts.googleapis.com/css?family=Roboto&display=swap\\" rel=\\"stylesheet\\">
+    
+    <link href=\\"../css/global.css\\" type=\\"text/css\\" rel=\\"stylesheet\\" />
+    <script src=\\"../js/global.js\\" type=\\"text/javascript\\"></script>
+    
+		<link href=\\"../css/loginRegistration.css\\" type=\\"text/css\\" rel=\\"stylesheet\\" />
+    <script src=\\"../js/loginRegistration.js\\" type=\\"text/javascript\\"></script>
+    
+    <link href=\\"../css/game.css\\" type=\\"text/css\\" rel=\\"stylesheet\\" />
+    <script src=\\"../js/game.js\\" type=\\"text/javascript\\"></script>
+    
+    <link href=\\"../css/review.css\\" type=\\"text/css\\" rel=\\"stylesheet\\" />
+    <script src=\\"../js/review.js\\" type=\\"text/javascript\\"></script>
+	</head>
+  <body>
+    <div id=\\"welcome\\">
+      <p>Welcome, guest! <a href=\\"#\\" onclick=\\"show('login')\\">Login</a> or <a href=\\"#\\" onclick=\\"show('register')\\">Register</a> </p>
+    </div>
+    
+    <div class=\\"popup\\" onclick=\\"hide('login', event)\\">
+      <form id=\\"login\\" onsubmit=\\"login(event)\\">
+        <div class=\\"input_header\\">
+        	<label for=\\"username\\">Username</label>
+          <p class=\\"error USERNAME_MISSING\\">This field is required. </p>
+        </div>
+        <input type=\\"text\\" id=\\"username\\" name=\\"username\\" autocomplete=\\"current-username\\" required/>
+        <p class=\\"error USERNAME_UNKNOWN\\">This username does not exist. </p>
+        
+        <div class=\\"input_header\\">
+        	<label for=\\"password\\">Password</label>
+          <p class=\\"error PASSWORD_MISSING\\">This field is required. </p>
+        </div>
+        <input type=\\"password\\" id=\\"password\\" name=\\"password\\" autocomplete=\\"current-password\\" required/>
+        <p class=\\"error PASSWORD_INCORRECT\\">Incorrect password. </p>
+        
+      	<input type=\\"submit\\" value=\\"Log in\\"/>
+        <a href=\\"#forgot\\">Forgot password</a>
+      </form>
+    </div>
+    
+    <div class=\\"popup\\" onclick=\\"hide('register', event)\\">
+      <form id=\\"register\\" onsubmit=\\"register(event)\\">
+        <div class=\\"input_header\\">
+        	<label for=\\"email\\">Email</label>
+          <p class=\\"error EMAIL_MISSING\\">This field is required. </p>
+        </div>
+        <input type=\\"email\\" id=\\"email\\" name=\\"email\\" autocomplete=\\"email\\" required/>
+        
+        <div class=\\"input_header\\">
+        	<label for=\\"new-username\\">Username</label>
+          <p class=\\"error USERNAME_MISSING\\">This field is required. </p>
+          <p class=\\"error USERNAME_AVAILABLE\\">Username available. </p>
+        </div>
+        <input type=\\"text\\" id=\\"new-username\\" name=\\"new-username\\" autocomplete=\\"none\\" required/>
+        <button type=\\"button\\" onclick=\\"checkUsernameAvailability()\\">&#x21bb;</button>
+        <p class=\\"error USERNAME_IN_USE\\">This username is already in use. </p>
+        <p class=\\"info USERNAME_BAD_REGEX\\">Usernames can only contain letters and numbers. <br/> They may contain, but not start or end with, hyphens(-). </p>
+        
+        <div class=\\"input_header\\">
+        	<label for=\\"new-password\\">Password</label>
+          <p class=\\"error PASSWORD_MISSING\\">This field is required. </p>
+        </div>
+        <input type=\\"password\\" id=\\"new-password\\" name=\\"new-password\\" minlength=\\"10\\" autocomplete=\\"new-password\\" required/>
+        <p class=\\"info PASSWORD_TOO_SHORT\\">Passwords must be at least 10 characters long. </p>
+        
+      	<input type=\\"submit\\" value=\\"Register\\">
+      </form>
+    </div>
+
+    <div id=\\"game\\">
+      <img id=\\"gameBanner\\" src=\\"banner\\"/>
+      <h1 id=\\"gameTitle\\">titleUnique</h1>
+      <div id=\\"gameInfo\\">
+        <p><span>Developer</span>developer</p>
+        <p><span>Publisher</span>publisher</p>
+        <p id=\\"gameStore\\"><span>Store</span><a href=\\"store\\" target=\\"_blank\\"><img src=\\"../img/steam-logo.png\\"/></a></p>
+        <p><span>Release Date</span><time datetime=\\"releaseDate\\">releaseDate</time></p>
+        <p><span>Tags</span>tags</p>
+        <p><span>Summary</span>summary</p>
+        <p><span>Description</span>description</p>
+        <a onclick=\\"show('fullDescription', event)\\">Read <br/> more</a>
+      </div>
+    </div>
+    
+    <div class=\\"popup\\" onclick=\\"hide('fullDescription', event)\\">
+      <div id=\\"fullDescription\\">description</div>
+    </div>
+    
+    <div class=\\"popup\\" onclick=\\"hide('updateGame', event)\\">
+      <form id=\\"updateGame\\" onsubmit=\\"updateGame(event)\\">
+        <h1>Create new game</h1>
+        <hr/>
+        <fieldset>
+          <div class=\\"input_header\\">
+          	<label for=\\"steamAppID\\">Steam App ID</label>
+            <p class=\\"error GAME_STEAM_APP_ID_MISSING\\">This field is required</p>
+          </div>
+          <input type=\\"text\\" id=\\"steamAppID\\" name=\\"steamAppID\\" value=\\"steamAppIDUnique\\" required/>
+          
+          <div class=\\"input_header\\">
+          	<label for=\\"title\\">Title</label>
+            <p class=\\"error GAME_TITLE_MISSING\\">This field is required</p>
+          </div>
+          <input type=\\"text\\" id=\\"title\\" name=\\"title\\" value=\\"titleUnique\\" required/>
+          <p class=\\"error GAME_TITLE_IN_USE\\">Title in use</p>
+        
+          <div class=\\"input_header\\">
+          	<label for=\\"summary\\">Summary</label>
+            <p class=\\"error GAME_SUMMARY_MISSING\\">This field is required</p>
+          </div>
+          <input type=\\"text\\" id=\\"summary\\" name=\\"summary\\" value=\\"summary\\" required/>
+        </fieldset>
+        
+        <fieldset>
+          <legend>Optional</legend>
+          
+          <div>
+          	<label for=\\"developer\\">Developer</label>
+            <input type=\\"text\\" id=\\"developer\\" name=\\"developer\\" value=\\"developer\\"/>
+            
+          	<label for=\\"publisher\\">Publisher</label>
+            <input type=\\"text\\" id=\\"publisher\\" name=\\"publisher\\" value=\\"publisher\\"/>
+            
+            <label for=\\"tags\\">Tags</label>
+            <input type=\\"text\\" id=\\"tags\\" name=\\"tags\\" value=\\"tags\\"/>
+            
+          	<label for=\\"description\\">Description</label>
+            <textarea id=\\"description\\" name=\\"description\\" rows=\\"1\\">description</textarea>
+          </div>
+          
+          <div>
+          	<label for=\\"store\\">Store</label>
+            <input type=\\"text\\" id=\\"store\\" name=\\"store\\" value=\\"store\\"/>
+            
+           	<label for=\\"thumbnail\\">Thumbnail</label>
+            <input type=\\"text\\" id=\\"thumbnail\\" name=\\"thumbnail\\" value=\\"thumbnail\\"/>
+          
+           	<label for=\\"banner\\">Banner</label>
+            <input type=\\"text\\" id=\\"banner\\" name=\\"banner\\" value=\\"banner\\"/>
+        
+            <label for=\\"releaseDate\\">Release date</label>
+            <input type=\\"date\\" id=\\"releaseDate\\" name=\\"releaseDate\\" value=\\"releaseDate\\"/>
+          </div>
+        
+        </fieldset>
+      	<input type=\\"submit\\" value=\\"Update\\">
+      </form>
+    </div>
+  
+    <div id=\\"reviews\\">
+      <div id=\\"short\\">
+        
+        <div id=\\"shortReviewCount\\">
+          <p id=\\"emoji\\">😐</p>
+          <div class=\\"label\\">
+            <p>Positive</p>
+            <p>Negative</p>
+          </div>
+          <div class=\\"bars\\">
+            <div class=\\"bar\\" style=\\"width:50%\\"><p>2 (50%)</p></div>
+            <div class=\\"bar\\" style=\\"width:50%\\"><p>2 (50%)</p></div>
+          </div>
+        </div>
+        
+        <div id=\\"shortReviews\\">
+          
+          <div class=\\"shortReview positive\\">
+            <div class=\\"header\\">
+              <p class=\\"rating\\">👍 Recommended</p>
+              <p class=\\"author\\">by <a href=\\"/members/1\\">1</a></p>
+              <div class=\\"buttons\\">
+                <button class=\\"visibility\\">V</button>
+                <button class=\\"flag\\">F</button>
+                <button class=\\"edit\\">E</button>
+              </div>
+            </div>
+            <hr/>
+            <div class=\\"middle\\">
+              <div class=\\"votes\\">
+                <button class=\\"upvote\\"></button>
+                <p class=\\"score\\">0</p>
+                <button class=\\"downvote\\"></button>
+              </div>
+              <p class=\\"body\\">body</p>
+            </div>
+            <hr/>
+            <div class=\\"footer\\">
+              <a>Read comments (12)</a>
+              <div class=\\"dates\\">
+                <p class=\\"posted\\">Posted: <time datetime=\\"timestamp\\">timestamp</time></p>
+              </div>
+            </div>
+          </div>
+          
+          <div class=\\"shortReview negative\\">
+            <div class=\\"header\\">
+              <p class=\\"rating \\">👎 Not recommended</p>
+              <p class=\\"author\\">by <a href=\\"/members/2\\">2</a></p>
+              <div class=\\"buttons\\">
+                <button class=\\"visibility\\">V</button>
+                <button class=\\"flag\\">F</button>
+                <button class=\\"edit\\">E</button>
+              </div>
+            </div>
+            <hr/>
+            <div class=\\"middle\\">
+              <div class=\\"votes\\">
+                <button class=\\"upvote\\"></button>
+                <p class=\\"score\\">0</p>
+                <button class=\\"downvote\\"></button>
+              </div>
+              <p class=\\"body\\">body</p>
+            </div>
+            <hr/>
+            <div class=\\"footer\\">
+              <a>Read comments (12)</a>
+              <div class=\\"dates\\">
+                <p class=\\"posted\\">Posted: <time datetime=\\"timestamp\\">timestamp</time></p>
+              </div>
+            </div>
+          </div>
+          
+          <div class=\\"shortReview positive\\">
+            <div class=\\"header\\">
+              <p class=\\"rating\\">👍 Recommended</p>
+              <p class=\\"author\\">by <a href=\\"/members/3\\">3</a></p>
+              <div class=\\"buttons\\">
+                <button class=\\"visibility\\">V</button>
+                <button class=\\"flag\\">F</button>
+                <button class=\\"edit\\">E</button>
+              </div>
+            </div>
+            <hr/>
+            <div class=\\"middle\\">
+              <div class=\\"votes\\">
+                <button class=\\"upvote\\"></button>
+                <p class=\\"score\\">0</p>
+                <button class=\\"downvote\\"></button>
+              </div>
+              <p class=\\"body\\">body</p>
+            </div>
+            <hr/>
+            <div class=\\"footer\\">
+              <a>Read comments (12)</a>
+              <div class=\\"dates\\">
+                <p class=\\"posted\\">Posted: <time datetime=\\"timestamp\\">timestamp</time></p>
+              </div>
+            </div>
+          </div>
+          
+          <div class=\\"shortReview negative\\">
+            <div class=\\"header\\">
+              <p class=\\"rating \\">👎 Not recommended</p>
+              <p class=\\"author\\">by <a href=\\"/members/4\\">4</a></p>
+              <div class=\\"buttons\\">
+                <button class=\\"visibility\\">V</button>
+                <button class=\\"flag\\">F</button>
+                <button class=\\"edit\\">E</button>
+              </div>
+            </div>
+            <hr/>
+            <div class=\\"middle\\">
+              <div class=\\"votes\\">
+                <button class=\\"upvote\\"></button>
+                <p class=\\"score\\">0</p>
+                <button class=\\"downvote\\"></button>
+              </div>
+              <p class=\\"body\\">body</p>
+            </div>
+            <hr/>
+            <div class=\\"footer\\">
+              <a>Read comments (12)</a>
+              <div class=\\"dates\\">
+                <p class=\\"posted\\">Posted: <time datetime=\\"timestamp\\">timestamp</time></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <a href=\\"http://127.0.0.1:50216/games/idUnique?s&#x3D;1\\">More reviews</a>
       </div>
       
       <div id=\\"long\\">

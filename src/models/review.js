@@ -3,8 +3,7 @@
 const connection = require('../database/connection')
 const ErrorEnum = require('../util/ErrorEnum')
 
-// eslint-disable-next-line complexity
-function hasRequiredProperties(review) {
+function hasAutomaticProperties(review) {
   if (!review) {
     throw Error(ErrorEnum.FUNCTION_MISUSE_PARAM_MISSING)
   }
@@ -14,6 +13,9 @@ function hasRequiredProperties(review) {
   if (!review.author) {
     throw Error(ErrorEnum.REVIEW_AUTHOR_MISSING)
   }
+}
+
+function hasRequiredProperties(review) {
   if (!review.body) {
     throw Error(ErrorEnum.REVIEW_BODY_MISSING)
   }
@@ -48,31 +50,16 @@ function onlyHasExpectedProperties(review) {
 }
 
 class Review {
-  get data() {
-    return [
-      this.game,
-      this.author,
-      this.rating,
-      this.body,
-      this.type,
-      this.posted,
-      this.visibility
-    ]
-  }
-
-  async create(review) {
+  async load(review) {
+    hasAutomaticProperties(review)
     hasRequiredProperties(review)
     onlyHasExpectedProperties(review)
-    const results = await connection.all('select.reviewByGameAndAuthorAndType', ...[
-      review.game,
-      review.author,
-      review.type
-    ])
+    const results = await connection.all('select.review', review.game, review.author, review.type)
     Object.assign(this, review)
     if (results && results.length !== 0) {
-      await connection.run('update.review', this.rating, this.body, this.game, this.author, 'short')
+      await connection.run('update.review', this.rating, this.body, this.game, this.author, this.type)
     } else {
-      await connection.run('insert.review', ...this.data)
+      await connection.run('insert.review', this.game, this.author, this.rating, this.body, this.type)
     }
     this.loaded = true
   }

@@ -2,6 +2,22 @@
 
 const authorisation = require('./util/authorisation')
 const connection = require('../../database/connection')
+const MAGIC_NUMBERS = require('../../util/magicNumbers')
+const updateQueryParam = require('./util/updateQueryParam')
+
+const EMOJI = {
+  10: '🤯',
+  9: '🥰',
+  8: '😄',
+  7: '😀',
+  6: '🙂',
+  5: '😐',
+  4: '🤔',
+  3: '🙁',
+  2: '🥱',
+  1: '🤢',
+  0: '🤮'
+}
 
 function fillDefaults(parameters) {
   const id = parameters.game.steamAppID
@@ -17,57 +33,63 @@ function fillDefaults(parameters) {
   return parameters.game
 }
 
-const emoji = {
-  10: '🤯',
-  9: '🥰',
-  8: '😄',
-  7: '😀',
-  6: '🙂',
-  5: '😐',
-  4: '🤔',
-  3: '🙁',
-  2: '🥱',
-  1: '🤢',
-  0: '🤮'
+function calculatePercentage(dividend, divisor) {
+  return Math.round(dividend * MAGIC_NUMBERS.PERCENTAGE_MULTIPLIER / divisor)
 }
-
-const PERCENTAGE_MULTIPLIER = 100
 
 async function getCounts(data, parameters) {
   parameters.negativeCount = 0
   parameters.positiveCount = 0
-  if (data) {
+  if (data && data.length !== 0) {
     if (data[1]) {
       parameters.negativeCount = data[0].count
       parameters.positiveCount = data[1].count
     } else {
-      data[0].rating ? parameters.positiveCount = data[0].count : parameters.negativeCount = data[0].count
+      data[0].rating === 1 ? parameters.positiveCount = data[0].count : parameters.negativeCount = data[0].count
     }
   }
   parameters.totalCount = parameters.negativeCount + parameters.positiveCount
-  parameters.negativePercent = Math.round(parameters.negativeCount * PERCENTAGE_MULTIPLIER / parameters.totalCount)
-  parameters.positivePercent = Math.round(parameters.positiveCount * PERCENTAGE_MULTIPLIER / parameters.totalCount)
-  parameters.emoji = emoji[Math.round(parameters.positiveCount * Object.keys(emoji).length / parameters.totalCount)]
+  parameters.negativePercent = calculatePercentage(parameters.negativeCount, parameters.totalCount)
+  parameters.positivePercent = calculatePercentage(parameters.positiveCount, parameters.totalCount)
+  const emojiCount = Object.keys(EMOJI).length - 1
+  parameters.emoji = EMOJI[Math.round(parameters.positiveCount * emojiCount / parameters.totalCount)]
 }
 
-const REVIEWS_PER_PAGE = 10
+async function reviewsPromise(gameID, type, page) {
+  return connection.all('select.reviews', gameID, type, (page || 0) * process.env.REVIEWS_PER_PAGE)
+}
+
+function getReviewPromises(parameters, gameID, query) {
+  const shortReviews = reviewsPromise(gameID,'short', query.s)
+    .then(data => parameters.shortReviews = data)
+  const longReviews = reviewsPromise(gameID,'long', query.l)
+    .then(data => parameters.longReviews = data )
+  const shortReviewCount = connection.all('select.countReviews', gameID, 'short')
+    .then(data => getCounts(data, parameters))
+  const userShortReviewed = connection.all('select.review', gameID, parameters.username, 'short')
+    .then(data => parameters.userShortReviewed = data[0] )
+  return [shortReviews, longReviews, shortReviewCount, userShortReviewed]
+}
+
+function checkShortReviewPages(total, href, query) {
+  const shortReviewPage = Number(query.s) || 0
+  if ((shortReviewPage + 1) * Number(process.env.REVIEWS_PER_PAGE) < total) {
+    return updateQueryParam(href, 's', shortReviewPage + 1, shortReviewPage)
+  }
+}
 
 async function game(context) {
+  const gameID = context.params.game
   const parameters = authorisation(context, {})
-  const shortReviews = connection.all('select.reviewsByGameAndType', context.params.game, 'short', (context.request.query.s || 0) * REVIEWS_PER_PAGE).then(data => parameters.shortReviews = data)
-  const longReviews = connection.all('select.reviewsByGameAndType', context.params.game, 'long', (context.request.query.l || 0) * REVIEWS_PER_PAGE).then(data => parameters.longReviews = data )
-  const shortReviewCount = connection.all('select.countShortReviewRating', context.params.game).then(data => getCounts(data, parameters))
-  const userShortReviewed = connection.all('select.reviewByGameAndAuthorAndType', context.params.game, parameters.username, 'short').then(data => parameters.userShortReviewed = data[0] )
+  const reviewPromises = getReviewPromises(parameters, gameID, context.request.query)
 
-  parameters.game = await connection.all('select.gameByID', context.params.game)
+  parameters.game = await connection.all('select.gameByID', gameID)
   parameters.game = parameters.game[0]
   parameters.game = fillDefaults(parameters)
 
-  await Promise.all([shortReviews, longReviews, shortReviewCount, userShortReviewed])
+  await Promise.all(reviewPromises)
 
-  if (context.request.query.s * REVIEWS_PER_PAGE + REVIEWS_PER_PAGE < parameters.totalCount) {
-    parameters.nextShortReviews = context.href.replace(`s=${context.request.query.s}`,`s=${Number(context.request.query.s) + 1}`)
-  }
+  parameters.nextShortReviews = checkShortReviewPages(parameters.totalCount, context.href, context.request.query)
 
   await context.render('game', parameters)
 }

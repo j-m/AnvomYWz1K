@@ -1,3 +1,5 @@
+'use strict'
+
 const authorisation = require('../../../../src/routes/pages/util/authorisation')
 
 describe('routes pages util authorisation', () => {
