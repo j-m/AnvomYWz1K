@@ -77,8 +77,9 @@
   white-space: nowrap;
 }
 
-#shortReviews {
-  padding: 1rem;
+#shortReviews,
+#longReviews {
+  padding: 1rem 0;
 }
 
 .shortReview {
@@ -256,8 +257,4 @@
 
 #preview {
   width: auto;
-}
-
-#longReviews {
-  padding: 1rem;
 }

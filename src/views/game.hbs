@@ -77,9 +77,8 @@
           </div>
         </div>
         
-        <hr/>
-        
         {{#if username}}
+        <hr/>
         <form id="writeshortReview" onsubmit="review('{{game.id}}', 'short', event)">
           <label for="positive">👍</label>
           <input type="radio" name="rating" id="positive" value="1" required {{#if (equal userShortReviewed.rating 1)}} checked{{/if}}/>
@@ -88,7 +87,6 @@
           <input type="submit" value="{{#if userShortReviewed.body}}Update{{else}}Post{{/if}}"/>
           <textarea id="shortReviewBody" name="body" rows="1" required>{{userShortReviewed.body}}</textarea>
         </form>  
-        
         <hr/>
         {{/if}}
         
@@ -159,9 +157,8 @@
           </div>
         </div>
         
-        <hr/>
-        
         {{#if username}}
+        <hr/>
         <form id="writelongReview" onsubmit="review('{{game.id}}', 'long', event)">
           Rating: 
           <input type="number" name="rating" min="0" max="100" required value="{{userLongReviewed.rating}}"/>
