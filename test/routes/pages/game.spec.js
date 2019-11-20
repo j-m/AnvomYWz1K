@@ -93,7 +93,7 @@ describe('routes get game', () => {
     await connection.run('delete.review', 'idUnique', '4',' short')
   })
 
-  test('with multiple pages of reviews', async() => {
+  test('with multiple pages of short reviews', async() => {
     await Promise.all([
       connection.run('insert.review', 'idUnique', '5', '1', 'body', 'short'),
       connection.run('insert.review', 'idUnique', '6', '-1', 'body', 'short'),
@@ -107,6 +107,23 @@ describe('routes get game', () => {
       connection.run('delete.review', 'idUnique', '6',' short'),
       connection.run('delete.review', 'idUnique', '7',' short'),
       connection.run('delete.review', 'idUnique', '8',' short')
+    ])
+  })
+
+  test('with multiple pages of long reviews', async() => {
+    await Promise.all([
+      connection.run('insert.review', 'idUnique', '5', '10', 'body', 'long'),
+      connection.run('insert.review', 'idUnique', '6', '11', 'body', 'long'),
+      connection.run('insert.review', 'idUnique', '7', '96', 'body', 'long'),
+      connection.run('insert.review', 'idUnique', '8', '43', 'body', 'long')
+    ])
+    const response = await request(app.callback()).get('/games/idUnique')
+    expect(removeTimeTags(response.text)).toMatchSnapshot()
+    await Promise.all([
+      connection.run('delete.review', 'idUnique', '5',' long'),
+      connection.run('delete.review', 'idUnique', '6',' long'),
+      connection.run('delete.review', 'idUnique', '7',' long'),
+      connection.run('delete.review', 'idUnique', '8',' long')
     ])
   })
 })

@@ -34,10 +34,13 @@ function fillDefaults(parameters) {
 }
 
 function calculatePercentage(dividend, divisor) {
+  if (divisor === 0) {
+    return 0
+  }
   return Math.round(dividend * MAGIC_NUMBERS.PERCENTAGE_MULTIPLIER / divisor)
 }
 
-async function getCounts(data, parameters) {
+function getCounts(data, parameters) {
   parameters.negativeCount = 0
   parameters.positiveCount = 0
   if (data && data.length !== 0) {
@@ -55,8 +58,31 @@ async function getCounts(data, parameters) {
   parameters.emoji = EMOJI[Math.round(parameters.positiveCount * emojiCount / parameters.totalCount)]
 }
 
+function getHistogram(data) {
+  let count = 0
+  let sum = 0
+  for (const datum of data) {
+    count += datum.count
+    sum += datum.rating
+  }
+  const ratings = new Array(MAGIC_NUMBERS.PERCENTAGE_MULTIPLIER + 1).fill({count: 0, percent: 100})
+  for (const datum of data) {
+    ratings[datum.rating] = {
+      rating: datum.rating,
+      count: datum.count,
+      percent: MAGIC_NUMBERS.PERCENTAGE_MULTIPLIER - calculatePercentage(datum.count, count)
+    }
+  }
+  return { ratings, count, average: count===0 ? '?' : Math.round(sum/count)}
+}
+
 async function reviewsPromise(gameID, type, page) {
-  return connection.all('select.reviews', gameID, type, (page || 0) * process.env.REVIEWS_PER_PAGE)
+  return connection.all('select.reviews', ...[
+    gameID,
+    type,
+    (page || 0) * Number(process.env.REVIEWS_PER_PAGE),
+    Number(process.env.REVIEWS_PER_PAGE)
+  ])
 }
 
 function getReviewPromises(parameters, gameID, query) {
@@ -66,15 +92,26 @@ function getReviewPromises(parameters, gameID, query) {
     .then(data => parameters.longReviews = data )
   const shortReviewCount = connection.all('select.countReviews', gameID, 'short')
     .then(data => getCounts(data, parameters))
+  const longReviewCount = connection.all('select.countReviews', gameID, 'long')
+    .then(data => parameters.histogram = getHistogram(data))
   const userShortReviewed = connection.all('select.review', gameID, parameters.username, 'short')
     .then(data => parameters.userShortReviewed = data[0] )
-  return [shortReviews, longReviews, shortReviewCount, userShortReviewed]
+  const userLongReviewed = connection.all('select.review', gameID, parameters.username, 'long')
+    .then(data => parameters.userLongReviewed = data[0] )
+  return [shortReviews, longReviews, shortReviewCount, longReviewCount, userShortReviewed, userLongReviewed]
 }
 
 function checkShortReviewPages(total, href, query) {
   const shortReviewPage = Number(query.s) || 0
   if ((shortReviewPage + 1) * Number(process.env.REVIEWS_PER_PAGE) < total) {
     return updateQueryParam(href, 's', shortReviewPage + 1, shortReviewPage)
+  }
+}
+
+function checkLongReviewPages(total, href, query) {
+  const longReviewPage = Number(query.l) || 0
+  if ((longReviewPage + 1) * Number(process.env.REVIEWS_PER_PAGE) < total) {
+    return updateQueryParam(href, 'l', longReviewPage + 1, longReviewPage)
   }
 }
 
@@ -90,6 +127,7 @@ async function game(context) {
   await Promise.all(reviewPromises)
 
   parameters.nextShortReviews = checkShortReviewPages(parameters.totalCount, context.href, context.request.query)
+  parameters.nextLongReviews = checkLongReviewPages(parameters.histogram.count, context.href, context.request.query)
 
   await context.render('game', parameters)
 }

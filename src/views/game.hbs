@@ -17,6 +17,8 @@
     
     <link href="../css/review.css" type="text/css" rel="stylesheet" />
     <script src="../js/review.js" type="text/javascript"></script>
+    
+    <script src="https://cdn.rawgit.com/showdownjs/showdown/1.9.1/dist/showdown.min.js" type="text/javascript"></script>
 	</head>
   <body>
     {{> loginRegistration }}
@@ -51,21 +53,19 @@
       	<input type="submit" value="Update">
       </form>
     </div>
+    
+    <div class="popup" onclick="hide('preview', event)">
+      <div id="preview">
+        <div id="previewContent">
+          
+        </div>
+      	<button onclick="hide('preview')">Close</button>
+      </div>
+    </div>
   
     <div id="reviews">
       <div id="short">
-        {{#if username}}
-        <form id="writeShortReview" onsubmit="writeShortReview('{{game.id}}', event)">
-          <label for="positive">👍</label>
-          <input type="radio" name="rating" id="positive" value="1" required {{#if (equal userShortReviewed.rating 1)}} checked{{/if}}/>
-          <label for="negative">👎</label>
-          <input type="radio" name="rating" id="negative" value="-1" required {{#if (equal userShortReviewed.rating -1)}} checked{{/if}}/>
-          <input type="submit" value="{{#if userShortReviewed.body}}Update{{else}}Post{{/if}}"/>
-          <textarea id="shortReviewBody" name="body" rows="1" required>{{userShortReviewed.body}}</textarea>
-        </form>  
-        {{/if}}
-        
-        <div id="shortReviewCount">
+         <div id="shortReviewCount">
           <p id="emoji">{{emoji}}</p>
           <div class="label">
             <p>Positive</p>
@@ -76,6 +76,19 @@
             <div class="bar" style="width:{{negativePercent}}%"><p>{{negativeCount}} ({{negativePercent}}%)</p></div>
           </div>
         </div>
+        
+        {{#if username}}
+        <hr/>
+        <form id="writeshortReview" onsubmit="review('{{game.id}}', 'short', event)">
+          <label for="positive">👍</label>
+          <input type="radio" name="rating" id="positive" value="1" required {{#if (equal userShortReviewed.rating 1)}} checked{{/if}}/>
+          <label for="negative">👎</label>
+          <input type="radio" name="rating" id="negative" value="-1" required {{#if (equal userShortReviewed.rating -1)}} checked{{/if}}/>
+          <input type="submit" value="{{#if userShortReviewed.body}}Update{{else}}Post{{/if}}"/>
+          <textarea id="shortReviewBody" name="body" rows="1" required>{{userShortReviewed.body}}</textarea>
+        </form>  
+        <hr/>
+        {{/if}}
         
         <div id="shortReviews">
           {{#each shortReviews}}
@@ -126,18 +139,79 @@
       </div>
       
       <div id="long">
+        <div id="histogram">
+          <p>{{histogram.average}}</p>
+          <div class="bars">
+            {{#each histogram.ratings}}
+            <div class="bar">
+              <div class="filled" style="height:{{percent}}%">
+                {{#if (equal count 0)}}{{else}}
+                <p>{{count}}</p>
+                {{/if}}
+              </div>
+              {{#if (equal count 0)}}{{else}}
+              <span>{{rating}}</span>
+              {{/if}}
+            </div>
+            {{/each}}
+          </div>
+        </div>
+        
         {{#if username}}
-        <form id="writeLongReview" onsubmit="writeLongReview(event)">
-          <input type="number" name="rating" min="0" max="100" required/>
-          <textarea id="longReviewBody" name="longReviewBody" rows="1" required></textarea>
-          <input type="submit" value="Preview"/>
+        <hr/>
+        <form id="writelongReview" onsubmit="review('{{game.id}}', 'long', event)">
+          Rating: 
+          <input type="number" name="rating" min="0" max="100" required value="{{userLongReviewed.rating}}"/>
+          (Higher is better)
+          <input type="button" value="Preview" onclick="preview()"/>
           <input type="submit" value="Post"/>
+          <textarea id="longReviewBody" name="body" rows="1" required>{{userLongReviewed.body}}</textarea>
         </form> 
+        <hr/>
         {{/if}}
-      
         
         <div id="longReviews">
+          {{#each longReviews}}
           
+          <div class="shortReview positive">
+            <div class="header">
+              <p class="rating">{{rating}}</p>
+              <p class="author">by <a href="/members/{{author}}">{{author}}</a></p>
+              <div class="buttons">
+                <button class="visibility">V</button>
+                <button class="flag">F</button>
+                <button class="edit">E</button>
+              </div>
+            </div>
+            <hr/>
+            <div class="middle">
+              <div class="votes">
+                <button class="upvote"></button>
+                <p class="score">0</p>
+                <button class="downvote"></button>
+              </div>
+              <p class="body">
+                <button onclick="longReview(`{{body}}`)">Click here to read this review</button>
+              </p>
+            </div>
+            <hr/>
+            <div class="footer">
+              <a>Read comments (12)</a>
+              <div class="dates">
+                <p class="posted">Posted: <time datetime="{{posted}}">{{posted}}</time></p>
+                {{#if edited}}
+                <span>|</span>
+                <p class="edited">Edited: <time datetime="{{edited}}">{{edited}}</time></p>
+                {{/if}}
+              </div>
+            </div>
+          </div>
+          {{/each}}
+        </div>
+        
+        {{#if nextLongReviews}}
+        <a href="{{nextLongReviews}}">More reviews</a>
+        {{/if}}
         </div>
       </div>
     </div>
