@@ -11,7 +11,7 @@ async function editGame(context) {
     game.update(body)
     context.body = { success: true }
   } catch (error) {
-    handleError(context, error)
+    context.body = handleError(error)
   }
 }
 

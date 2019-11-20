@@ -59,6 +59,7 @@ describe('routes post login', () => {
     expect(response.status).toEqual(200)
     expect(response.type).toEqual('application/json')
     expect(response.body).toEqual({ success: true })
+    expect(response.headers['set-cookie'].length).toEqual(1)
     done()
   })
 })

@@ -3,6 +3,7 @@
 const sqlite = require('sqlite-async')
 
 const queries = require('./queries')
+const ErrorEnum = require('../util/ErrorEnum')
 
 let database
 
@@ -38,6 +39,9 @@ async function close() {
 
 async function run(file, ...values) {
   const query = queries.get(file)
+  if (values.length !== query.split('?').length - 1) {
+    throw Error(ErrorEnum.FUNCTION_MISUSE_PARAM_MISSING)
+  }
   return database.run(query, values).catch(error => {
     throw Error(`Error running '${file}' with values '${values}'. ${error}`)
   })
@@ -45,6 +49,9 @@ async function run(file, ...values) {
 
 async function all(file, ...values) {
   const query = queries.get(file)
+  if (values.length !== query.split('?').length - 1) {
+    throw Error(ErrorEnum.FUNCTION_MISUSE_PARAM_MISSING)
+  }
   return database.all(query, values)
 }
 

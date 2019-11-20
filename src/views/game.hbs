@@ -14,6 +14,9 @@
     
     <link href="../css/game.css" type="text/css" rel="stylesheet" />
     <script src="../js/game.js" type="text/javascript"></script>
+    
+    <link href="../css/review.css" type="text/css" rel="stylesheet" />
+    <script src="../js/review.js" type="text/javascript"></script>
 	</head>
   <body>
     {{> loginRegistration }}
@@ -44,64 +47,100 @@
       <form id="updateGame" onsubmit="updateGame(event)">
         <h1>Create new game</h1>
         <hr/>
-        <fieldset>
-          <div class="input_header">
-          	<label for="steamAppID">Steam App ID</label>
-            <p class="error GAME_STEAM_APP_ID_MISSING">This field is required</p>
-          </div>
-          <input type="text" id="steamAppID" name="steamAppID" value="{{game.steamAppID}}" required/>
-          
-          <div class="input_header">
-          	<label for="title">Title</label>
-            <p class="error GAME_TITLE_MISSING">This field is required</p>
-          </div>
-          <input type="text" id="title" name="title" value="{{game.title}}" required/>
-          <p class="error GAME_TITLE_IN_USE">Title in use</p>
-        
-          <div class="input_header">
-          	<label for="summary">Summary</label>
-            <p class="error GAME_SUMMARY_MISSING">This field is required</p>
-          </div>
-          <input type="text" id="summary" name="summary" value="{{game.summary}}" required/>
-        </fieldset>
-        
-        <fieldset>
-          <legend>Optional</legend>
-          
-          <div>
-          	<label for="developer">Developer</label>
-            <input type="text" id="developer" name="developer" value="{{game.developer}}"/>
-            
-          	<label for="publisher">Publisher</label>
-            <input type="text" id="publisher" name="publisher" value="{{game.publisher}}"/>
-            
-            <label for="tags">Tags</label>
-            <input type="text" id="tags" name="tags" value="{{game.tags}}"/>
-            
-          	<label for="description">Description</label>
-            <textarea id="description" name="description" rows="1">{{game.description}}</textarea>
-          </div>
-          
-          <div>
-          	<label for="store">Store</label>
-            <input type="text" id="store" name="store" value="{{game.store}}"/>
-            
-           	<label for="thumbnail">Thumbnail</label>
-            <input type="text" id="thumbnail" name="thumbnail" value="{{game.thumbnail}}"/>
-          
-           	<label for="banner">Banner</label>
-            <input type="text" id="banner" name="banner" value="{{game.banner}}"/>
-
-            <label for="releaseDate">Release date</label>
-            <input type="date" id="releaseDate" name="releaseDate" value="{{game.releaseDate}}"/>
-          </div>
-
-        </fieldset>
-        
+        {{> gameFields }}
       	<input type="submit" value="Update">
       </form>
     </div>
-    
+  
+    <div id="reviews">
+      <div id="short">
+        {{#if username}}
+        <form id="writeShortReview" onsubmit="writeShortReview('{{game.id}}', event)">
+          <label for="positive">👍</label>
+          <input type="radio" name="rating" id="positive" value="1" required {{#if (equal userShortReviewed.rating 1)}} checked{{/if}}/>
+          <label for="negative">👎</label>
+          <input type="radio" name="rating" id="negative" value="-1" required {{#if (equal userShortReviewed.rating -1)}} checked{{/if}}/>
+          <input type="submit" value="{{#if userShortReviewed.body}}Update{{else}}Post{{/if}}"/>
+          <textarea id="shortReviewBody" name="body" rows="1" required>{{userShortReviewed.body}}</textarea>
+        </form>  
+        {{/if}}
+        
+        <div id="shortReviewCount">
+          <p id="emoji">{{emoji}}</p>
+          <div class="label">
+            <p>Positive</p>
+            <p>Negative</p>
+          </div>
+          <div class="bars">
+            <div class="bar" style="width:{{positivePercent}}%"><p>{{positiveCount}} ({{positivePercent}}%)</p></div>
+            <div class="bar" style="width:{{negativePercent}}%"><p>{{negativeCount}} ({{negativePercent}}%)</p></div>
+          </div>
+        </div>
+        
+        <div id="shortReviews">
+          {{#each shortReviews}}
+          
+          {{#if (equal rating 1)}}
+          <div class="shortReview positive">
+            <div class="header">
+              <p class="rating">👍 Recommended</p>
+          {{else}}
+          <div class="shortReview negative">
+            <div class="header">
+              <p class="rating ">👎 Not recommended</p>
+          {{/if}}
+              <p class="author">by <a href="/members/{{author}}">{{author}}</a></p>
+              <div class="buttons">
+                <button class="visibility">V</button>
+                <button class="flag">F</button>
+                <button class="edit">E</button>
+              </div>
+            </div>
+            <hr/>
+            <div class="middle">
+              <div class="votes">
+                <button class="upvote"></button>
+                <p class="score">0</p>
+                <button class="downvote"></button>
+              </div>
+              <p class="body">{{body}}</p>
+            </div>
+            <hr/>
+            <div class="footer">
+              <a>Read comments (12)</a>
+              <div class="dates">
+                <p class="posted">Posted: <time datetime="{{posted}}">{{posted}}</time></p>
+                {{#if edited}}
+                <span>|</span>
+                <p class="edited">Edited: <time datetime="{{edited}}">{{edited}}</time></p>
+                {{/if}}
+              </div>
+            </div>
+          </div>
+          {{/each}}
+        </div>
+        
+        {{#if nextShortReviews}}
+        <a href="{{nextShortReviews}}">More reviews</a>
+        {{/if}}
+      </div>
+      
+      <div id="long">
+        {{#if username}}
+        <form id="writeLongReview" onsubmit="writeLongReview(event)">
+          <input type="number" name="rating" min="0" max="100" required/>
+          <textarea id="longReviewBody" name="longReviewBody" rows="1" required></textarea>
+          <input type="submit" value="Preview"/>
+          <input type="submit" value="Post"/>
+        </form> 
+        {{/if}}
+      
+        
+        <div id="longReviews">
+          
+        </div>
+      </div>
+    </div>
   </body>
 
 </html>

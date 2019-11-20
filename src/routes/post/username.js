@@ -10,7 +10,7 @@ async function username(context) {
     await validateUsername(username)
     context.body = { success: true }
   } catch (error) {
-    handleError(context, error)
+    context.body = handleError(error)
   }
 }
 

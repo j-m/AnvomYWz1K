@@ -85,20 +85,20 @@ exports[`routes get games should contain templated text 1`] = `
           	<label for=\\"steamAppID\\">Steam App ID</label>
             <p class=\\"error GAME_STEAM_APP_ID_MISSING\\">This field is required</p>
           </div>
-          <input type=\\"text\\" id=\\"steamAppID\\" name=\\"steamAppID\\" required/>
+          <input type=\\"text\\" id=\\"steamAppID\\" name=\\"steamAppID\\" value=\\"\\" required/>
           
           <div class=\\"input_header\\">
           	<label for=\\"title\\">Title</label>
             <p class=\\"error GAME_TITLE_MISSING\\">This field is required</p>
           </div>
-          <input type=\\"text\\" id=\\"title\\" name=\\"title\\" required/>
+          <input type=\\"text\\" id=\\"title\\" name=\\"title\\" value=\\"\\" required/>
           <p class=\\"error GAME_TITLE_IN_USE\\">Title in use</p>
         
           <div class=\\"input_header\\">
           	<label for=\\"summary\\">Summary</label>
             <p class=\\"error GAME_SUMMARY_MISSING\\">This field is required</p>
           </div>
-          <input type=\\"text\\" id=\\"summary\\" name=\\"summary\\" required/>
+          <input type=\\"text\\" id=\\"summary\\" name=\\"summary\\" value=\\"\\" required/>
         </fieldset>
         
         <fieldset>
@@ -106,28 +106,33 @@ exports[`routes get games should contain templated text 1`] = `
           
           <div>
           	<label for=\\"developer\\">Developer</label>
-            <input type=\\"text\\" id=\\"developer\\" name=\\"developer\\"/>
+            <input type=\\"text\\" id=\\"developer\\" name=\\"developer\\" value=\\"\\"/>
             
           	<label for=\\"publisher\\">Publisher</label>
-            <input type=\\"text\\" id=\\"publisher\\" name=\\"publisher\\"/>
+            <input type=\\"text\\" id=\\"publisher\\" name=\\"publisher\\" value=\\"\\"/>
+            
+            <label for=\\"tags\\">Tags</label>
+            <input type=\\"text\\" id=\\"tags\\" name=\\"tags\\" value=\\"\\"/>
             
           	<label for=\\"description\\">Description</label>
-            <input type=\\"text\\" id=\\"description\\" name=\\"description\\"/>
+            <textarea id=\\"description\\" name=\\"description\\" rows=\\"1\\"></textarea>
           </div>
           
           <div>
           	<label for=\\"store\\">Store</label>
-            <input type=\\"text\\" id=\\"store\\" name=\\"store\\"/>
-
-            <label for=\\"releaseDate\\">Release date</label>
-            <input type=\\"date\\" id=\\"releaseDate\\" name=\\"releaseDate\\"/>
+            <input type=\\"text\\" id=\\"store\\" name=\\"store\\" value=\\"\\"/>
             
-            <label for=\\"tags\\">Tags</label>
-            <input type=\\"text\\" id=\\"tags\\" name=\\"tags\\"/>
-          </div>
-
-        </fieldset>
+           	<label for=\\"thumbnail\\">Thumbnail</label>
+            <input type=\\"text\\" id=\\"thumbnail\\" name=\\"thumbnail\\" value=\\"\\"/>
+          
+           	<label for=\\"banner\\">Banner</label>
+            <input type=\\"text\\" id=\\"banner\\" name=\\"banner\\" value=\\"\\"/>
         
+            <label for=\\"releaseDate\\">Release date</label>
+            <input type=\\"date\\" id=\\"releaseDate\\" name=\\"releaseDate\\" value=\\"\\"/>
+          </div>
+        
+        </fieldset>
       	<input type=\\"submit\\" value=\\"Create\\">
       </form>
     </div>
