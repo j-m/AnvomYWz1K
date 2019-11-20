@@ -1,6 +1,6 @@
 {
   "name": "340ct-marshj6",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Coventry University. Module 340CT. Coursework. Game Review. Jonathan Marsh",
   "main": "./src/main.js",
   "scripts": {
