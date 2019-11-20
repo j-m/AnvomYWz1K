@@ -14,7 +14,7 @@ beforeAll(async() => {
     'id',
     'steamAppId',
     'title',
-    'summary'
+    'summary', null, null, null, null, null, null, null, null
   ])
 })
 

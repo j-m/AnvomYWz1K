@@ -1,16 +1,18 @@
 'use strict'
 
 const handleError = require('./util/handleError')
-const Game = require('../../models/game')
+const Review = require('../../models/review')
 
-async function game(context) {
+async function review(context) {
   try {
     const body = context.request.body
-    await new Game().create(body)
+    body.author = context.session.username
+    const review = new Review()
+    await review.load(body)
     context.body = { success: true }
   } catch (error) {
     context.body = handleError(error)
   }
 }
 
-module.exports = game
+module.exports = review

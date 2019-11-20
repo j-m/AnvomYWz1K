@@ -22,7 +22,11 @@
       {{#each games}}
         <a href="/games/{{id}}">
           <div class="game">
+            {{#if thumbnail}}
+            <img src="{{thumbnail}}"/>
+            {{else}}
             <img src="https://steamcdn-a.akamaihd.net/steam/apps/{{steamAppID}}/library_600x900_2x.jpg"/>
+            {{/if}}
           </div>
         </a>
       {{/each}}
@@ -35,54 +39,7 @@
       <form id="addGame" onsubmit="addGame(event)">
         <h1>Create new game</h1>
         <hr/>
-        <fieldset>
-          <div class="input_header">
-          	<label for="steamAppID">Steam App ID</label>
-            <p class="error GAME_STEAM_APP_ID_MISSING">This field is required</p>
-          </div>
-          <input type="text" id="steamAppID" name="steamAppID" required/>
-          
-          <div class="input_header">
-          	<label for="title">Title</label>
-            <p class="error GAME_TITLE_MISSING">This field is required</p>
-          </div>
-          <input type="text" id="title" name="title" required/>
-          <p class="error GAME_TITLE_IN_USE">Title in use</p>
-        
-          <div class="input_header">
-          	<label for="summary">Summary</label>
-            <p class="error GAME_SUMMARY_MISSING">This field is required</p>
-          </div>
-          <input type="text" id="summary" name="summary" required/>
-        </fieldset>
-        
-        <fieldset>
-          <legend>Optional</legend>
-          
-          <div>
-          	<label for="developer">Developer</label>
-            <input type="text" id="developer" name="developer"/>
-            
-          	<label for="publisher">Publisher</label>
-            <input type="text" id="publisher" name="publisher"/>
-            
-          	<label for="description">Description</label>
-            <input type="text" id="description" name="description"/>
-          </div>
-          
-          <div>
-          	<label for="store">Store</label>
-            <input type="text" id="store" name="store"/>
-
-            <label for="releaseDate">Release date</label>
-            <input type="date" id="releaseDate" name="releaseDate"/>
-            
-            <label for="tags">Tags</label>
-            <input type="text" id="tags" name="tags"/>
-          </div>
-
-        </fieldset>
-        
+        {{> gameFields }}
       	<input type="submit" value="Create">
       </form>
     </div>

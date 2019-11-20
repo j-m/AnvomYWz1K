@@ -1,6 +1,6 @@
 {
   "name": "340ct-marshj6",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Coventry University. Module 340CT. Coursework. Game Review. Jonathan Marsh",
   "main": "./src/main.js",
   "scripts": {
@@ -26,11 +26,11 @@
     "bcrypt": "^3.0.6",
     "bcrypt-promise": "^2.0.0",
     "glob": "^7.1.6",
-    "handlebars": "^4.5.2",
+    "handlebars": "^4.5.3",
     "koa": "^2.11.0",
     "koa-bodyparser": "^4.2.1",
+    "koa-encrypted-session": "^1.1.2",
     "koa-router": "^7.4.0",
-    "koa-session": "^5.12.3",
     "koa-static": "^5.0.0",
     "koa-views": "^6.2.1"
   },

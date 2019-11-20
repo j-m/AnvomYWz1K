@@ -11,6 +11,7 @@ const logout = require('../routes/post/logout')
 const username = require('../routes/post/username')
 const newGame = require('../routes/post/game')
 const editGame = require('../routes/post/editGame')
+const review = require('../routes/post/review')
 
 const router = new Router()
 
@@ -24,5 +25,6 @@ router.post('/logout', async(context, next) => await logout(context, next))
 router.post('/username', async(context, next) => await username(context, next))
 router.post('/game', async(context, next) => await newGame(context, next))
 router.post('/editGame', async(context, next) => await editGame(context, next))
+router.post('/review', async(context, next) => await review(context, next))
 
 module.exports = router

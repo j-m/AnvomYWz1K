@@ -23,10 +23,10 @@ async function login(context) {
     const body = context.request.body
     const username = body.username
     const password = body.password
-    if (username === undefined) {
+    if (!username) {
       throw new Error(ErrorEnum.USERNAME_MISSING)
     }
-    if (password === undefined) {
+    if (!password) {
       throw new Error(ErrorEnum.PASSWORD_MISSING)
     }
     const records = await checkPassword(username, password)
@@ -35,7 +35,7 @@ async function login(context) {
     context.session.privileges = records[0].privileges
     context.body = { success: true }
   } catch (error) {
-    handleError(context, error)
+    context.body = handleError(error)
   }
 }
 
