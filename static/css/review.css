@@ -57,7 +57,7 @@
 }
 
 #shortReviewCount .bar {
-  display: inline-block;
+  display: block;
   height: 1rem;
   position: relative;
 }
@@ -215,8 +215,10 @@
 }
 
 #histogram .bars {
-  display: inline-block;
+  display: flex;
+  justify-content: space-between;
   width: 100%;
+  background: linear-gradient(0.25turn, #d20202, #efff00, #06c103);
 }
 
 #histogram .bar {
@@ -225,22 +227,22 @@
   position: relative;
   height: 10rem;
   margin: 0;
-  width: 0.2rem;
-  background-color: white;
+  flex: 1;
 }
 
 #histogram .bar .filled {
-  background-color: lightblue;
-  width: 0.2rem;
+  background-color: #eeeeee;
+  width: 100%;
   position: absolute;
-  bottom: 0;
+  top: 0;
 }
 
 #histogram .bar p {
   margin: 0;
-  height: 0;
   font-size: small;
   width: 0;
+  bottom: 0;
+  position: absolute;
 }
 
 #histogram .bar span {
@@ -250,4 +252,8 @@
   font-size: small;
   position: absolute;
   bottom: 0;
+}
+
+#preview {
+  width: auto;
 }

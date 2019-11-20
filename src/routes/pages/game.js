@@ -63,12 +63,12 @@ function getHistogram(data) {
   for (const datum of data) {
     count += datum.count
   }
-  const ratings = new Array(MAGIC_NUMBERS.PERCENTAGE_MULTIPLIER + 1).fill({count: 0, percent: 0})
+  const ratings = new Array(MAGIC_NUMBERS.PERCENTAGE_MULTIPLIER + 1).fill({count: 0, percent: 100})
   for (const datum of data) {
     ratings[datum.rating] = {
       rating: datum.rating,
       count: datum.count,
-      percent: calculatePercentage(datum.count, count)
+      percent: MAGIC_NUMBERS.PERCENTAGE_MULTIPLIER - calculatePercentage(datum.count, count)
     }
   }
   return ratings

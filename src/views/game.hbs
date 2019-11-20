@@ -17,6 +17,8 @@
     
     <link href="../css/review.css" type="text/css" rel="stylesheet" />
     <script src="../js/review.js" type="text/javascript"></script>
+    
+    <script src="https://cdn.rawgit.com/showdownjs/showdown/1.9.1/dist/showdown.min.js" type="text/javascript"></script>
 	</head>
   <body>
     {{> loginRegistration }}
@@ -50,6 +52,15 @@
         {{> gameFields }}
       	<input type="submit" value="Update">
       </form>
+    </div>
+    
+    <div class="popup" onclick="hide('preview', event)">
+      <div id="preview">
+        <div id="previewContent">
+          
+        </div>
+      	<button onclick="hide('preview')">Close</button>
+      </div>
     </div>
   
     <div id="reviews">
@@ -130,7 +141,7 @@
         <form id="writelongReview" onsubmit="review('{{game.id}}', 'long', event)">
           <input type="number" name="rating" min="0" max="100" required value="{{userLongReviewed.rating}}"/>
           <textarea id="longReviewBody" name="body" rows="1" required>{{userLongReviewed.body}}</textarea>
-          <input type="submit" value="Preview"/>
+          <input type="button" value="Preview" onclick="preview()"/>
           <input type="submit" value="Post"/>
         </form> 
         {{/if}}
@@ -139,11 +150,13 @@
           <div class="bars">
             {{#each histogram}}
             <div class="bar">
-              {{#if (equal count 0)}}{{else}}
               <div class="filled" style="height:{{percent}}%">
-                <span>{{rating}}</span>
+                {{#if (equal count 0)}}{{else}}
+                <p>{{count}}</p>
+                {{/if}}
               </div>
-              <p>{{count}}</p>
+              {{#if (equal count 0)}}{{else}}
+              <span>{{rating}}</span>
               {{/if}}
             </div>
             {{/each}}
@@ -170,7 +183,9 @@
                 <p class="score">0</p>
                 <button class="downvote"></button>
               </div>
-              <p class="body">{{body}}</p>
+              <p class="body">
+                <button onclick="longReview(`{{body}}`)">Click here to read this review</button>
+              </p>
             </div>
             <hr/>
             <div class="footer">
@@ -187,8 +202,8 @@
           {{/each}}
         </div>
         
-        {{#if nextShortReviews}}
-        <a href="{{nextShortReviews}}">More reviews</a>
+        {{#if nextLongReviews}}
+        <a href="{{nextLongReviews}}">More reviews</a>
         {{/if}}
         </div>
       </div>
