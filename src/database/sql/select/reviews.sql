@@ -1,1 +1,1 @@
-SELECT * FROM reviews WHERE game=? AND type=? LIMIT ?,20;
+SELECT * FROM reviews WHERE game=? AND type=? LIMIT ?,?;
