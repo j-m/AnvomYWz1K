@@ -540,14 +540,14 @@ exports[`routes get game with multiple pages of reviews 1`] = `
       <div id=\\"short\\">
         
         <div id=\\"shortReviewCount\\">
-          <p id=\\"emoji\\">😐</p>
+          <p id=\\"emoji\\">🙂</p>
           <div class=\\"label\\">
             <p>Positive</p>
             <p>Negative</p>
           </div>
           <div class=\\"bars\\">
-            <div class=\\"bar\\" style=\\"width:50%\\"><p>4 (50%)</p></div>
-            <div class=\\"bar\\" style=\\"width:50%\\"><p>4 (50%)</p></div>
+            <div class=\\"bar\\" style=\\"width:57%\\"><p>4 (57%)</p></div>
+            <div class=\\"bar\\" style=\\"width:43%\\"><p>3 (43%)</p></div>
           </div>
         </div>
         
@@ -576,35 +576,7 @@ exports[`routes get game with multiple pages of reviews 1`] = `
             <div class=\\"footer\\">
               <a>Read comments (12)</a>
               <div class=\\"dates\\">
-                <p class=\\"posted\\">Posted: <time datetime=\\"2019-11-20 14:22:52\\">2019-11-20 14:22:52</time></p>
-              </div>
-            </div>
-          </div>
-          
-          <div class=\\"shortReview negative\\">
-            <div class=\\"header\\">
-              <p class=\\"rating \\">👎 Not recommended</p>
-              <p class=\\"author\\">by <a href=\\"/members/2\\">2</a></p>
-              <div class=\\"buttons\\">
-                <button class=\\"visibility\\">V</button>
-                <button class=\\"flag\\">F</button>
-                <button class=\\"edit\\">E</button>
-              </div>
-            </div>
-            <hr/>
-            <div class=\\"middle\\">
-              <div class=\\"votes\\">
-                <button class=\\"upvote\\"></button>
-                <p class=\\"score\\">0</p>
-                <button class=\\"downvote\\"></button>
-              </div>
-              <p class=\\"body\\">body</p>
-            </div>
-            <hr/>
-            <div class=\\"footer\\">
-              <a>Read comments (12)</a>
-              <div class=\\"dates\\">
-                <p class=\\"posted\\">Posted: <time datetime=\\"2019-11-20 14:22:52\\">2019-11-20 14:22:52</time></p>
+                <p class=\\"posted\\">Posted: <time datetime=\\"timestamp\\">timestamp</time></p>
               </div>
             </div>
           </div>
@@ -632,7 +604,7 @@ exports[`routes get game with multiple pages of reviews 1`] = `
             <div class=\\"footer\\">
               <a>Read comments (12)</a>
               <div class=\\"dates\\">
-                <p class=\\"posted\\">Posted: <time datetime=\\"2019-11-20 14:22:52\\">2019-11-20 14:22:52</time></p>
+                <p class=\\"posted\\">Posted: <time datetime=\\"timestamp\\">timestamp</time></p>
               </div>
             </div>
           </div>
@@ -660,7 +632,7 @@ exports[`routes get game with multiple pages of reviews 1`] = `
             <div class=\\"footer\\">
               <a>Read comments (12)</a>
               <div class=\\"dates\\">
-                <p class=\\"posted\\">Posted: <time datetime=\\"2019-11-20 14:22:52\\">2019-11-20 14:22:52</time></p>
+                <p class=\\"posted\\">Posted: <time datetime=\\"timestamp\\">timestamp</time></p>
               </div>
             </div>
           </div>
@@ -688,7 +660,7 @@ exports[`routes get game with multiple pages of reviews 1`] = `
             <div class=\\"footer\\">
               <a>Read comments (12)</a>
               <div class=\\"dates\\">
-                <p class=\\"posted\\">Posted: <time datetime=\\"2019-11-20 14:22:52\\">2019-11-20 14:22:52</time></p>
+                <p class=\\"posted\\">Posted: <time datetime=\\"timestamp\\">timestamp</time></p>
               </div>
             </div>
           </div>
@@ -716,7 +688,7 @@ exports[`routes get game with multiple pages of reviews 1`] = `
             <div class=\\"footer\\">
               <a>Read comments (12)</a>
               <div class=\\"dates\\">
-                <p class=\\"posted\\">Posted: <time datetime=\\"2019-11-20 14:22:52\\">2019-11-20 14:22:52</time></p>
+                <p class=\\"posted\\">Posted: <time datetime=\\"timestamp\\">timestamp</time></p>
               </div>
             </div>
           </div>
@@ -744,7 +716,7 @@ exports[`routes get game with multiple pages of reviews 1`] = `
             <div class=\\"footer\\">
               <a>Read comments (12)</a>
               <div class=\\"dates\\">
-                <p class=\\"posted\\">Posted: <time datetime=\\"2019-11-20 14:22:52\\">2019-11-20 14:22:52</time></p>
+                <p class=\\"posted\\">Posted: <time datetime=\\"timestamp\\">timestamp</time></p>
               </div>
             </div>
           </div>
@@ -772,13 +744,13 @@ exports[`routes get game with multiple pages of reviews 1`] = `
             <div class=\\"footer\\">
               <a>Read comments (12)</a>
               <div class=\\"dates\\">
-                <p class=\\"posted\\">Posted: <time datetime=\\"2019-11-20 14:22:52\\">2019-11-20 14:22:52</time></p>
+                <p class=\\"posted\\">Posted: <time datetime=\\"timestamp\\">timestamp</time></p>
               </div>
             </div>
           </div>
         </div>
         
-        <a href=\\"http://127.0.0.1:50218/games/idUnique?s&#x3D;1\\">More reviews</a>
+        <a href=\\"http://127.0.0.1:54137/games/idUnique?s&#x3D;1\\">More reviews</a>
       </div>
       
       <div id=\\"long\\">
@@ -801,7 +773,7 @@ exports[`routes get game with only negative short reviews 1`] = `
 <html lang=\\"en\\">
 	<head>
 		<meta charset=\\"utf-8\\">
-		<title>Game Reviews - Game - titleUnique</title>
+		<title>Game Reviews - Game - title</title>
     <link href=\\"https://fonts.googleapis.com/css?family=Roboto&display=swap\\" rel=\\"stylesheet\\">
     
     <link href=\\"../css/global.css\\" type=\\"text/css\\" rel=\\"stylesheet\\" />
@@ -872,22 +844,22 @@ exports[`routes get game with only negative short reviews 1`] = `
     </div>
 
     <div id=\\"game\\">
-      <img id=\\"gameBanner\\" src=\\"banner\\"/>
-      <h1 id=\\"gameTitle\\">titleUnique</h1>
+      <img id=\\"gameBanner\\" src=\\"https://steamcdn-a.akamaihd.net/steam/apps/steamAppId/library_hero.jpg\\"/>
+      <h1 id=\\"gameTitle\\">title</h1>
       <div id=\\"gameInfo\\">
-        <p><span>Developer</span>developer</p>
-        <p><span>Publisher</span>publisher</p>
-        <p id=\\"gameStore\\"><span>Store</span><a href=\\"store\\" target=\\"_blank\\"><img src=\\"../img/steam-logo.png\\"/></a></p>
-        <p><span>Release Date</span><time datetime=\\"releaseDate\\">releaseDate</time></p>
-        <p><span>Tags</span>tags</p>
+        <p><span>Developer</span></p>
+        <p><span>Publisher</span></p>
+        <p id=\\"gameStore\\"><span>Store</span><a href=\\"https://store.steampowered.com/app/steamAppId\\" target=\\"_blank\\"><img src=\\"../img/steam-logo.png\\"/></a></p>
+        <p><span>Release Date</span><time datetime=\\"\\"></time></p>
+        <p><span>Tags</span></p>
         <p><span>Summary</span>summary</p>
-        <p><span>Description</span>description</p>
+        <p><span>Description</span></p>
         <a onclick=\\"show('fullDescription', event)\\">Read <br/> more</a>
       </div>
     </div>
     
     <div class=\\"popup\\" onclick=\\"hide('fullDescription', event)\\">
-      <div id=\\"fullDescription\\">description</div>
+      <div id=\\"fullDescription\\"></div>
     </div>
     
     <div class=\\"popup\\" onclick=\\"hide('updateGame', event)\\">
@@ -899,13 +871,13 @@ exports[`routes get game with only negative short reviews 1`] = `
           	<label for=\\"steamAppID\\">Steam App ID</label>
             <p class=\\"error GAME_STEAM_APP_ID_MISSING\\">This field is required</p>
           </div>
-          <input type=\\"text\\" id=\\"steamAppID\\" name=\\"steamAppID\\" value=\\"steamAppIDUnique\\" required/>
+          <input type=\\"text\\" id=\\"steamAppID\\" name=\\"steamAppID\\" value=\\"steamAppId\\" required/>
           
           <div class=\\"input_header\\">
           	<label for=\\"title\\">Title</label>
             <p class=\\"error GAME_TITLE_MISSING\\">This field is required</p>
           </div>
-          <input type=\\"text\\" id=\\"title\\" name=\\"title\\" value=\\"titleUnique\\" required/>
+          <input type=\\"text\\" id=\\"title\\" name=\\"title\\" value=\\"title\\" required/>
           <p class=\\"error GAME_TITLE_IN_USE\\">Title in use</p>
         
           <div class=\\"input_header\\">
@@ -920,30 +892,30 @@ exports[`routes get game with only negative short reviews 1`] = `
           
           <div>
           	<label for=\\"developer\\">Developer</label>
-            <input type=\\"text\\" id=\\"developer\\" name=\\"developer\\" value=\\"developer\\"/>
+            <input type=\\"text\\" id=\\"developer\\" name=\\"developer\\" value=\\"\\"/>
             
           	<label for=\\"publisher\\">Publisher</label>
-            <input type=\\"text\\" id=\\"publisher\\" name=\\"publisher\\" value=\\"publisher\\"/>
+            <input type=\\"text\\" id=\\"publisher\\" name=\\"publisher\\" value=\\"\\"/>
             
             <label for=\\"tags\\">Tags</label>
-            <input type=\\"text\\" id=\\"tags\\" name=\\"tags\\" value=\\"tags\\"/>
+            <input type=\\"text\\" id=\\"tags\\" name=\\"tags\\" value=\\"\\"/>
             
           	<label for=\\"description\\">Description</label>
-            <textarea id=\\"description\\" name=\\"description\\" rows=\\"1\\">description</textarea>
+            <textarea id=\\"description\\" name=\\"description\\" rows=\\"1\\"></textarea>
           </div>
           
           <div>
           	<label for=\\"store\\">Store</label>
-            <input type=\\"text\\" id=\\"store\\" name=\\"store\\" value=\\"store\\"/>
+            <input type=\\"text\\" id=\\"store\\" name=\\"store\\" value=\\"https://store.steampowered.com/app/steamAppId\\"/>
             
            	<label for=\\"thumbnail\\">Thumbnail</label>
-            <input type=\\"text\\" id=\\"thumbnail\\" name=\\"thumbnail\\" value=\\"thumbnail\\"/>
+            <input type=\\"text\\" id=\\"thumbnail\\" name=\\"thumbnail\\" value=\\"https://steamcdn-a.akamaihd.net/steam/apps/steamAppId/library_600x900_2x.jpg\\"/>
           
            	<label for=\\"banner\\">Banner</label>
-            <input type=\\"text\\" id=\\"banner\\" name=\\"banner\\" value=\\"banner\\"/>
+            <input type=\\"text\\" id=\\"banner\\" name=\\"banner\\" value=\\"https://steamcdn-a.akamaihd.net/steam/apps/steamAppId/library_hero.jpg\\"/>
         
             <label for=\\"releaseDate\\">Release date</label>
-            <input type=\\"date\\" id=\\"releaseDate\\" name=\\"releaseDate\\" value=\\"releaseDate\\"/>
+            <input type=\\"date\\" id=\\"releaseDate\\" name=\\"releaseDate\\" value=\\"\\"/>
           </div>
         
         </fieldset>
@@ -955,46 +927,18 @@ exports[`routes get game with only negative short reviews 1`] = `
       <div id=\\"short\\">
         
         <div id=\\"shortReviewCount\\">
-          <p id=\\"emoji\\">😐</p>
+          <p id=\\"emoji\\">🤮</p>
           <div class=\\"label\\">
             <p>Positive</p>
             <p>Negative</p>
           </div>
           <div class=\\"bars\\">
-            <div class=\\"bar\\" style=\\"width:50%\\"><p>1 (50%)</p></div>
-            <div class=\\"bar\\" style=\\"width:50%\\"><p>1 (50%)</p></div>
+            <div class=\\"bar\\" style=\\"width:0%\\"><p>0 (0%)</p></div>
+            <div class=\\"bar\\" style=\\"width:100%\\"><p>1 (100%)</p></div>
           </div>
         </div>
         
         <div id=\\"shortReviews\\">
-          
-          <div class=\\"shortReview positive\\">
-            <div class=\\"header\\">
-              <p class=\\"rating\\">👍 Recommended</p>
-              <p class=\\"author\\">by <a href=\\"/members/1\\">1</a></p>
-              <div class=\\"buttons\\">
-                <button class=\\"visibility\\">V</button>
-                <button class=\\"flag\\">F</button>
-                <button class=\\"edit\\">E</button>
-              </div>
-            </div>
-            <hr/>
-            <div class=\\"middle\\">
-              <div class=\\"votes\\">
-                <button class=\\"upvote\\"></button>
-                <p class=\\"score\\">0</p>
-                <button class=\\"downvote\\"></button>
-              </div>
-              <p class=\\"body\\">body</p>
-            </div>
-            <hr/>
-            <div class=\\"footer\\">
-              <a>Read comments (12)</a>
-              <div class=\\"dates\\">
-                <p class=\\"posted\\">Posted: <time datetime=\\"timestamp\\">timestamp</time></p>
-              </div>
-            </div>
-          </div>
           
           <div class=\\"shortReview negative\\">
             <div class=\\"header\\">
@@ -1419,14 +1363,14 @@ exports[`routes get game with positive and negative short reviews 1`] = `
       <div id=\\"short\\">
         
         <div id=\\"shortReviewCount\\">
-          <p id=\\"emoji\\">😐</p>
+          <p id=\\"emoji\\">😀</p>
           <div class=\\"label\\">
             <p>Positive</p>
             <p>Negative</p>
           </div>
           <div class=\\"bars\\">
-            <div class=\\"bar\\" style=\\"width:50%\\"><p>2 (50%)</p></div>
-            <div class=\\"bar\\" style=\\"width:50%\\"><p>2 (50%)</p></div>
+            <div class=\\"bar\\" style=\\"width:67%\\"><p>2 (67%)</p></div>
+            <div class=\\"bar\\" style=\\"width:33%\\"><p>1 (33%)</p></div>
           </div>
         </div>
         
@@ -1436,34 +1380,6 @@ exports[`routes get game with positive and negative short reviews 1`] = `
             <div class=\\"header\\">
               <p class=\\"rating\\">👍 Recommended</p>
               <p class=\\"author\\">by <a href=\\"/members/1\\">1</a></p>
-              <div class=\\"buttons\\">
-                <button class=\\"visibility\\">V</button>
-                <button class=\\"flag\\">F</button>
-                <button class=\\"edit\\">E</button>
-              </div>
-            </div>
-            <hr/>
-            <div class=\\"middle\\">
-              <div class=\\"votes\\">
-                <button class=\\"upvote\\"></button>
-                <p class=\\"score\\">0</p>
-                <button class=\\"downvote\\"></button>
-              </div>
-              <p class=\\"body\\">body</p>
-            </div>
-            <hr/>
-            <div class=\\"footer\\">
-              <a>Read comments (12)</a>
-              <div class=\\"dates\\">
-                <p class=\\"posted\\">Posted: <time datetime=\\"timestamp\\">timestamp</time></p>
-              </div>
-            </div>
-          </div>
-          
-          <div class=\\"shortReview negative\\">
-            <div class=\\"header\\">
-              <p class=\\"rating \\">👎 Not recommended</p>
-              <p class=\\"author\\">by <a href=\\"/members/2\\">2</a></p>
               <div class=\\"buttons\\">
                 <button class=\\"visibility\\">V</button>
                 <button class=\\"flag\\">F</button>
@@ -1545,7 +1461,7 @@ exports[`routes get game with positive and negative short reviews 1`] = `
           </div>
         </div>
         
-        <a href=\\"http://127.0.0.1:50216/games/idUnique?s&#x3D;1\\">More reviews</a>
+        <a href=\\"http://127.0.0.1:54135/games/idUnique?s&#x3D;1\\">More reviews</a>
       </div>
       
       <div id=\\"long\\">
