@@ -128,8 +128,8 @@
       <div id="long">
         {{#if username}}
         <form id="writelongReview" onsubmit="review('{{game.id}}', 'long', event)">
-          <input type="number" name="rating" min="0" max="100" required/>
-          <textarea id="longReviewBody" name="body" rows="1" required></textarea>
+          <input type="number" name="rating" min="0" max="100" required value="{{userLongReviewed.rating}}"/>
+          <textarea id="longReviewBody" name="body" rows="1" required>{{userLongReviewed.body}}</textarea>
           <input type="submit" value="Preview"/>
           <input type="submit" value="Post"/>
         </form> 
