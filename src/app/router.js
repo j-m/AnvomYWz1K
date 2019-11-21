@@ -4,6 +4,7 @@ const Router = require('koa-router')
 
 const gamesPage = require('../routes/pages/games')
 const gamePage = require('../routes/pages/game')
+const commentsPage = require('../routes/pages/comments')
 
 const login = require('../routes/post/login')
 const register = require('../routes/post/register')
@@ -18,6 +19,7 @@ const router = new Router()
 router.redirect('/', '/games/')
 router.get('/games', async(context, next) => await gamesPage(context, next))
 router.get('/games/:game', async(context, next) => await gamePage(context, next))
+router.get('/games/:game/:author/:type', async(context, next) => await commentsPage(context, next))
 
 router.post('/login', async(context, next) => await login(context, next))
 router.post('/register', async(context, next) => await register(context, next))
