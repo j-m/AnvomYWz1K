@@ -2,5 +2,4 @@ SELECT *
 FROM comments 
 WHERE review_game=? 
 AND review_author=? 
-AND review_type=? 
-LIMIT 1;
+AND review_type=?;

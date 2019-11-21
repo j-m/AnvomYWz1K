@@ -13,6 +13,7 @@ const username = require('../routes/post/username')
 const newGame = require('../routes/post/game')
 const editGame = require('../routes/post/editGame')
 const review = require('../routes/post/review')
+const comment = require('../routes/post/comment')
 
 const router = new Router()
 
@@ -28,5 +29,6 @@ router.post('/username', async(context, next) => await username(context, next))
 router.post('/game', async(context, next) => await newGame(context, next))
 router.post('/editGame', async(context, next) => await editGame(context, next))
 router.post('/review', async(context, next) => await review(context, next))
+router.post('/comment', async(context, next) => await comment(context, next))
 
 module.exports = router

@@ -3,12 +3,13 @@
 const authorisation = require('./util/authorisation')
 const connection = require('../../database/connection')
 
-async function game(context) {
+async function comments(context) {
   const gameID = context.params.game
   const author = context.params.author
   const type = context.params.type
 
   const parameters = authorisation(context, {})
+  parameters.game = gameID
   parameters.author = author
   parameters.type = type
   parameters.review = await connection.all('select.review', gameID, author, type).then(data => { return data })
@@ -17,4 +18,4 @@ async function game(context) {
   await context.render('comments', parameters)
 }
 
-module.exports = game
+module.exports = comments
