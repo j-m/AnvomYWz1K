@@ -1,6 +1,6 @@
 'use strict'
 
-function parse(data) {
+function parseDifferent(data) {
   let converter
   event.preventDefault()
   if (!converter) {
@@ -18,29 +18,11 @@ function send(game, author, type) {
   }).then(res => res.json()).catch(err => console.log(err))
 }
 
-function hideErrors() {
-  document.querySelector('#commentForm .show').forEach(item => {
-    item.classList.remove('show')
-  })
-}
-
-function showError(code) {
-  document.querySelector(`#commentForm .${code}`).classList.add('show')
-}
-
 async function somethingDifferent(event, game, author, type) {
   event.preventDefault()
   const result = await send(game, author, type)
-  hideErrors()
-
-  if (result.success === false) {
-    console.log(result)
-    if (result.code) {
-      showError(result.code)
-    }
-  } else {
+  if (result.success) {
     location.reload()
   }
-
   return false
 }

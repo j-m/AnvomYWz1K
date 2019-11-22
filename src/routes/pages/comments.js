@@ -12,7 +12,7 @@ async function comments(context) {
   parameters.game = gameID
   parameters.author = author
   parameters.type = type
-  parameters.review = await connection.all('select.review', gameID, author, type).then(data => { return data })
+  parameters.review = await connection.all('select.review', gameID, author, type).then(data => { return data[0] })
   parameters.comments = await connection.all('select.comments', gameID, author, type).then(data => { return data })
 
   await context.render('comments', parameters)

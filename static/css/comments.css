@@ -1,143 +1,77 @@
-#reviews {
+#review {
   width: 100rem;
   margin: auto;
-}
-
-#short {
-  float: left;
-}
-#long {
-  float:right;
-}
-#short,
-#long {
-  width: 49%;
-}
-
-#writeshortReview,
-#writelongReview {
-  padding: 0.5rem 0.25rem;
-  min-height: 8rem;
-  margin: 1rem 0.5rem;
-}
-
-#shortReviewBody{
-  resize: vertical;
-  display: block;
-  width: 100%;
-  height: 5rem;
-  box-sizing: border-box;
-  margin-top: 0.5rem;
-}
-
-#shortReviewCount {
-  margin-bottom: 1rem; 
-  margin-top: 7rem;
-}
-
-#shortReviewCount #emoji {
-  font-size: 3rem;
-  display: inline-block;
-  margin: 0;
-}
-
-#shortReviewCount .label {
-  display: inline-block;
-  margin: 0;
-}
-
-#shortReviewCount .label p {
-  margin: 0;
-}
-
-#shortReviewCount .bars {
-  display: inline-block;
-  width: 35rem;
-}
-
-#shortReviewCount .bar {
-  display: block;
-  height: 1rem;
-  position: relative;
-}
-
-#shortReviewCount .bar:nth-of-type(1) {
-  background-color: green;
-}
-
-#shortReviewCount .bar:nth-of-type(2) {
-  background-color: red;
-}
-
-#shortReviewCount .bar p {
-  margin: 0;
-  position: relative;
-  left: 100%;
-  margin-left: 1ch;
-  white-space: nowrap;
-}
-
-#shortReviews,
-#longReviews {
-  padding: 1rem 0;
-}
-
-.shortReview {
-  position: relative;
   background: #f9f9f9;
   border: 1px solid #ddd;
-  margin-bottom: 1rem;
   border-radius: 0.25rem;
 }
 
-.shortReview hr {
+#review hr {
   margin: 0;
   border: 0.5px solid #cccccc;
 }
 
-.shortReview .rating,
-.shortReview .author,
-.shortReview .buttons{
+#review .rating,
+#review .author,
+#review .buttons{
   display: inline-block;
 }
 
-.shortReview .rating {
+#review .rating {
   font-size: 1.5rem;
   font-weight: bold;
   margin: 0 0 0 0.5rem;
 }
 
-.shortReview .author {
+#review .author {
   color: #333333;
   font-style: italic;
 }
 
-.shortReview .author a{
+#review .author a{
   font-style: normal;
 }
 
-.shortReview .buttons {
+#review .dates {
   float: right;
 }
 
-.shortReview .votes,
-.shortReview .body {
+#review .dates span {
+  color: #999999;
+}
+
+#review .posted,
+#review .edited {
+  display: inline; 
+  color: #999999;
+  font-size: small;
+  margin: 0.25rem;
+}
+
+
+#review .buttons {
+  float: right;
+}
+
+#review .votes,
+#review .body {
   display: inline-block;
 }
 
-.shortReview .votes {
+#review .votes {
   width: 3rem;
   text-align: center;
   color: #cccccc;
+  vertical-align: top;
 }
 
-.shortReview .votes .score {
+#review .votes .score {
   font-size: 3rem;
   font-weight: bolder;
   margin: 0;
 }
 
-.shortReview .votes button {
+#review .votes button {
   background: none;
   display: block;
   border: solid #e3e3e3;
@@ -147,19 +81,19 @@
   cursor: pointer;
 }
 
-.shortReview .votes button:hover {
+#review .votes button:hover {
   border-color: #cccccc
 }
 
-.shortReview .votes .upvote {
+#review .votes .upvote {
   transform: rotate(-135deg) translate(-0.5rem,-0.5rem);
 }
 
-.shortReview .votes .downvote {
+#review .votes .downvote {
   transform: rotate(45deg) translate(-0.7rem,-0.7rem);
 }
 
-.shortReview .body {
+#review .body {
   display: inline-block;
   vertical-align: top;
   width: 40.5rem;
@@ -169,92 +103,8 @@
   hyphens: auto;
 }
 
-.shortReview .footer {
-  position: relative;
-  padding: 0.5rem;
-}
-
-.shortReview .dates {
-  float: right;
-}
-
-.shortReview .dates span {
-  color: #999999;
-}
-
-.shortReview .posted,
-.shortReview .edited {
-  display: inline; 
-  color: #999999;
-  font-size: small;
-  margin: 0.25rem;
-}
-
-#longReviewBody{
-  resize: vertical;
-  display: block;
-  width: 100%;
-  height: 5rem;
-  box-sizing: border-box;
-  margin-top: 0.5rem;
-}
-
-
-#histogram {
-  margin: 1rem 0;
-  width: 100%;
-  display: flex;
-  align-items: center;
-}
-
-#histogram > p {
-  display: inline;
-  font-size: 5rem;
-  margin: 0;
-  vertical-align: middle;
-}
-
-#histogram .bars {
-  display: flex;
-  justify-content: space-between;
-  flex: 1;
-  background: linear-gradient(0.25turn, #d20202, #efff00, #06c103);
-}
-
-#histogram .bar {
+#reviewBody {
+  margin-left: 3rem;
   display: inline-block;
-  vertical-align: bottom;
-  position: relative;
-  height: 10rem;
-  margin: 0;
-  flex: 1;
-  outline: 1px solid #d2d2d2;
 }
 
-#histogram .bar .filled {
-  background-color: #eeeeee;
-  width: 100%;
-  position: absolute;
-  top: 0;
-}
-
-#histogram .bar p {
-  margin: 0;
-  font-size: small;
-  width: 0;
-  bottom: 0;
-  position: absolute;
-}
-
-#histogram .bar span {
-  margin: 0;
-  height: 0;
-  width: 0;
-  font-size: small;
-  position: absolute;
-  bottom: 0;
-}
-
-#preview {
-  width: auto;
-}
