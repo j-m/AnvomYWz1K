@@ -1427,7 +1427,7 @@ exports[`routes get game with multiple pages of long reviews 1`] = `
             </div>
             <hr/>
             <div class=\\"footer\\">
-              <a>Read comments (12)</a>
+              <a href=\\"/games/idUnique/1/short\\">Read comments</a>
               <div class=\\"dates\\">
                 <p class=\\"posted\\">Posted: <time datetime=\\"timestamp\\">timestamp</time></p>
               </div>
@@ -1455,7 +1455,7 @@ exports[`routes get game with multiple pages of long reviews 1`] = `
             </div>
             <hr/>
             <div class=\\"footer\\">
-              <a>Read comments (12)</a>
+              <a href=\\"/games/idUnique/3/short\\">Read comments</a>
               <div class=\\"dates\\">
                 <p class=\\"posted\\">Posted: <time datetime=\\"timestamp\\">timestamp</time></p>
               </div>
@@ -1463,7 +1463,7 @@ exports[`routes get game with multiple pages of long reviews 1`] = `
           </div>
         </div>
         
-        <a href=\\"http://127.0.0.1:54423/games/idUnique?s&#x3D;1\\">More reviews</a>
+        <a href=\\"http://baseURL/games/idUnique?s&#x3D;1\\">More reviews</a>
       </div>
       
       <div id=\\"long\\">
@@ -1919,7 +1919,7 @@ exports[`routes get game with multiple pages of long reviews 1`] = `
             </div>
             <hr/>
             <div class=\\"footer\\">
-              <a>Read comments (12)</a>
+              <a href=\\"/games/idUnique/5/long\\">Read comments</a>
               <div class=\\"dates\\">
                 <p class=\\"posted\\">Posted: <time datetime=\\"timestamp\\">timestamp</time></p>
               </div>
@@ -1949,7 +1949,7 @@ exports[`routes get game with multiple pages of long reviews 1`] = `
             </div>
             <hr/>
             <div class=\\"footer\\">
-              <a>Read comments (12)</a>
+              <a href=\\"/games/idUnique/6/long\\">Read comments</a>
               <div class=\\"dates\\">
                 <p class=\\"posted\\">Posted: <time datetime=\\"timestamp\\">timestamp</time></p>
               </div>
@@ -1957,7 +1957,7 @@ exports[`routes get game with multiple pages of long reviews 1`] = `
           </div>
         </div>
         
-        <a href=\\"http://127.0.0.1:54423/games/idUnique?l&#x3D;1\\">More reviews</a>
+        <a href=\\"http://baseURL/games/idUnique?l&#x3D;1\\">More reviews</a>
         </div>
       </div>
     </div>
@@ -2172,7 +2172,7 @@ exports[`routes get game with multiple pages of short reviews 1`] = `
             </div>
             <hr/>
             <div class=\\"footer\\">
-              <a>Read comments (12)</a>
+              <a href=\\"/games/idUnique/1/short\\">Read comments</a>
               <div class=\\"dates\\">
                 <p class=\\"posted\\">Posted: <time datetime=\\"timestamp\\">timestamp</time></p>
               </div>
@@ -2200,7 +2200,7 @@ exports[`routes get game with multiple pages of short reviews 1`] = `
             </div>
             <hr/>
             <div class=\\"footer\\">
-              <a>Read comments (12)</a>
+              <a href=\\"/games/idUnique/3/short\\">Read comments</a>
               <div class=\\"dates\\">
                 <p class=\\"posted\\">Posted: <time datetime=\\"timestamp\\">timestamp</time></p>
               </div>
@@ -2208,7 +2208,7 @@ exports[`routes get game with multiple pages of short reviews 1`] = `
           </div>
         </div>
         
-        <a href=\\"http://127.0.0.1:54421/games/idUnique?s&#x3D;1\\">More reviews</a>
+        <a href=\\"http://baseURL/games/idUnique?s&#x3D;1\\">More reviews</a>
       </div>
       
       <div id=\\"long\\">
@@ -2840,7 +2840,7 @@ exports[`routes get game with only negative short reviews 1`] = `
             </div>
             <hr/>
             <div class=\\"footer\\">
-              <a>Read comments (12)</a>
+              <a href=\\"/games/id/2/short\\">Read comments</a>
               <div class=\\"dates\\">
                 <p class=\\"posted\\">Posted: <time datetime=\\"timestamp\\">timestamp</time></p>
               </div>
@@ -3479,7 +3479,7 @@ exports[`routes get game with only positive short reviews 1`] = `
             </div>
             <hr/>
             <div class=\\"footer\\">
-              <a>Read comments (12)</a>
+              <a href=\\"/games/idUnique/1/short\\">Read comments</a>
               <div class=\\"dates\\">
                 <p class=\\"posted\\">Posted: <time datetime=\\"timestamp\\">timestamp</time></p>
               </div>
@@ -4118,7 +4118,7 @@ exports[`routes get game with positive and negative short reviews 1`] = `
             </div>
             <hr/>
             <div class=\\"footer\\">
-              <a>Read comments (12)</a>
+              <a href=\\"/games/idUnique/1/short\\">Read comments</a>
               <div class=\\"dates\\">
                 <p class=\\"posted\\">Posted: <time datetime=\\"timestamp\\">timestamp</time></p>
               </div>
@@ -4146,7 +4146,7 @@ exports[`routes get game with positive and negative short reviews 1`] = `
             </div>
             <hr/>
             <div class=\\"footer\\">
-              <a>Read comments (12)</a>
+              <a href=\\"/games/idUnique/3/short\\">Read comments</a>
               <div class=\\"dates\\">
                 <p class=\\"posted\\">Posted: <time datetime=\\"timestamp\\">timestamp</time></p>
               </div>
@@ -4154,7 +4154,7 @@ exports[`routes get game with positive and negative short reviews 1`] = `
           </div>
         </div>
         
-        <a href=\\"http://127.0.0.1:54419/games/idUnique?s&#x3D;1\\">More reviews</a>
+        <a href=\\"http://baseURL/games/idUnique?s&#x3D;1\\">More reviews</a>
       </div>
       
       <div id=\\"long\\">
