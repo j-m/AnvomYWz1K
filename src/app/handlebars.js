@@ -3,7 +3,7 @@
 const path = require('path')
 const views = require('koa-views')
 
-function equal(left, right, options) {
+function equal(left, right) {
   return left === right
 }
 
