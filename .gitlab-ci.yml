@@ -1,0 +1,47 @@
+image: node:12
+
+stages:
+  - code-testing
+  - acceptance-testing
+  - staging-server
+  - production-server
+
+linting:
+  stage: code-testing
+  script:
+    - npm install
+    - npm run linter
+
+unit-testing:
+  stage: code-testing
+  script:
+    - npm install
+    - npm test
+
+code-coverage:
+  stage: code-testing
+  script:
+    - npm install
+    - npm run coverage
+
+deploy-staging:
+  image: ruby:latest
+  only:
+    - master
+  stage: staging-server
+  script:
+    - apt-get update -qy
+    - apt-get install -y ruby-dev
+    - gem install dpl
+    - dpl --provider=heroku --app=$HEROKU_STAGING_SERVER --api-key=$HEROKU_API_KEY
+
+deploy-production:
+  image: ruby:latest
+  only:
+    - master
+  stage: production-server
+  script:
+    - apt-get update -qy
+    - apt-get install -y ruby-dev
+    - gem install dpl
+    - dpl --provider=heroku --app=$HEROKU_PRODUCTION_SERVER --api-key=$HEROKU_API_KEY
