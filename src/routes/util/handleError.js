@@ -1,6 +1,6 @@
 'use strict'
 
-const ErrorEnum = require('../../../util/ErrorEnum')
+const ErrorEnum = require('../../util/ErrorEnum')
 
 function handleError(error) {
   if (!error) {

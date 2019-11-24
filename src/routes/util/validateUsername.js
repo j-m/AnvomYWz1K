@@ -1,7 +1,7 @@
 'use strict'
 
-const connection = require('../../../database/connection')
-const ErrorEnum = require('../../../util/ErrorEnum')
+const connection = require('../../database/connection')
+const ErrorEnum = require('../../util/ErrorEnum')
 
 async function validateUsername(username) {
   if (!username) {

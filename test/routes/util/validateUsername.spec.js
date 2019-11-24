@@ -1,8 +1,8 @@
 'use strict'
 
-const validateUsername = require('../../../../src/routes/post/util/validateUsername')
-const connection = require('../../../../src/database/connection')
-const ErrorEnum = require('../../../../src/util/ErrorEnum')
+const validateUsername = require('../../../src/routes/util/validateUsername')
+const connection = require('../../../src/database/connection')
+const ErrorEnum = require('../../../src/util/ErrorEnum')
 
 beforeAll(async() => {
   jest.resetModules()

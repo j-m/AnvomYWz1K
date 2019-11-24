@@ -1,7 +1,7 @@
 'use strict'
 
-const ErrorEnum = require('../../../../src/util/ErrorEnum')
-const handleError = require('../../../../src/routes/post/util/handleError')
+const ErrorEnum = require('../../../src/util/ErrorEnum')
+const handleError = require('../../../src/routes/util/handleError')
 
 describe('routes post util handleError', () => {
   test('throws if error missing', async done => {

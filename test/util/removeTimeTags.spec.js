@@ -1,6 +1,6 @@
 'use strict'
 
-const removeTimeTags = require('./removeTimeTags')
+const removeTimeTags = require('../../src/test/util/removeTimeTags')
 
 describe('removeTimeTags', () => {
   test('remove time stamps from string', async done => {

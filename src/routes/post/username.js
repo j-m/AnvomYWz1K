@@ -1,7 +1,7 @@
 'use strict'
 
-const validateUsername = require('./util/validateUsername')
-const handleError = require('./util/handleError')
+const validateUsername = require('../util/validateUsername')
+const handleError = require('../util/handleError')
 
 async function username(context) {
   const body = context.request.body

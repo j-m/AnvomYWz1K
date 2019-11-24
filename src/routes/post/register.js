@@ -3,9 +3,9 @@
 const bcrypt = require('bcrypt-promise')
 
 const connection = require('../../database/connection')
-const validateUsername = require('./util/validateUsername')
+const validateUsername = require('../util/validateUsername')
 const ErrorEnum = require('../../util/ErrorEnum')
-const handleError = require('./util/handleError')
+const handleError = require('../util/handleError')
 
 async function insert(email, username, password) {
   const salt = await bcrypt.genSalt(Number(process.env.SALT_ROUNDS))

@@ -4,7 +4,7 @@ const request = require('supertest')
 
 const app = require('../../../src/app/koa')
 const connection = require('../../../src/database/connection')
-const removeTimeTags = require('../test_util/removeTimeTags')
+const scrubSnapshot = require('../../../src/test/util/scrubSnapshot')
 
 describe('routes get game', () => {
   beforeAll(async() => {
@@ -73,14 +73,14 @@ describe('routes get game', () => {
   test('with only positive short reviews', async() => {
     await connection.run('insert.review', 'idUnique', '1', '1', 'body', 'short')
     const response = await request(app.callback()).get('/games/idUnique')
-    expect(removeTimeTags(response.text)).toMatchSnapshot()
+    expect(scrubSnapshot(response.text)).toMatchSnapshot()
     await connection.run('delete.review', 'idUnique', '1',' short')
   })
 
   test('with only negative short reviews', async() => {
     await connection.run('insert.review', 'id', '2', '-1', 'body', 'short')
     const response = await request(app.callback()).get('/games/id')
-    expect(removeTimeTags(response.text)).toMatchSnapshot()
+    expect(scrubSnapshot(response.text)).toMatchSnapshot()
     await connection.run('delete.review', 'id', '2',' short')
   })
 
@@ -88,7 +88,7 @@ describe('routes get game', () => {
     await connection.run('insert.review', 'idUnique', '3', '1', 'body', 'short')
     await connection.run('insert.review', 'idUnique', '4', '-1', 'body', 'short')
     const response = await request(app.callback()).get('/games/idUnique')
-    expect(removeTimeTags(response.text)).toMatchSnapshot()
+    expect(scrubSnapshot(response.text)).toMatchSnapshot()
     await connection.run('delete.review', 'idUnique', '3',' short')
     await connection.run('delete.review', 'idUnique', '4',' short')
   })
@@ -101,7 +101,7 @@ describe('routes get game', () => {
       connection.run('insert.review', 'idUnique', '8', '-1', 'body', 'short')
     ])
     const response = await request(app.callback()).get('/games/idUnique')
-    expect(removeTimeTags(response.text)).toMatchSnapshot()
+    expect(scrubSnapshot(response.text)).toMatchSnapshot()
     await Promise.all([
       connection.run('delete.review', 'idUnique', '5',' short'),
       connection.run('delete.review', 'idUnique', '6',' short'),
@@ -118,7 +118,7 @@ describe('routes get game', () => {
       connection.run('insert.review', 'idUnique', '8', '43', 'body', 'long')
     ])
     const response = await request(app.callback()).get('/games/idUnique')
-    expect(removeTimeTags(response.text)).toMatchSnapshot()
+    expect(scrubSnapshot(response.text)).toMatchSnapshot()
     await Promise.all([
       connection.run('delete.review', 'idUnique', '5',' long'),
       connection.run('delete.review', 'idUnique', '6',' long'),

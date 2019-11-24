@@ -1,0 +1,110 @@
+#review {
+  width: 100rem;
+  margin: auto;
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 0.25rem;
+}
+
+#review hr {
+  margin: 0;
+  border: 0.5px solid #cccccc;
+}
+
+#review .rating,
+#review .author,
+#review .buttons{
+  display: inline-block;
+}
+
+#review .rating {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0 0 0 0.5rem;
+}
+
+#review .author {
+  color: #333333;
+  font-style: italic;
+}
+
+#review .author a{
+  font-style: normal;
+}
+
+#review .dates {
+  float: right;
+}
+
+#review .dates span {
+  color: #999999;
+}
+
+#review .posted,
+#review .edited {
+  display: inline; 
+  color: #999999;
+  font-size: small;
+  margin: 0.25rem;
+}
+
+
+#review .buttons {
+  float: right;
+}
+
+#review .votes,
+#review .body {
+  display: inline-block;
+}
+
+#review .votes {
+  width: 3rem;
+  text-align: center;
+  color: #cccccc;
+  vertical-align: top;
+}
+
+#review .votes .score {
+  font-size: 3rem;
+  font-weight: bolder;
+  margin: 0;
+}
+
+#review .votes button {
+  background: none;
+  display: block;
+  border: solid #e3e3e3;
+  border-width: 0 0.25rem 0.25rem 0;
+  display: inline-block;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+#review .votes button:hover {
+  border-color: #cccccc
+}
+
+#review .votes .upvote {
+  transform: rotate(-135deg) translate(-0.5rem,-0.5rem);
+}
+
+#review .votes .downvote {
+  transform: rotate(45deg) translate(-0.7rem,-0.7rem);
+}
+
+#review .body {
+  display: inline-block;
+  vertical-align: top;
+  width: 40.5rem;
+  margin: 0.5rem;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
+}
+
+#reviewBody {
+  margin-left: 3rem;
+  display: inline-block;
+}
+

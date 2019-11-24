@@ -77,7 +77,7 @@ describe('database models game', () => {
   describe('.get', () => {
     test('throws if not found', async done => {
       const game = await new Game()
-      await expect(game.get('title')).rejects.toThrow(ErrorEnum.GAME_UNKNOWN)
+      await expect(game.get('thisisalongtitle')).rejects.toThrow(ErrorEnum.GAME_UNKNOWN)
       done()
     })
 
