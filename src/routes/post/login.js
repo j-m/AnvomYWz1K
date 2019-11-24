@@ -32,7 +32,6 @@ function getCredentials(body) {
 
 async function login(context) {
   try {
-
     const {username, password} = getCredentials(context.request.body)
     const member = await checkCredentials(username, password)
     context.session.authorised = true

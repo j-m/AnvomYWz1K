@@ -116,7 +116,7 @@ function checkLongReviewPages(total, href, query) {
 
 async function game(context) {
   const gameID = context.params.game
-  const parameters = context.request.body.parameters
+  const parameters = JSON.parse(JSON.stringify(context.request.cookieData))
   const reviewPromises = getReviewPromises(parameters, gameID, context.request.query)
 
   parameters.game = await connection.all('select.gameByID', gameID)

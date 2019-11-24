@@ -6,9 +6,8 @@ const Review = require('../../models/review')
 async function review(context) {
   try {
     const body = context.request.body
-    body.author = context.session.username
     const review = new Review()
-    await review.load(body)
+    await review.load(context.request.cookieData.username, body)
     context.body = { success: true }
   } catch (error) {
     context.body = handleError(error)

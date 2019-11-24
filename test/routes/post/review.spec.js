@@ -2,6 +2,16 @@
 
 const request = require('supertest')
 
+jest.mock('../../../src/routes/util/Session')
+const Session = require('../../../src/routes/util/Session')
+Session.mockImplementation(() => ({
+  authorised: true,
+  username: 'real',
+  privileges: 'administrator',
+  administrator: true,
+  moderator: true
+}))
+
 const app = require('../../../src/app/koa')
 const connection = require('../../../src/database/connection')
 const ErrorEnum = require('../../../src/util/ErrorEnum')
@@ -28,7 +38,7 @@ afterAll(async() => {
   await connection.close()
 })
 
-describe('routes post username', () => {
+describe('routes post review', () => {
   test('returns error message from Review model', async done => {
     const response = await request(app.callback()).post('/review').send({ })
     expect(response.status).toEqual(200)
@@ -38,14 +48,12 @@ describe('routes post username', () => {
   })
 
   test('returns success if review posted/updated', async done => {
-    const login = await request(app.callback()).post('/login').send({ username: 'real', password: 'correct' })
-    //const cookie = login.headers['set-cookie'][0]
     const response = await request(app.callback())
       .post('/review')
-      //.set('Cookie', cookie)
       .send({
         game: 'id',
         rating: '1',
+        type: 'short',
         body: 'test'
       })
     expect(response.status).toEqual(200)

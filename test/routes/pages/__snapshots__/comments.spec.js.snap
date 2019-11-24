@@ -6,7 +6,7 @@ exports[`routes get game should contain templated text with generated thumbnail,
 <html lang=\\"en\\">
 	<head>
 		<meta charset=\\"utf-8\\">
-		<title>Game Reviews - Comments - gameID - userID - short</title>
+		<title>Game Reviews - Comments -  -  - </title>
     <link href=\\"https://fonts.googleapis.com/css?family=Roboto&display=swap\\" rel=\\"stylesheet\\">
     
     <link href=\\"../../../css/global.css\\" type=\\"text/css\\" rel=\\"stylesheet\\" />
@@ -79,8 +79,8 @@ exports[`routes get game should contain templated text with generated thumbnail,
     
     <div id=\\"review\\">
       <div class=\\"header\\">
-        <p class=\\"rating\\">👍 Recommended</p>
-        <p class=\\"author\\">by <a href=\\"/members/userID\\">userID</a></p>
+        <p class=\\"rating\\">1</p>
+        <p class=\\"author\\">by <a href=\\"/members/\\"></a></p>
         <div class=\\"dates\\">
           <p class=\\"posted\\">Posted: <time datetime=\\"timestamp\\">timestamp</time></p>
         </div>
@@ -108,7 +108,7 @@ exports[`routes get game should contain templated text with generated thumbnail,
         </div>
         <hr/>
       </div>
-      <form id=\\"commentForm\\" onsubmit=\\"somethingDifferent(event, 'gameID', 'userID', 'short')\\">
+      <form id=\\"commentForm\\" onsubmit=\\"somethingDifferent(event, '', '', '')\\">
         <input type=\\"text\\" id=\\"commentInput\\"name=\\"comment\\" autocomplete=\\"comment\\" required/>
         <input type=\\"submit\\" value=\\"Comment\\"/>
       </form>

@@ -8,16 +8,6 @@ class Session {
     this.administrator = this.privileges === 'administrator'
     this.moderator = this.privileges !== 'none'
   }
-
-  get data() {
-    return {
-      authorised: this.authorised,
-      username: this.username,
-      privileges: this.privileges,
-      administrator: this.administrator,
-      moderator: this.moderator
-    }
-  }
 }
 
 module.exports = Session

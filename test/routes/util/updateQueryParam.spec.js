@@ -1,6 +1,6 @@
 'use strict'
 
-const updateQueryParam = require('../../../../src/routes/pages/util/updateQueryParam')
+const updateQueryParam = require('../../../src/routes/util/updateQueryParam')
 
 describe('routes pages util updateQueryParam', () => {
   test('adds ? if required', async done => {

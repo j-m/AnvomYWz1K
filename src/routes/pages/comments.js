@@ -3,16 +3,15 @@
 const connection = require('../../database/connection')
 
 async function comments(context) {
-  const gameID = context.params.game
-  const author = context.params.author
-  const type = context.params.type
+  const reviewGameID = context.params.game
+  const reviewAuthor = context.params.author
+  const reviewType = context.params.type
 
-  const parameters = context.request.body.parameters
-  parameters.game = gameID
-  parameters.author = author
-  parameters.type = type
-  parameters.review = await connection.all('select.review', gameID, author, type).then(data => { return data[0] })
-  parameters.comments = await connection.all('select.comments', gameID, author, type).then(data => { return data })
+  const parameters = JSON.parse(JSON.stringify(context.request.cookieData))
+  await connection.all('select.review', reviewGameID, reviewAuthor, reviewType)
+    .then(data => parameters.review = data[0])
+  await connection.all('select.comments', reviewGameID, reviewAuthor, reviewType)
+    .then(data => parameters.comments = data)
 
   await context.render('comments', parameters)
 }
