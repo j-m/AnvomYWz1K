@@ -1,6 +1,6 @@
 'use strict'
 
-const handleError = require('./util/handleError')
+const handleError = require('../util/handleError')
 const Comment = require('../../models/comment')
 
 async function comment(context) {

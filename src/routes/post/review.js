@@ -1,6 +1,6 @@
 'use strict'
 
-const handleError = require('./util/handleError')
+const handleError = require('../util/handleError')
 const Review = require('../../models/review')
 
 async function review(context) {

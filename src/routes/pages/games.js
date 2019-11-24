@@ -1,10 +1,9 @@
 'use strict'
 
-const authorisation = require('./util/authorisation')
 const connection = require('../../database/connection')
 
 async function games(context) {
-  const parameters = authorisation(context, {})
+  const parameters = context.request.body.parameters
   parameters.games = await connection.all('select.allGames')
   await context.render('games', parameters)
 }

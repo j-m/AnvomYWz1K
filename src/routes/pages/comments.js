@@ -1,6 +1,5 @@
 'use strict'
 
-const authorisation = require('./util/authorisation')
 const connection = require('../../database/connection')
 
 async function comments(context) {
@@ -8,7 +7,7 @@ async function comments(context) {
   const author = context.params.author
   const type = context.params.type
 
-  const parameters = authorisation(context, {})
+  const parameters = context.request.body.parameters
   parameters.game = gameID
   parameters.author = author
   parameters.type = type

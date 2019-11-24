@@ -1,9 +1,8 @@
 'use strict'
 
-const authorisation = require('./util/authorisation')
 const connection = require('../../database/connection')
-const MAGIC_NUMBERS = require('../../util/magicNumbers')
-const updateQueryParam = require('./util/updateQueryParam')
+const PERCENTAGE_MULTIPLIER = require('../../util/magicNumbers').PERCENTAGE_MULTIPLIER
+const updateQueryParam = require('../util/updateQueryParam')
 
 const EMOJI = {
   10: '🤯',
@@ -37,7 +36,7 @@ function calculatePercentage(dividend, divisor) {
   if (divisor === 0) {
     return 0
   }
-  return Math.round(dividend * MAGIC_NUMBERS.PERCENTAGE_MULTIPLIER / divisor)
+  return Math.round(dividend * PERCENTAGE_MULTIPLIER / divisor)
 }
 
 function getCounts(data, parameters) {
@@ -65,12 +64,12 @@ function getHistogram(data) {
     count += datum.count
     sum += datum.rating
   }
-  const ratings = new Array(MAGIC_NUMBERS.PERCENTAGE_MULTIPLIER + 1).fill({count: 0, percent: 100})
+  const ratings = new Array(PERCENTAGE_MULTIPLIER + 1).fill({count: 0, percent: 100})
   for (const datum of data) {
     ratings[datum.rating] = {
       rating: datum.rating,
       count: datum.count,
-      percent: MAGIC_NUMBERS.PERCENTAGE_MULTIPLIER - calculatePercentage(datum.count, count)
+      percent: PERCENTAGE_MULTIPLIER - calculatePercentage(datum.count, count)
     }
   }
   return { ratings, count, average: count===0 ? '?' : Math.round(sum/count)}
@@ -117,7 +116,7 @@ function checkLongReviewPages(total, href, query) {
 
 async function game(context) {
   const gameID = context.params.game
-  const parameters = authorisation(context, {})
+  const parameters = context.request.body.parameters
   const reviewPromises = getReviewPromises(parameters, gameID, context.request.query)
 
   parameters.game = await connection.all('select.gameByID', gameID)
