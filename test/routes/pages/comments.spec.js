@@ -31,6 +31,7 @@ describe('routes get game', () => {
 
   test('should contain templated text with generated thumbnail, banner, and store', async() => {
     const response = await request(app.callback()).get('/games/gameID/userID/short')
+    expect(response.status).toEqual(200)
     expect(scrubSnapshot(response.text)).toMatchSnapshot()
   })
 

@@ -16,6 +16,16 @@ class Member {
     }
     Object.assign(this, results[0])
   }
+
+  async promote(type, visibility, username) {
+    if (type !== 'long') {
+      return
+    }
+    if (visibility !== 'public') {
+      return
+    }
+    await connection.run('update.promote', username)
+  }
 }
 
 module.exports = Member

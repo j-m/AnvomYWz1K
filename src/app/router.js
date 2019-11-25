@@ -16,6 +16,7 @@ const username = require('../routes/post/username')
 const newGame = require('../routes/post/game')
 const editGame = require('../routes/post/editGame')
 const review = require('../routes/post/review')
+const visibility = require('../routes/post/visibility')
 const comment = require('../routes/post/comment')
 
 const router = new Router()
@@ -33,6 +34,7 @@ router.post('/username', authenticate.isNotLoggedIn, username)
 router.post('/game', authenticate.isAdmin, newGame)
 router.post('/editGame', authenticate.isAdmin, editGame)
 router.post('/review', authenticate.isLoggedIn, review)
+router.post('/visibility', authenticate.isLoggedIn, visibility)
 router.post('/comment', authenticate.isLoggedIn, comment)
 
 module.exports = router
