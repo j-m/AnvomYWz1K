@@ -105,7 +105,6 @@
               <div class="buttons">
                 <select id="visibilityShort" name="visibility" onchange="visibility('{{game}}', '{{author}}', 'short')">
                   <option {{#if (equal visibility 'public')}}selected="selected"{{/if}}>public</option>
-                  <option {{#if (equal visibility 'registrant')}}selected="selected"{{/if}}>registrant</option>
                   {{#if (equal 'moderator' ../privileges)}}
                   <option {{#if (equal visibility 'moderator')}}selected="selected"{{/if}}>moderator</option>
                   {{/if}}
@@ -192,7 +191,6 @@
               <div class="buttons">
                 <select id="visibilityLong" name="visibility" onchange="visibility('{{game}}', '{{author}}', 'long')">
                   <option {{#if (equal visibility 'public')}}selected="selected"{{/if}}>public</option>
-                  <option {{#if (equal visibility 'registrant')}}selected="selected"{{/if}}>registrant</option>
                   {{#if (equal 'moderator' ../privileges)}}
                   <option {{#if (equal visibility 'moderator')}}selected="selected"{{/if}}>moderator</option>
                   {{/if}}

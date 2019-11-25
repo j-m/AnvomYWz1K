@@ -7,20 +7,11 @@ function equal(left, right) {
   return left === right
 }
 
-function isModerator(visibility, privileges) {
-  return visibility === 'moderator' && privileges === 'moderator'
-}
-
-function isRegistrant(visibility, privileges) {
-  return visibility === 'registrant' && privileges === 'registrant'
-}
-
 function visible(visibility, author, username, privileges) {
   return visibility === 'public'
       || privileges === 'administrator'
       || author === username
-      || isModerator(visibility, privileges)
-      || isRegistrant(visibility, privileges)
+      || visibility === 'moderator' && privileges === 'moderator'
 }
 
 function getViews(context, next) {
