@@ -7,6 +7,10 @@ function equal(left, right) {
   return left === right
 }
 
+function or(left, right) {
+  return left === true || right === true
+}
+
 function visible(visibility, author, username, privileges) {
   return visibility === 'public'
       || privileges === 'administrator'
@@ -19,8 +23,7 @@ function getViews(context, next) {
     extension: 'hbs',
     options: {
       helpers: {
-        equal,
-        visible
+        equal, or, visible
       },
       partials: {
         loginRegistration: './partials/loginRegistration',

@@ -92,6 +92,7 @@
         
         <div id="shortReviews">
           {{#each shortReviews}}
+          {{#if (visible visibility author ../username ../privileges) }}
           {{#if (equal rating 1)}}
           <div class="shortReview positive">
             <div class="header">
@@ -103,21 +104,17 @@
           {{/if}}
               <p class="author">by <a href="/members/{{author}}">{{author}}</a></p>
               <div class="buttons">
-                <select id="visibilityShort" name="visibility" onchange="visibility('{{game}}', '{{author}}', 'short')">
+                {{#if (or (equal 'moderator' ../privileges) (equal 'administrator' ../privileges))}}
+                <select id="visibilityLong" name="visibility" onchange="visibility('{{game}}', '{{author}}', 'long')">
                   <option {{#if (equal visibility 'public')}}selected="selected"{{/if}}>public</option>
-                  {{#if (equal 'moderator' ../privileges)}}
+                  {{#if (or (equal 'moderator' ../privileges) (equal 'administrator' ../privileges))}}
                   <option {{#if (equal visibility 'moderator')}}selected="selected"{{/if}}>moderator</option>
                   {{/if}}
-                  {{#if (equal 'administrator' ../privileges)}}
-                  <option {{#if (equal visibility 'moderator')}}selected="selected"{{/if}}>moderator</option>
-                  {{/if}}
-                  {{#if (equal ../username author)}}
-                  <option {{#if (equal visibility 'author')}}selected="selected"{{/if}}>author</option>
-                  {{/if}}
-                  {{#if (equal 'administrator' ../privileges)}}
+                  {{#if (or (equal ../username author) (equal 'administrator' ../privileges))}}
                   <option {{#if (equal visibility 'author')}}selected="selected"{{/if}}>author</option>
                   {{/if}}
                 </select>
+                {{/if}}
               </div>
             </div>
             <hr/>
@@ -141,6 +138,7 @@
               </div>
             </div>
           </div>
+          {{/if}}
           {{/each}}
         </div>
         
@@ -189,21 +187,17 @@
               <p class="rating">{{rating}}</p>
               <p class="author">by <a href="/members/{{author}}">{{author}}</a></p>
               <div class="buttons">
+                {{#if (or (equal 'moderator' ../privileges) (equal 'administrator' ../privileges))}}
                 <select id="visibilityLong" name="visibility" onchange="visibility('{{game}}', '{{author}}', 'long')">
                   <option {{#if (equal visibility 'public')}}selected="selected"{{/if}}>public</option>
-                  {{#if (equal 'moderator' ../privileges)}}
+                  {{#if (or (equal 'moderator' ../privileges) (equal 'administrator' ../privileges))}}
                   <option {{#if (equal visibility 'moderator')}}selected="selected"{{/if}}>moderator</option>
                   {{/if}}
-                  {{#if (equal 'administrator' ../privileges)}}
-                  <option {{#if (equal visibility 'moderator')}}selected="selected"{{/if}}>moderator</option>
-                  {{/if}}
-                  {{#if (equal ../username author)}}
-                  <option {{#if (equal visibility 'author')}}selected="selected"{{/if}}>author</option>
-                  {{/if}}
-                  {{#if (equal 'administrator' ../privileges)}}
+                  {{#if (or (equal ../username author) (equal 'administrator' ../privileges))}}
                   <option {{#if (equal visibility 'author')}}selected="selected"{{/if}}>author</option>
                   {{/if}}
                 </select>
+                {{/if}}
               </div>
             </div>
             <hr/>

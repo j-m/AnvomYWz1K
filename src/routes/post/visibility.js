@@ -10,7 +10,7 @@ async function visibility(context) {
     const review = new Review()
     await review.visibility(body, context.request.cookieData.username, context.request.cookieData.privileges)
     const member = new Member()
-    await member.promote(body.visibility, body.author)
+    await member.promote(body.type, body.visibility, body.author)
     context.body = { success: true }
   } catch (error) {
     context.body = handleError(error)

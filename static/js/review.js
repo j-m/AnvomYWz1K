@@ -63,10 +63,10 @@ function longReview(data) {
   show('preview')
 }
 
-function visibility(game, author, type) {
+async function visibility(game, author, type) {
   const visibility = document.getElementById(type === 'short' ? 'visibilityShort': 'visibilityLong').value
 
-  const result = fetch('/visibility', {
+  const result = await fetch('/visibility', {
     method: 'POST',
     cache: 'no-cache',
     headers: { 'Content-Type': 'application/json' },
