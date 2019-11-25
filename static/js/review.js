@@ -62,3 +62,20 @@ function longReview(data) {
   document.getElementById('previewContent').innerHTML = converter.makeHtml(data)
   show('preview')
 }
+
+async function visibility(game, author, type) {
+  const visibility = document.getElementById(type === 'short' ? 'visibilityShort': 'visibilityLong').value
+
+  const result = await fetch('/visibility', {
+    method: 'POST',
+    cache: 'no-cache',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({game, author, type, visibility})
+  }).then(res => res.json()).catch(err => console.log(err))
+
+  if (result.success === false) {
+    console.log(result)
+  } else {
+    location.reload()
+  }
+}

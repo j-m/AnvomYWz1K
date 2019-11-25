@@ -34,7 +34,7 @@ describe('routes post util validateUsername', () => {
   })
 
   test('username can contain -', async() => {
-    await expect(validateUsername('go-d')).resolves
+    await expect(validateUsername('go-d')).resolves.toBeUndefined()
   })
 
   test('username is not in use', async() => {
@@ -42,6 +42,6 @@ describe('routes post util validateUsername', () => {
   })
 
   test('does not throw if username not in use and valid', async() => {
-    await expect(validateUsername('unique')).resolves
+    await expect(validateUsername('unique')).resolves.toBeUndefined()
   })
 })

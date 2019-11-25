@@ -1,11 +1,8 @@
 'use strict'
 
-const request = require('supertest')
-
 jest.mock('../../../src/routes/util/Session')
 const Session = require('../../../src/routes/util/Session')
 
-const app = require('../../../src/app/koa')
 const connection = require('../../../src/database/connection')
 const ErrorEnum = require('../../../src/util/ErrorEnum')
 const authenticate = require('../../../src/routes/middleware/authenticate')
@@ -36,7 +33,7 @@ describe('routes middleware authenticate', () => {
       moderator: false
     }))
     await expect(
-      authenticate.isAdmin({request: {}, session: {}},() => {})
+      authenticate.isAdmin({request: {}, session: {}}, () => undefined)
     ).rejects.toThrow(ErrorEnum.SESSION_INSUFFICIENT_PRIVILEGES)
     done()
   })
@@ -49,9 +46,9 @@ describe('routes middleware authenticate', () => {
       administrator: true,
       moderator: true
     }))
-    expect(
-      await authenticate.isAdmin({request: {}, session: {}},() => {})
-    ).resolves
+    const context = {request: {}, session: {}}
+    await authenticate.isAdmin(context, () => undefined)
+    expect(context.request.cookieData).toBeDefined()
     done()
   })
 
@@ -64,7 +61,7 @@ describe('routes middleware authenticate', () => {
       moderator: false
     }))
     await expect(
-      authenticate.isModerator({request: {}, session: {}},() => {})
+      authenticate.isModerator({request: {}, session: {}}, () => undefined)
     ).rejects.toThrow(ErrorEnum.SESSION_INSUFFICIENT_PRIVILEGES)
     done()
   })
@@ -77,11 +74,12 @@ describe('routes middleware authenticate', () => {
       administrator: false,
       moderator: true
     }))
-    expect(
-      await authenticate.isModerator({request: {}, session: {}},() => {})
-    ).resolves
+    const context = {request: {}, session: {}}
+    await authenticate.isModerator(context, () => undefined)
+    expect(context.request.cookieData).toBeDefined()
     done()
   })
+
   test('isLoggedIn throws', async done => {
     Session.mockImplementation(() => ({
       authorised: false,
@@ -91,7 +89,7 @@ describe('routes middleware authenticate', () => {
       moderator: false
     }))
     await expect(
-      authenticate.isLoggedIn({request: {}, session: {}},() => {})
+      authenticate.isLoggedIn({request: {}, session: {}},() => undefined)
     ).rejects.toThrow(ErrorEnum.SESSION_NOT_LOGGED_IN)
     done()
   })
@@ -104,9 +102,9 @@ describe('routes middleware authenticate', () => {
       administrator: true,
       moderator: true
     }))
-    expect(
-      await authenticate.isLoggedIn({request: {}, session: {}},() => {})
-    ).resolves
+    const context = {request: {}, session: {}}
+    await authenticate.isLoggedIn(context, () => undefined)
+    expect(context.request.cookieData).toBeDefined()
     done()
   })
 
@@ -119,7 +117,7 @@ describe('routes middleware authenticate', () => {
       moderator: false
     }))
     await expect(
-      authenticate.isNotLoggedIn({request: {}, session: {}},() => {})
+      authenticate.isNotLoggedIn({request: {}, session: {}}, () => undefined)
     ).rejects.toThrow(ErrorEnum.SESSION_LOGGED_IN)
     done()
   })
@@ -132,9 +130,9 @@ describe('routes middleware authenticate', () => {
       administrator: true,
       moderator: true
     }))
-    expect(
-      authenticate.populateSession({request: {}, session: {}},() => {})
-    ).resolves
+    const context = {request: {}, session: {}}
+    await authenticate.populateSession(context, () => undefined)
+    expect(context.request.cookieData).toBeDefined()
     done()
   })
 })
