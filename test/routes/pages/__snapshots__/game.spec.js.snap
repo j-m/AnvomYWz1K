@@ -86,7 +86,7 @@ exports[`routes get game should contain templated text with defined thumbnail, b
         <p><span>Publisher</span>publisher</p>
         <p id=\\"gameStore\\"><span>Store</span><a href=\\"store\\" target=\\"_blank\\"><img src=\\"../img/steam-logo.png\\"/></a></p>
         <p><span>Release Date</span><time datetime=\\"releaseDate\\">releaseDate</time></p>
-        <p><span>Tags</span>tags</p>
+        <p><span>Category</span>category</p>
         <p><span>Summary</span>summary</p>
         <p><span>Description</span>description</p>
         <a onclick=\\"show('fullDescription', event)\\">Read <br/> more</a>
@@ -132,8 +132,8 @@ exports[`routes get game should contain templated text with defined thumbnail, b
           	<label for=\\"publisher\\">Publisher</label>
             <input type=\\"text\\" id=\\"publisher\\" name=\\"publisher\\" value=\\"publisher\\"/>
             
-            <label for=\\"tags\\">Tags</label>
-            <input type=\\"text\\" id=\\"tags\\" name=\\"tags\\" value=\\"tags\\"/>
+            <label for=\\"category\\">Category</label>
+            <input type=\\"text\\" id=\\"category\\" name=\\"category\\" value=\\"category\\"/>
             
           	<label for=\\"description\\">Description</label>
             <textarea id=\\"description\\" name=\\"description\\" rows=\\"1\\">description</textarea>
@@ -697,7 +697,7 @@ exports[`routes get game should contain templated text with generated thumbnail,
         <p><span>Publisher</span></p>
         <p id=\\"gameStore\\"><span>Store</span><a href=\\"https://store.steampowered.com/app/steamAppId\\" target=\\"_blank\\"><img src=\\"../img/steam-logo.png\\"/></a></p>
         <p><span>Release Date</span><time datetime=\\"\\"></time></p>
-        <p><span>Tags</span></p>
+        <p><span>Category</span></p>
         <p><span>Summary</span>summary</p>
         <p><span>Description</span></p>
         <a onclick=\\"show('fullDescription', event)\\">Read <br/> more</a>
@@ -743,8 +743,8 @@ exports[`routes get game should contain templated text with generated thumbnail,
           	<label for=\\"publisher\\">Publisher</label>
             <input type=\\"text\\" id=\\"publisher\\" name=\\"publisher\\" value=\\"\\"/>
             
-            <label for=\\"tags\\">Tags</label>
-            <input type=\\"text\\" id=\\"tags\\" name=\\"tags\\" value=\\"\\"/>
+            <label for=\\"category\\">Category</label>
+            <input type=\\"text\\" id=\\"category\\" name=\\"category\\" value=\\"\\"/>
             
           	<label for=\\"description\\">Description</label>
             <textarea id=\\"description\\" name=\\"description\\" rows=\\"1\\"></textarea>
@@ -1308,7 +1308,7 @@ exports[`routes get game with multiple pages of long reviews 1`] = `
         <p><span>Publisher</span>publisher</p>
         <p id=\\"gameStore\\"><span>Store</span><a href=\\"store\\" target=\\"_blank\\"><img src=\\"../img/steam-logo.png\\"/></a></p>
         <p><span>Release Date</span><time datetime=\\"releaseDate\\">releaseDate</time></p>
-        <p><span>Tags</span>tags</p>
+        <p><span>Category</span>category</p>
         <p><span>Summary</span>summary</p>
         <p><span>Description</span>description</p>
         <a onclick=\\"show('fullDescription', event)\\">Read <br/> more</a>
@@ -1354,8 +1354,8 @@ exports[`routes get game with multiple pages of long reviews 1`] = `
           	<label for=\\"publisher\\">Publisher</label>
             <input type=\\"text\\" id=\\"publisher\\" name=\\"publisher\\" value=\\"publisher\\"/>
             
-            <label for=\\"tags\\">Tags</label>
-            <input type=\\"text\\" id=\\"tags\\" name=\\"tags\\" value=\\"tags\\"/>
+            <label for=\\"category\\">Category</label>
+            <input type=\\"text\\" id=\\"category\\" name=\\"category\\" value=\\"category\\"/>
             
           	<label for=\\"description\\">Description</label>
             <textarea id=\\"description\\" name=\\"description\\" rows=\\"1\\">description</textarea>
@@ -2053,7 +2053,7 @@ exports[`routes get game with multiple pages of short reviews 1`] = `
         <p><span>Publisher</span>publisher</p>
         <p id=\\"gameStore\\"><span>Store</span><a href=\\"store\\" target=\\"_blank\\"><img src=\\"../img/steam-logo.png\\"/></a></p>
         <p><span>Release Date</span><time datetime=\\"releaseDate\\">releaseDate</time></p>
-        <p><span>Tags</span>tags</p>
+        <p><span>Category</span>category</p>
         <p><span>Summary</span>summary</p>
         <p><span>Description</span>description</p>
         <a onclick=\\"show('fullDescription', event)\\">Read <br/> more</a>
@@ -2099,8 +2099,8 @@ exports[`routes get game with multiple pages of short reviews 1`] = `
           	<label for=\\"publisher\\">Publisher</label>
             <input type=\\"text\\" id=\\"publisher\\" name=\\"publisher\\" value=\\"publisher\\"/>
             
-            <label for=\\"tags\\">Tags</label>
-            <input type=\\"text\\" id=\\"tags\\" name=\\"tags\\" value=\\"tags\\"/>
+            <label for=\\"category\\">Category</label>
+            <input type=\\"text\\" id=\\"category\\" name=\\"category\\" value=\\"category\\"/>
             
           	<label for=\\"description\\">Description</label>
             <textarea id=\\"description\\" name=\\"description\\" rows=\\"1\\">description</textarea>
@@ -2721,7 +2721,7 @@ exports[`routes get game with only negative short reviews 1`] = `
         <p><span>Publisher</span></p>
         <p id=\\"gameStore\\"><span>Store</span><a href=\\"https://store.steampowered.com/app/steamAppId\\" target=\\"_blank\\"><img src=\\"../img/steam-logo.png\\"/></a></p>
         <p><span>Release Date</span><time datetime=\\"\\"></time></p>
-        <p><span>Tags</span></p>
+        <p><span>Category</span></p>
         <p><span>Summary</span>summary</p>
         <p><span>Description</span></p>
         <a onclick=\\"show('fullDescription', event)\\">Read <br/> more</a>
@@ -2767,8 +2767,8 @@ exports[`routes get game with only negative short reviews 1`] = `
           	<label for=\\"publisher\\">Publisher</label>
             <input type=\\"text\\" id=\\"publisher\\" name=\\"publisher\\" value=\\"\\"/>
             
-            <label for=\\"tags\\">Tags</label>
-            <input type=\\"text\\" id=\\"tags\\" name=\\"tags\\" value=\\"\\"/>
+            <label for=\\"category\\">Category</label>
+            <input type=\\"text\\" id=\\"category\\" name=\\"category\\" value=\\"\\"/>
             
           	<label for=\\"description\\">Description</label>
             <textarea id=\\"description\\" name=\\"description\\" rows=\\"1\\"></textarea>
@@ -3360,7 +3360,7 @@ exports[`routes get game with only positive short reviews 1`] = `
         <p><span>Publisher</span>publisher</p>
         <p id=\\"gameStore\\"><span>Store</span><a href=\\"store\\" target=\\"_blank\\"><img src=\\"../img/steam-logo.png\\"/></a></p>
         <p><span>Release Date</span><time datetime=\\"releaseDate\\">releaseDate</time></p>
-        <p><span>Tags</span>tags</p>
+        <p><span>Category</span>category</p>
         <p><span>Summary</span>summary</p>
         <p><span>Description</span>description</p>
         <a onclick=\\"show('fullDescription', event)\\">Read <br/> more</a>
@@ -3406,8 +3406,8 @@ exports[`routes get game with only positive short reviews 1`] = `
           	<label for=\\"publisher\\">Publisher</label>
             <input type=\\"text\\" id=\\"publisher\\" name=\\"publisher\\" value=\\"publisher\\"/>
             
-            <label for=\\"tags\\">Tags</label>
-            <input type=\\"text\\" id=\\"tags\\" name=\\"tags\\" value=\\"tags\\"/>
+            <label for=\\"category\\">Category</label>
+            <input type=\\"text\\" id=\\"category\\" name=\\"category\\" value=\\"category\\"/>
             
           	<label for=\\"description\\">Description</label>
             <textarea id=\\"description\\" name=\\"description\\" rows=\\"1\\">description</textarea>
@@ -3999,7 +3999,7 @@ exports[`routes get game with positive and negative short reviews 1`] = `
         <p><span>Publisher</span>publisher</p>
         <p id=\\"gameStore\\"><span>Store</span><a href=\\"store\\" target=\\"_blank\\"><img src=\\"../img/steam-logo.png\\"/></a></p>
         <p><span>Release Date</span><time datetime=\\"releaseDate\\">releaseDate</time></p>
-        <p><span>Tags</span>tags</p>
+        <p><span>Category</span>category</p>
         <p><span>Summary</span>summary</p>
         <p><span>Description</span>description</p>
         <a onclick=\\"show('fullDescription', event)\\">Read <br/> more</a>
@@ -4045,8 +4045,8 @@ exports[`routes get game with positive and negative short reviews 1`] = `
           	<label for=\\"publisher\\">Publisher</label>
             <input type=\\"text\\" id=\\"publisher\\" name=\\"publisher\\" value=\\"publisher\\"/>
             
-            <label for=\\"tags\\">Tags</label>
-            <input type=\\"text\\" id=\\"tags\\" name=\\"tags\\" value=\\"tags\\"/>
+            <label for=\\"category\\">Category</label>
+            <input type=\\"text\\" id=\\"category\\" name=\\"category\\" value=\\"category\\"/>
             
           	<label for=\\"description\\">Description</label>
             <textarea id=\\"description\\" name=\\"description\\" rows=\\"1\\">description</textarea>

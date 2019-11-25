@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS games (
   developer TEXT,
   publisher TEXT,
   description TEXT,
-  tags TEXT,
+  category TEXT,
   releaseDate DATETIME,
   store TEXT,
   thumbnail TEXT,

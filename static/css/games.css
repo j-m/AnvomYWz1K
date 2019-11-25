@@ -1,23 +1,31 @@
 #games {
+  margin: 2rem;
+}
+
+.category {
   display: flex; 
   height: 20rem;
+  margin-bottom: 1rem;
 }
 
 .game {
-  width: 12rem;
-  height: 18rem;
-  margin: 1rem;
-  transition: width 0.2s ease-in, margin 0.2s ease-in;
+  margin: 1.8rem 1.2rem ;
+  transition: margin 0.2s ease-in;
 }
 
 .game:hover {
-  width: 13rem;
-  height: 18rem;
-  margin: 0.5rem;
+  margin: 0.9rem 0.6rem ;
 }
 
 .game img {
-  width: 100%;
+  width: 12rem;
+  height: 18rem;
+  transition: width 0.2s ease-in, height 0.2s ease-in
+}
+
+.game:hover img {
+  width: 13.2rem;
+  height: 19.8rem;
 }
 
 #addGameButton {
