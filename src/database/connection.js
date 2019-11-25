@@ -7,6 +7,12 @@ const ErrorEnum = require('../util/ErrorEnum')
 
 let database
 
+async function insertAdmin() {
+  if (process.env.NODE_ENV === 'production') {
+    await run('insert.admin')
+  }
+}
+
 async function open() {
   await Promise.all([
     sqlite.open(process.env.DATABASE).then(db => {
@@ -15,6 +21,7 @@ async function open() {
     queries.load()
   ])
   await createTables()
+  await insertAdmin()
 }
 
 async function createTables() {
@@ -31,7 +38,7 @@ async function createTables() {
 }
 
 async function close() {
-  if (database !== undefined) {
+  if (database && database.db && database.db.open) {
     await database.close()
   }
   queries.close()

@@ -48,4 +48,33 @@ describe('database models member', () => {
       done()
     })
   })
+
+  describe('.promote', () => {
+    test('requires review type to be long', async done => {
+      await connection.run('insert.member', 'a@b.com', 'promote1', 'password')
+      const member = await new Member()
+      await member.promote('short')
+      const results = await connection.all('select.memberByUsername', 'promote1')
+      expect(results[0].privileges).toEqual('none')
+      done()
+    })
+
+    test('requires review visibility to now be public', async done => {
+      await connection.run('insert.member', 'a@b.com', 'promote2', 'password')
+      const member = await new Member()
+      await member.promote('long', 'moderator','promote2')
+      const results = await connection.all('select.memberByUsername', 'promote2')
+      expect(results[0].privileges).toEqual('none')
+      done()
+    })
+
+    test('promotes if review is long and visible is now public', async done => {
+      await connection.run('insert.member', 'a@b.com', 'promote3', 'password')
+      const member = await new Member()
+      await member.promote('long', 'public', 'promote3')
+      const results = await connection.all('select.memberByUsername', 'promote3')
+      expect(results[0].privileges).toEqual('moderator')
+      done()
+    })
+  })
 })

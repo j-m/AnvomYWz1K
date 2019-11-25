@@ -31,7 +31,7 @@
         <p><span>Publisher</span>{{game.publisher}}</p>
         <p id="gameStore"><span>Store</span><a href="{{game.store}}" target="_blank"><img src="../img/steam-logo.png"/></a></p>
         <p><span>Release Date</span><time datetime="{{game.releaseDate}}">{{game.releaseDate}}</time></p>
-        <p><span>Tags</span>{{game.tags}}</p>
+        <p><span>Category</span>{{game.category}}</p>
         <p><span>Summary</span>{{game.summary}}</p>
         <p><span>Description</span>{{game.description}}</p>
         <a onclick="show('fullDescription', event)">Read <br/> more</a>
@@ -92,7 +92,7 @@
         
         <div id="shortReviews">
           {{#each shortReviews}}
-          
+          {{#if (visible visibility author ../username ../privileges) }}
           {{#if (equal rating 1)}}
           <div class="shortReview positive">
             <div class="header">
@@ -104,9 +104,17 @@
           {{/if}}
               <p class="author">by <a href="/members/{{author}}">{{author}}</a></p>
               <div class="buttons">
-                <button class="visibility">V</button>
-                <button class="flag">F</button>
-                <button class="edit">E</button>
+                {{#if (or (equal 'moderator' ../privileges) (equal 'administrator' ../privileges))}}
+                <select id="visibilityLong" name="visibility" onchange="visibility('{{game}}', '{{author}}', 'long')">
+                  <option {{#if (equal visibility 'public')}}selected="selected"{{/if}}>public</option>
+                  {{#if (or (equal 'moderator' ../privileges) (equal 'administrator' ../privileges))}}
+                  <option {{#if (equal visibility 'moderator')}}selected="selected"{{/if}}>moderator</option>
+                  {{/if}}
+                  {{#if (or (equal ../username author) (equal 'administrator' ../privileges))}}
+                  <option {{#if (equal visibility 'author')}}selected="selected"{{/if}}>author</option>
+                  {{/if}}
+                </select>
+                {{/if}}
               </div>
             </div>
             <hr/>
@@ -130,6 +138,7 @@
               </div>
             </div>
           </div>
+          {{/if}}
           {{/each}}
         </div>
         
@@ -172,15 +181,23 @@
         
         <div id="longReviews">
           {{#each longReviews}}
-          
+          {{#if (visible visibility author ../username ../privileges) }}
           <div class="shortReview positive">
             <div class="header">
               <p class="rating">{{rating}}</p>
               <p class="author">by <a href="/members/{{author}}">{{author}}</a></p>
               <div class="buttons">
-                <button class="visibility">V</button>
-                <button class="flag">F</button>
-                <button class="edit">E</button>
+                {{#if (or (equal 'moderator' ../privileges) (equal 'administrator' ../privileges))}}
+                <select id="visibilityLong" name="visibility" onchange="visibility('{{game}}', '{{author}}', 'long')">
+                  <option {{#if (equal visibility 'public')}}selected="selected"{{/if}}>public</option>
+                  {{#if (or (equal 'moderator' ../privileges) (equal 'administrator' ../privileges))}}
+                  <option {{#if (equal visibility 'moderator')}}selected="selected"{{/if}}>moderator</option>
+                  {{/if}}
+                  {{#if (or (equal ../username author) (equal 'administrator' ../privileges))}}
+                  <option {{#if (equal visibility 'author')}}selected="selected"{{/if}}>author</option>
+                  {{/if}}
+                </select>
+                {{/if}}
               </div>
             </div>
             <hr/>
@@ -206,6 +223,7 @@
               </div>
             </div>
           </div>
+          {{/if}}
           {{/each}}
         </div>
         

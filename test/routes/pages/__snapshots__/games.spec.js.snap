@@ -74,6 +74,27 @@ exports[`routes get games should contain templated text 1`] = `
     </div>
     
     <div id=\\"games\\">
+        <h1>category</h1>
+        <div class=\\"category\\">  
+          <a href=\\"/games/id\\">
+            <div class=\\"game\\">
+              <img width=\\"600\\" height=\\"900\\" src=\\"thumbnail\\"/>
+            </div>
+          </a>
+          <a href=\\"/games/id2\\">
+            <div class=\\"game\\">
+              <img width=\\"600\\" height=\\"900\\" src=\\"thumbnail\\"/>
+            </div>
+          </a>
+        </div>
+        <h1>Other</h1>
+        <div class=\\"category\\">  
+          <a href=\\"/games/id3\\">
+            <div class=\\"game\\">
+              <img width=\\"600\\" height=\\"900\\" src=\\"https://steamcdn-a.akamaihd.net/steam/apps/413150/library_600x900_2x.jpg\\"/>
+            </div>
+          </a>
+        </div>
     </div>
 
     <div class=\\"popup\\" onclick=\\"hide('addGame', event)\\">
@@ -111,8 +132,8 @@ exports[`routes get games should contain templated text 1`] = `
           	<label for=\\"publisher\\">Publisher</label>
             <input type=\\"text\\" id=\\"publisher\\" name=\\"publisher\\" value=\\"\\"/>
             
-            <label for=\\"tags\\">Tags</label>
-            <input type=\\"text\\" id=\\"tags\\" name=\\"tags\\" value=\\"\\"/>
+            <label for=\\"category\\">Category</label>
+            <input type=\\"text\\" id=\\"category\\" name=\\"category\\" value=\\"\\"/>
             
           	<label for=\\"description\\">Description</label>
             <textarea id=\\"description\\" name=\\"description\\" rows=\\"1\\"></textarea>
