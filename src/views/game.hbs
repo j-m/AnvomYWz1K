@@ -92,7 +92,6 @@
         
         <div id="shortReviews">
           {{#each shortReviews}}
-          
           {{#if (equal rating 1)}}
           <div class="shortReview positive">
             <div class="header">
@@ -104,9 +103,16 @@
           {{/if}}
               <p class="author">by <a href="/members/{{author}}">{{author}}</a></p>
               <div class="buttons">
-                <button class="visibility">V</button>
-                <button class="flag">F</button>
-                <button class="edit">E</button>
+                <select id="visibilityShort" name="visibility" onchange="visibility('{{game}}', '{{author}}', 'short')">
+                  <option {{#if (equal visibility public)}}selected="selected"{{/if}}>public</option>
+                  <option {{#if (equal visibility public)}}selected="selected"{{/if}}>registrant</option>
+                  {{#if moderator}}
+                  <option {{#if (equal visibility public)}}selected="selected"{{/if}}>moderator</option>
+                  {{/if}}
+                  {{#if (equal username author)}}
+                  <option {{#if (equal visibility public)}}selected="selected"{{/if}}>author</option>
+                  {{/if}}
+                </select>
               </div>
             </div>
             <hr/>
@@ -172,15 +178,22 @@
         
         <div id="longReviews">
           {{#each longReviews}}
-          
+          {{#if (visible visibility author ../username ../privileges) }}
           <div class="shortReview positive">
             <div class="header">
               <p class="rating">{{rating}}</p>
               <p class="author">by <a href="/members/{{author}}">{{author}}</a></p>
               <div class="buttons">
-                <button class="visibility">V</button>
-                <button class="flag">F</button>
-                <button class="edit">E</button>
+                <select id="visibilityLong" name="visibility" onchange="visibility('{{game}}', '{{author}}', 'long')">
+                  <option {{#if (equal visibility public)}}selected="selected"{{/if}}>public</option>
+                  <option {{#if (equal visibility public)}}selected="selected"{{/if}}>registrant</option>
+                  {{#if moderator}}
+                  <option {{#if (equal visibility public)}}selected="selected"{{/if}}>moderator</option>
+                  {{/if}}
+                  {{#if (equal username author)}}
+                  <option {{#if (equal visibility public)}}selected="selected"{{/if}}>author</option>
+                  {{/if}}
+                </select>
               </div>
             </div>
             <hr/>
@@ -206,6 +219,7 @@
               </div>
             </div>
           </div>
+          {{/if}}
           {{/each}}
         </div>
         

@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS reviews (
   body TEXT NOT NULL,
   type TEXT NOT NULL DEFAULT 'short' CHECK (type IN ('short','long')), 
   posted DATETIME DEFAULT CURRENT_TIMESTAMP,
-  visiblity TEXT DEFAULT 'public' CHECK (visiblity IN ('public','registrant','moderator','administrator')), 
+  visibility TEXT DEFAULT 'moderator' CHECK (visibility IN ('public','registrant','moderator','author')), 
   PRIMARY KEY(game, author, type),
   FOREIGN KEY(game) REFERENCES games(id),
   FOREIGN KEY(author) REFERENCES members(username)
