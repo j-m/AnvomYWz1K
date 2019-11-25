@@ -19,20 +19,25 @@
     {{> loginRegistration }}
     
     <div id="games">
-      {{#each games}}
-        <a href="/games/{{id}}">
-          <div class="game">
-            {{#if thumbnail}}
-            <img src="{{thumbnail}}"/>
-            {{else}}
-            <img src="https://steamcdn-a.akamaihd.net/steam/apps/{{steamAppID}}/library_600x900_2x.jpg"/>
-            {{/if}}
-          </div>
-        </a>
+      {{#each categories}}
+        <h1>{{@key}}</h1>
+        <div class="category">  
+          {{#each this}}
+          <a href="/games/{{id}}">
+            <div class="game">
+              {{#if thumbnail}}
+              <img width="600" height="900" src="{{thumbnail}}"/>
+              {{else}}
+              <img width="600" height="900" src="https://steamcdn-a.akamaihd.net/steam/apps/{{steamAppID}}/library_600x900_2x.jpg"/>
+              {{/if}}
+            </div>
+          </a>
+          {{/each}}
+        </div>
+        {{#if administrator}}
+        <button id="addGameButton" onclick="show('addGame')">+</button>
+        {{/if}}
       {{/each}}
-      {{#if administrator}}
-      <button id="addGameButton" onclick="show('addGame')">+</button>
-      {{/if}}
     </div>
 
     <div class="popup" onclick="hide('addGame', event)">

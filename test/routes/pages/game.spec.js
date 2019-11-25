@@ -27,7 +27,7 @@ describe('routes get game', () => {
         'developer',
         'publisher',
         'description',
-        'tags',
+        'category',
         'releaseDate',
         'store',
         'thumbnail',

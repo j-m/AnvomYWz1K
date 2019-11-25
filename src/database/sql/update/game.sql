@@ -1,3 +1,3 @@
 UPDATE games
-SET steamAppID=?,title=?,summary=?,developer=?,publisher=?,description=?,tags=?,releaseDate=?,store=?,thumbnail=?,banner=?
+SET steamAppID=?,title=?,summary=?,developer=?,publisher=?,description=?,category=?,releaseDate=?,store=?,thumbnail=?,banner=?
 WHERE id=?;

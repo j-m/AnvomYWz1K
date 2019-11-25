@@ -28,6 +28,7 @@ async function createTables() {
   const assessments = Promise.all([members, flags]).then(run('create.assessments'))
 
   await Promise.all([games, flags, members, reviews, comments, assessments])
+  //await run('insert.admin')
 }
 
 async function close() {
