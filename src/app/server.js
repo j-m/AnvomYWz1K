@@ -1,22 +1,23 @@
 'use strict'
 
 const http = require('http')
+
 const app = require('./koa')
+const connection = require('../database/connection.js')
 
 const host = process.env.HOST
 const port = process.env.PORT
 
 let server
 
-function open() {
+async function open() {
+  await connection.open()
   server = http.createServer(app.callback())
-  server.listen(port, host, () => {
-    console.log(`Listening on http://${host}:${port}`)
-  }).on('error', error => console.log(error))
+  await server.listen(port, host)
 }
 
-function close() {
-  if (server !== undefined) {
+async function close() {
+  if (server) {
     server.close()
   }
 }

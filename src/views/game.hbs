@@ -105,7 +105,7 @@
               <p class="author">by <a href="/members/{{author}}">{{author}}</a></p>
               <div class="buttons">
                 {{#if (or (equal 'moderator' ../privileges) (equal 'administrator' ../privileges))}}
-                <select id="visibilityLong" name="visibility" onchange="visibility('{{game}}', '{{author}}', 'long')">
+                <select name="visibility" onchange="visibility('{{game}}', '{{author}}', 'short', this.value)">
                   <option {{#if (equal visibility 'public')}}selected="selected"{{/if}}>public</option>
                   {{#if (or (equal 'moderator' ../privileges) (equal 'administrator' ../privileges))}}
                   <option {{#if (equal visibility 'moderator')}}selected="selected"{{/if}}>moderator</option>
@@ -138,6 +138,8 @@
               </div>
             </div>
           </div>
+          {{else}}
+          <p class="hidden">A review has been hidden. </p>
           {{/if}}
           {{/each}}
         </div>
@@ -188,7 +190,7 @@
               <p class="author">by <a href="/members/{{author}}">{{author}}</a></p>
               <div class="buttons">
                 {{#if (or (equal 'moderator' ../privileges) (equal 'administrator' ../privileges))}}
-                <select id="visibilityLong" name="visibility" onchange="visibility('{{game}}', '{{author}}', 'long')">
+                <select name="visibility" onchange="visibility('{{game}}', '{{author}}', 'long', this.value)">
                   <option {{#if (equal visibility 'public')}}selected="selected"{{/if}}>public</option>
                   {{#if (or (equal 'moderator' ../privileges) (equal 'administrator' ../privileges))}}
                   <option {{#if (equal visibility 'moderator')}}selected="selected"{{/if}}>moderator</option>
@@ -223,6 +225,8 @@
               </div>
             </div>
           </div>
+          {{else}}
+          <p class="hidden">A review has been hidden. </p>
           {{/if}}
           {{/each}}
         </div>
