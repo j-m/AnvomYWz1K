@@ -1,17 +1,14 @@
 'use strict'
 
 const puppeteer = require('puppeteer')
-
+const baseURL = `http://${process.env.HOST||'localhost'}:${process.env.PORT||'5000'}`
 let browser
-let page
 
 beforeAll(async() => {
   browser = await puppeteer.launch({
     headless: process.env.SLOW_MO ? false : true,
     slowMo: process.env.SLOW_MO || 0
   })
-  page = await browser.newPage()
-  await page.goto(`http://${process.env.HOST}:${process.env.PORT}`)
 })
 
 afterAll(async() => {
@@ -19,8 +16,10 @@ afterAll(async() => {
 })
 
 describe('Page Games', () => {
-  test('with correct title', async() => {
-    await expect(page.title()).resolves.toMatch('Game Reviews - Games')
+  test('games', async() => {
+    const page = await browser.newPage()
+    await page.goto(baseURL)
+    await page.screenshot({ path: 'test/acceptance/puppeteer/screenshots/games.png' })
   })
 })
 
