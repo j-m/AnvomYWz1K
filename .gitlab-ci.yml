@@ -26,8 +26,6 @@ code-coverage:
     
 deploy-staging:
   image: ruby:latest
-  only:
-    - master
   stage: staging-server
   script:
     - apt-get update -qy
