@@ -1,6 +1,6 @@
 'use strict'
 
-async function checkUsernameAvailability () {
+async function checkUsernameAvailability() {
   const username = document.getElementById('new-username').value
   const result = await fetch('/username', {
     method: 'POST',
@@ -18,17 +18,17 @@ async function checkUsernameAvailability () {
     })
   }
 
-  if (result.success === false) {
+  if (result.success) {
+    document.querySelector('#register .USERNAME_AVAILABLE').classList.add('show')
+  } else {
     console.log(result)
     if (result.code !== undefined) {
-      document.querySelector('#register .' + result.code).classList.add('show')
+      document.querySelector(`#register .${result.code}`).classList.add('show')
     }
-  } else {
-    document.querySelector('#register .USERNAME_AVAILABLE').classList.add('show')
   }
 }
 
-async function login (event) {
+async function login(event) {
   event.preventDefault()
 
   const username = document.getElementById('username').value
@@ -42,27 +42,24 @@ async function login (event) {
     body: JSON.stringify({ username, password })
   }).then(res => res.json())
 
+  if (result.success) {
+    location.reload()
+  }
   const shown = document.querySelector('#login .show')
-  if (shown !== null) {
+  if (shown) {
     shown.forEach(item => {
       item.classList.remove('show')
     })
   }
-
-  if (result.success === false) {
-    console.log(result)
-    if (result.code !== undefined) {
-      document.querySelector('#login .' + result.code).classList.add('show')
-    }
-  } else {
-    hide('login')
-    location.reload()
+  console.log(result)
+  if (result.code !== undefined) {
+    document.querySelector(`#login .${result.code}`).classList.add('show')
   }
 
   return false
 }
 
-async function register (event) {
+async function register(event) {
   event.preventDefault()
 
   const email = document.getElementById('email').value
@@ -77,21 +74,18 @@ async function register (event) {
     body: JSON.stringify({ email, username, password })
   }).then(res => res.json())
 
+  if (result.success) {
+    location.reload()
+  }
   const shown = document.querySelector('#register .show')
-  if (shown !== null) {
+  if (shown) {
     shown.forEach(item => {
       item.classList.remove('show')
     })
   }
-
-  if (result.success === false) {
-    console.log(result)
-    if (result.code !== undefined) {
-      document.querySelector('#register .' + result.code).classList.add('show')
-    }
-  } else {
-    hide('register')
-    location.reload()
+  console.log(result)
+  if (result.code !== undefined) {
+    document.querySelector(`#register .${result.code}`).classList.add('show')
   }
 
   return false
@@ -107,9 +101,8 @@ async function logout() {
     body: JSON.stringify({ })
   }).then(res => res.json())
 
-  if (result.success === false) {
-    console.log(result)
-  } else {
+  if (result.success) {
     location.reload()
   }
+  console.log(result)
 }
