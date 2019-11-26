@@ -24,5 +24,6 @@ async function somethingDifferent(event, game, author, type) {
   if (result.success) {
     location.reload()
   }
+  console.log(result)
   return false
 }
