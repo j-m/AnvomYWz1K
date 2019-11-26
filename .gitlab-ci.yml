@@ -23,6 +23,12 @@ code-coverage:
   script:
     - npm install
     - npm run coverage
+    
+puppeteer:
+  stage: acceptance-testing
+  script:
+    - npm install
+    - npm run puppeteer
 
 deploy-staging:
   image: ruby:latest
