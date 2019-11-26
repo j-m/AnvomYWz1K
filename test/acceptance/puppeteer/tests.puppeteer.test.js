@@ -1,13 +1,16 @@
 'use strict'
 
+process.env.DATABASE = ':memory:'
+require('../../../src/main')
+
 const puppeteer = require('puppeteer')
 const baseURL = `http://${process.env.HOST||'localhost'}:${process.env.PORT||'5000'}`
 let browser
 
 beforeAll(async() => {
   browser = await puppeteer.launch({
-    headless: process.env.SLOW_MO ? false : true,
-    slowMo: process.env.SLOW_MO || 0
+    headless: false,
+    slowMo: 100
   })
 })
 
