@@ -19,7 +19,11 @@ let har
 beforeAll(async done => {
   await connection.open()
   await connection.run('insert.admin')
-  browser = await puppeteer.launch({ headless: headless, slowMo: delayMS, args: [`--window-size=${width},${height}`] })
+  browser = await puppeteer.launch({ headless: headless, slowMo: delayMS, args: [
+    '--no-sandbox',
+    '--disable-setuid-sandbox',
+    `--window-size=${width},${height}`
+  ]})
   page = await browser.newPage()
   har = new PuppeteerHar(page)
   await page.setViewport({ width, height })
