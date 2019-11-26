@@ -2,8 +2,8 @@ image: node:12
 
 stages:
   - code-testing
-  - staging-server
   - acceptance-testing
+  - staging-server
   - production-server
 
 linting:
@@ -24,6 +24,13 @@ code-coverage:
     - npm install
     - npm run coverage
     
+puppeteer:
+  image: buildkite/puppeteer:latest
+  stage: acceptance-testing
+  script:
+    - npm install
+    - npm run puppeteer   
+    
 deploy-staging:
   image: ruby:latest
   stage: staging-server
@@ -32,13 +39,6 @@ deploy-staging:
     - apt-get install -y ruby-dev
     - gem install dpl
     - dpl --provider=heroku --app=$HEROKU_STAGING_SERVER --api-key=$HEROKU_API_KEY
-
-puppeteer:
-  stage: acceptance-testing
-  image: buildkite/puppeteer
-  script:
-    - npm install
-    - npm run puppeteer
 
 deploy-production:
   image: ruby:latest
