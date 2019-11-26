@@ -8,12 +8,12 @@
     "npm": "6.12.0"
   },
   "scripts": {
-    "coverage": "jest --coverage",
+    "coverage": "jest --coverage --testPathIgnorePatterns='./test/acceptance/puppeteer/*'",
     "debug": "node --inspect ./src/main.js",
     "linter": "eslint ./src/**/*.js --fix",
     "puppeteer": "jest ./test/acceptance/puppeteer --runInBand --bail",
     "start": "node ./src/main.js",
-    "test": "jest --testPathIgnorePatterns='puppeteer.*'"
+    "test": "jest --testPathIgnorePatterns='./test/acceptance/puppeteer/*'"
   },
   "repository": {
     "type": "git",

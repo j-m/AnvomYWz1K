@@ -198,7 +198,7 @@ exports[`routes get game author review 1`] = `
               <p class=\\"rating\\">👍 Recommended</p>
               <p class=\\"author\\">by <a href=\\"/members/1\\">1</a></p>
               <div class=\\"buttons\\">
-                <select id=\\"visibilityLong\\" name=\\"visibility\\" onchange=\\"visibility('game2', '1', 'long')\\">
+                <select name=\\"visibility\\" onchange=\\"visibility('game2', '1', 'short', this.value)\\">
                   <option >public</option>
                   <option selected=\\"selected\\">moderator</option>
                 </select>
@@ -226,7 +226,7 @@ exports[`routes get game author review 1`] = `
               <p class=\\"rating\\">👍 Recommended</p>
               <p class=\\"author\\">by <a href=\\"/members/3\\">3</a></p>
               <div class=\\"buttons\\">
-                <select id=\\"visibilityLong\\" name=\\"visibility\\" onchange=\\"visibility('game2', '3', 'long')\\">
+                <select name=\\"visibility\\" onchange=\\"visibility('game2', '3', 'short', this.value)\\">
                   <option >public</option>
                   <option selected=\\"selected\\">moderator</option>
                 </select>
@@ -686,7 +686,7 @@ exports[`routes get game author review 1`] = `
               <p class=\\"rating\\">10</p>
               <p class=\\"author\\">by <a href=\\"/members/memberAuthor\\">memberAuthor</a></p>
               <div class=\\"buttons\\">
-                <select id=\\"visibilityLong\\" name=\\"visibility\\" onchange=\\"visibility('game2', 'memberAuthor', 'long')\\">
+                <select name=\\"visibility\\" onchange=\\"visibility('game2', 'memberAuthor', 'long', this.value)\\">
                   <option >public</option>
                   <option >moderator</option>
                   <option selected=\\"selected\\">author</option>
@@ -717,7 +717,7 @@ exports[`routes get game author review 1`] = `
               <p class=\\"rating\\">10</p>
               <p class=\\"author\\">by <a href=\\"/members/memberPublic\\">memberPublic</a></p>
               <div class=\\"buttons\\">
-                <select id=\\"visibilityLong\\" name=\\"visibility\\" onchange=\\"visibility('game2', 'memberPublic', 'long')\\">
+                <select name=\\"visibility\\" onchange=\\"visibility('game2', 'memberPublic', 'long', this.value)\\">
                   <option selected=\\"selected\\">public</option>
                   <option >moderator</option>
                 </select>
@@ -951,7 +951,7 @@ exports[`routes get game moderator review 1`] = `
               <p class=\\"rating\\">👍 Recommended</p>
               <p class=\\"author\\">by <a href=\\"/members/1\\">1</a></p>
               <div class=\\"buttons\\">
-                <select id=\\"visibilityLong\\" name=\\"visibility\\" onchange=\\"visibility('game2', '1', 'long')\\">
+                <select name=\\"visibility\\" onchange=\\"visibility('game2', '1', 'short', this.value)\\">
                   <option >public</option>
                   <option selected=\\"selected\\">moderator</option>
                 </select>
@@ -979,7 +979,7 @@ exports[`routes get game moderator review 1`] = `
               <p class=\\"rating\\">👍 Recommended</p>
               <p class=\\"author\\">by <a href=\\"/members/3\\">3</a></p>
               <div class=\\"buttons\\">
-                <select id=\\"visibilityLong\\" name=\\"visibility\\" onchange=\\"visibility('game2', '3', 'long')\\">
+                <select name=\\"visibility\\" onchange=\\"visibility('game2', '3', 'short', this.value)\\">
                   <option >public</option>
                   <option selected=\\"selected\\">moderator</option>
                 </select>
@@ -1434,12 +1434,13 @@ exports[`routes get game moderator review 1`] = `
         <hr/>
         
         <div id=\\"longReviews\\">
+          <p class=\\"hidden\\">A review has been hidden. </p>
           <div class=\\"shortReview positive\\">
             <div class=\\"header\\">
               <p class=\\"rating\\">10</p>
               <p class=\\"author\\">by <a href=\\"/members/memberModerator\\">memberModerator</a></p>
               <div class=\\"buttons\\">
-                <select id=\\"visibilityLong\\" name=\\"visibility\\" onchange=\\"visibility('game2', 'memberModerator', 'long')\\">
+                <select name=\\"visibility\\" onchange=\\"visibility('game2', 'memberModerator', 'long', this.value)\\">
                   <option >public</option>
                   <option selected=\\"selected\\">moderator</option>
                 </select>
@@ -1659,6 +1660,8 @@ exports[`routes get game public review 1`] = `
         
         
         <div id=\\"shortReviews\\">
+          <p class=\\"hidden\\">A review has been hidden. </p>
+          <p class=\\"hidden\\">A review has been hidden. </p>
         </div>
         
         <a href=\\"http://baseURL/games/game2?s&#x3D;1\\">More reviews</a>
@@ -3523,6 +3526,8 @@ exports[`routes get game with multiple pages of short reviews 1`] = `
         
         
         <div id=\\"shortReviews\\">
+          <p class=\\"hidden\\">A review has been hidden. </p>
+          <p class=\\"hidden\\">A review has been hidden. </p>
         </div>
         
         <a href=\\"http://baseURL/games/game2?s&#x3D;1\\">More reviews</a>
@@ -4135,6 +4140,7 @@ exports[`routes get game with only negative short reviews 1`] = `
         
         
         <div id=\\"shortReviews\\">
+          <p class=\\"hidden\\">A review has been hidden. </p>
         </div>
         
       </div>
@@ -4746,6 +4752,7 @@ exports[`routes get game with only positive short reviews 1`] = `
         
         
         <div id=\\"shortReviews\\">
+          <p class=\\"hidden\\">A review has been hidden. </p>
         </div>
         
       </div>
@@ -5357,6 +5364,8 @@ exports[`routes get game with positive and negative short reviews 1`] = `
         
         
         <div id=\\"shortReviews\\">
+          <p class=\\"hidden\\">A review has been hidden. </p>
+          <p class=\\"hidden\\">A review has been hidden. </p>
         </div>
         
         <a href=\\"http://baseURL/games/game2?s&#x3D;1\\">More reviews</a>
