@@ -132,10 +132,10 @@
             <div class="footer">
               <a href="/games/{{game}}/{{author}}/{{type}}">Read comments</a>
               <div class="dates">
-                <p class="posted">Posted: {{#if ../CI}}timestamp{{else}}<time datetime="{{posted}}">{{posted}}</time>{{/if}}</p>
+                <p class="posted">Posted: {{#if ../CI}}<time datetime="timestamp">timestamp</time>{{else}}<time datetime="{{posted}}">{{posted}}</time>{{/if}}</p>
                 {{#if edited}}
                 <span>|</span>
-                <p class="edited">Edited: {{#if ../CI}}timestamp{{else}}<time datetime="{{edited}}">{{edited}}</time>{{/if}}</p>
+                <p class="edited">Edited: {{#if ../CI}}<time datetime="timestamp">timestamp</time>{{else}}<time datetime="{{edited}}">{{edited}}</time>{{/if}}</p>
                 {{/if}}
               </div>
             </div>
@@ -219,10 +219,10 @@
             <div class="footer">
               <a href="/games/{{game}}/{{author}}/{{type}}">Read comments</a>
               <div class="dates">
-                <p class="posted">Posted: {{#if ../CI}}timestamp{{else}}<time datetime="{{posted}}">{{posted}}</time>{{/if}}</p>
+                <p class="posted">Posted: {{#if ../CI}}<time datetime="timestamp">timestamp</time>{{else}}<time datetime="{{posted}}">{{posted}}</time>{{/if}}</p>
                 {{#if edited}}
                 <span>|</span>
-                <p class="edited">Edited: {{#if ../CI}}timestamp{{else}}<time datetime="{{edited}}">{{edited}}</time>{{/if}}</p>
+                <p class="edited">Edited: {{#if ../CI}}<time datetime="timestamp">timestamp</time>{{else}}<time datetime="{{edited}}">{{edited}}</time>{{/if}}</p>
                 {{/if}}
               </div>
             </div>
