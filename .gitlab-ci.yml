@@ -25,6 +25,9 @@ code-coverage:
     - npm run coverage
     
 puppeteer:
+  variables: {
+    CI: false
+  }
   image: buildkite/puppeteer:latest
   stage: acceptance-testing
   artifacts:
@@ -36,8 +39,6 @@ puppeteer:
     - npm run puppeteer   
     
 deploy-staging:
-  variables:
-    CI: false
   image: ruby:latest
   stage: staging-server
   only:
@@ -49,8 +50,6 @@ deploy-staging:
     - dpl --provider=heroku --app=$HEROKU_STAGING_SERVER --api-key=$HEROKU_API_KEY
 
 deploy-production:
-  variables:
-    CI: false
   image: ruby:latest
   only:
     - master
