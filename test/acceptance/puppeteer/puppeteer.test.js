@@ -3,15 +3,15 @@
 process.env.DATABASE = ':memory:'
 require('../../../src/main')
 const connection = require('../../../src/database/connection.js')
-jest.setTimeout(30000);
+jest.setTimeout(30000)
 
 const puppeteer = require('puppeteer')
 const PuppeteerHar = require('puppeteer-har')
 
 const width = 1920
 const height = 1080
-const delayMS = 15
-const headless = false
+const delayMS = 0
+const headless = true
 const basePath = 'test/acceptance/puppeteer/screenshots'
 
 let browser
