@@ -33,10 +33,10 @@
             </div>
           </a>
           {{/each}}
+          {{#if ../administrator}}
+          <button id="addGameButton" onclick="show('addGame')">+</button>
+          {{/if}}
         </div>
-        {{#if administrator}}
-        <button id="addGameButton" onclick="show('addGame')">+</button>
-        {{/if}}
       {{else}}
         {{#if administrator}}
         <button id="addGameButton" onclick="show('addGame')">+</button>

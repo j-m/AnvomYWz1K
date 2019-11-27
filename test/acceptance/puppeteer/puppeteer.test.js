@@ -9,8 +9,8 @@ const PuppeteerHar = require('puppeteer-har')
 
 const width = 1920
 const height = 1080
-const delayMS = 0
-const headless = true
+const delayMS = 50
+const headless = false
 
 let browser
 let page
@@ -22,6 +22,7 @@ beforeAll(async done => {
   browser = await puppeteer.launch({ headless: headless, slowMo: delayMS, args: [
     '--no-sandbox',
     '--disable-setuid-sandbox',
+    '--incognito',
     `--window-size=${width},${height}`
   ]})
   page = await browser.newPage()
@@ -35,6 +36,7 @@ beforeAll(async done => {
 afterAll(async done => {
   await page.tracing.stop()
   await har.stop()
+  await page.close()
   await browser.close()
   done()
 })
