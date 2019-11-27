@@ -3,7 +3,7 @@
 process.env.DATABASE = ':memory:'
 require('../../../src/main')
 const connection = require('../../../src/database/connection.js')
-jest.setTimeout(30000)
+jest.setTimeout(60000)
 
 const puppeteer = require('puppeteer')
 const PuppeteerHar = require('puppeteer-har')
