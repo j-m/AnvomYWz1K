@@ -262,10 +262,112 @@ describe('Flow', () => {
     const closePreview = (await page.$x('//*[@id="preview"]/button'))[0]
     await closePreview.click()
 
-    const submitLongReview = (await page.$x('//*[@id="writeshortReview"]/input[3]'))[0]
+    const submitLongReview = (await page.$x('//*[@id="writelongReview"]/input[3]'))[0]
     await Promise.all([
       page.waitForNavigation({ waitUntil: 'load' }),
       submitLongReview.click()
+    ])
+
+    expect(await page.screenshot()).toMatchImageSnapshot()
+    done()
+  })
+
+  test('19 update short review to negative', async done => {
+    const thumbsDown = (await page.$x('//*[@id="negative"]'))[0]
+    await thumbsDown.click()
+    await page.clear('textarea[id=shortReviewBody]')
+    await page.type('textarea[id=shortReviewBody]', 'bad short review')
+    const submitShortReview = (await page.$x('//*[@id="writeshortReview"]/input[3]'))[0]
+    await Promise.all([
+      page.waitForNavigation({ waitUntil: 'load' }),
+      submitShortReview.click()
+    ])
+
+    expect(await page.screenshot()).toMatchImageSnapshot()
+    done()
+  })
+
+  test('20 update long review to negative', async done => {
+    await page.clear('#writelongReview input[type=number]')
+    await page.type('#writelongReview input[type=number]', '13')
+    await page.clear('textarea[id=longReviewBody]')
+    await page.type('textarea[id=longReviewBody]', 'bad')
+
+    const submitLongReview = (await page.$x('//*[@id="writelongReview"]/input[3]'))[0]
+    await Promise.all([
+      page.waitForNavigation({ waitUntil: 'load' }),
+      submitLongReview.click()
+    ])
+
+    expect(await page.screenshot()).toMatchImageSnapshot()
+    done()
+  })
+
+  test('21 log out and cannot see reviews', async done => {
+    const logout = (await page.$x('//*[@id="welcome"]/p/a'))[0]
+    await Promise.all([
+      page.waitForNavigation({ waitUntil: 'load' }),
+      logout.click()
+    ])
+
+    expect(await page.screenshot()).toMatchImageSnapshot()
+    done()
+  })
+
+  test('22 login admin can see visibility drop downs', async done => {
+    await (await page.$x('//a[contains(text(), \'Login\')]'))[0].click()
+    await page.type('input[id=username]', 'admin')
+    await page.type('input[id=password]', 'admin')
+
+    const submitLogin = (await page.$x('//*[@id="login"]/input[3]'))[0]
+    await Promise.all([
+      page.waitForNavigation({ waitUntil: 'load' }),
+      submitLogin.click()
+    ])
+
+    expect(await page.screenshot()).toMatchImageSnapshot()
+    done()
+  })
+
+  test('23 admin change visibility', async done => {
+    const shortReviewSelect = await page.$x('//*[@id="shortReviews"]/div/div[1]/div/select')
+
+    await Promise.all([
+      page.waitForNavigation({ waitUntil: 'load' }),
+      await shortReviewSelect[0].type('public')
+    ])
+
+    const longReviewSelect = await page.$x('//*[@id="longReviews"]/div/div[1]/div/select')
+
+    await Promise.all([
+      page.waitForNavigation({ waitUntil: 'load' }),
+      await longReviewSelect[0].type('public')
+    ])
+
+    expect(await page.screenshot()).toMatchImageSnapshot()
+    done()
+  })
+
+  test('24 log out and can see reviews', async done => {
+    const logout = (await page.$x('//*[@id="welcome"]/p/a'))[0]
+    await Promise.all([
+      page.waitForNavigation({ waitUntil: 'load' }),
+      logout.click()
+    ])
+
+    expect(await page.screenshot()).toMatchImageSnapshot()
+    done()
+  })
+
+  test('25 login user can see visibility drop downs', async done => {
+    await (await page.$x('//a[contains(text(), \'Login\')]'))[0].click()
+    await page.type('input[id=username]', 'user')
+    await page.type('input[id=password]', 'longpassword')
+
+    const submitLogin = (await page.$x('//*[@id="login"]/input[3]'))[0]
+    await Promise.all([
+      page.waitForNavigation({ waitUntil: 'load' }),
+      submitLogin.click()
     ])
 
     expect(await page.screenshot()).toMatchImageSnapshot()
