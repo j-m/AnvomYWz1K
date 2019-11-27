@@ -13,8 +13,8 @@ expect.extend({ toMatchImageSnapshot })
 
 const width = 1920
 const height = 1080
-const delayMS = 40
-const headless = false
+const delayMS = process.env.CI ? 0 : 40
+const headless = process.env.CI ? true : false
 
 let browser
 let page
