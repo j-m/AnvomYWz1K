@@ -11,7 +11,7 @@ async function checkUsernameAvailability() {
     body: JSON.stringify({ username })
   }).then(res => res.json())
 
-  const shown = document.querySelector('#register .show')
+  const shown = document.querySelectorAll('#register .show')
   if (shown !== null) {
     shown.forEach(item => {
       item.classList.remove('show')
@@ -45,7 +45,7 @@ async function login(event) {
   if (result.success) {
     location.reload()
   }
-  const shown = document.querySelector('#login .show')
+  const shown = document.querySelectorAll('#login .show')
   if (shown) {
     shown.forEach(item => {
       item.classList.remove('show')
@@ -77,7 +77,7 @@ async function register(event) {
   if (result.success) {
     location.reload()
   }
-  const shown = document.querySelector('#register .show')
+  const shown = document.querySelectorAll('#register .show')
   if (shown) {
     shown.forEach(item => {
       item.classList.remove('show')

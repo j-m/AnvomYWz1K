@@ -17,13 +17,13 @@ function send(game, type) {
 }
 
 function hideErrors(type) {
-  document.querySelector(`#write${type}Review`).querySelectorAll('.show').forEach(item => {
+  document.querySelectorAll(`#write${type}Review .show`).forEach(item => {
     item.classList.remove('show')
   })
 }
 
 function showError(type, code) {
-  document.querySelector(`#write${type}Review`).querySelector(`.${code}`).classList.add('show')
+  document.querySelector(`#write${type}Review .${code}`).classList.add('show')
 }
 
 async function review(game, type, event) {

@@ -44,6 +44,7 @@
       {{/each}}
     </div>
 
+    {{#if administrator}}
     <div class="popup" onclick="hide('addGame', event)">
       <form id="addGame" onsubmit="addGame(event)">
         <h1>Create new game</h1>
@@ -52,6 +53,7 @@
       	<input type="submit" value="Create">
       </form>
     </div>
+    {{/if}}
     
   </body>
 

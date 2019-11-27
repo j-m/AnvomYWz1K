@@ -45,6 +45,7 @@
       <div id="fullDescription">{{game.description}}</div>
     </div>
     
+    {{#if administrator}}
     <div class="popup" onclick="hide('updateGame', event)">
       <form id="updateGame" onsubmit="updateGame(event)">
         <h1>Create new game</h1>
@@ -53,6 +54,7 @@
       	<input type="submit" value="Update">
       </form>
     </div>
+    {{/if}}
     
     <div class="popup" onclick="hide('preview', event)">
       <div id="preview">
