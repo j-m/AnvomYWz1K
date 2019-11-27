@@ -17,7 +17,7 @@ expect.extend({ toMatchImageSnapshot })
 
 const width = 1920
 const height = 1080
-const delayMS = process.env.CI ? 0 : 40
+const delayMS = process.env.CI ? 0 : 30
 const headless = process.env.CI ? true : false
 
 let browser
@@ -143,8 +143,57 @@ describe('Flow', () => {
     done()
   })
 
+  test('7 add RimWorld', async done => {
+    await (await page.$x('//*[@class="addGameButton"]'))[0].click()
+    await page.type('input[id=steamAppID]', '294100')
+    await page.type('input[id=title]', 'RimWorld')
+    await page.type('input[id=summary]', 'Space management strategy')
+    await page.type('input[id=category]', 'Space')
+
+    const submitGameCreate = (await page.$x('//*[@id="addGame"]/input[@value="Create"]'))[0]
+    await Promise.all([
+      page.waitForNavigation({ waitUntil: 'load' }),
+      submitGameCreate.click()
+    ])
+
+    expect(await page.screenshot()).toMatchImageSnapshot()
+    done()
+  })
+  test('7 add non steam game', async done => {
+    await (await page.$x('//*[@class="addGameButton"]'))[0].click()
+    await page.type('input[id=steamAppID]', 'made up')
+    await page.type('input[id=title]', 'made up')
+    await page.type('input[id=summary]', 'made up')
+
+    const submitGameCreate = (await page.$x('//*[@id="addGame"]/input[@value="Create"]'))[0]
+    await Promise.all([
+      page.waitForNavigation({ waitUntil: 'load' }),
+      submitGameCreate.click()
+    ])
+
+    expect(await page.screenshot()).toMatchImageSnapshot()
+    done()
+  })
+
+  test('7 add The Sims 3', async done => {
+    await (await page.$x('//*[@class="addGameButton"]'))[0].click()
+    await page.type('input[id=steamAppID]', '47890')
+    await page.type('input[id=title]', 'The Sims™ 3')
+    await page.type('input[id=summary]', 'Classic')
+    await page.type('input[id=category]', 'RPG')
+
+    const submitGameCreate = (await page.$x('//*[@id="addGame"]/input[@value="Create"]'))[0]
+    await Promise.all([
+      page.waitForNavigation({ waitUntil: 'load' }),
+      submitGameCreate.click()
+    ])
+
+    expect(await page.screenshot()).toMatchImageSnapshot()
+    done()
+  })
+
   test('8 view Stardew Valley', async done => {
-    const stardewThumbnail = (await page.$x('//*[@id="games"]/div/a'))[0]
+    const stardewThumbnail = (await page.$x('//*[@src="https://steamcdn-a.akamaihd.net/steam/apps/413150/library_600x900_2x.jpg"]'))[0]
     await Promise.all([
       page.waitForNavigation({ waitUntil: 'load' }),
       stardewThumbnail.click()
