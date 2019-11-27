@@ -25,9 +25,8 @@ code-coverage:
     - npm run coverage
     
 puppeteer:
-  variables: {
-    CI: false
-  }
+  variables:
+    CI: "false"
   image: buildkite/puppeteer:latest
   stage: acceptance-testing
   artifacts:
