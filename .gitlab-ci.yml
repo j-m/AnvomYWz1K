@@ -27,6 +27,10 @@ code-coverage:
 puppeteer:
   image: buildkite/puppeteer:latest
   stage: acceptance-testing
+  artifacts:
+    paths:
+     - test/acceptance/puppeteer/__image_snapshots__/**/*
+    expire_in: 3 days
   script:
     - npm install
     - npm run puppeteer   
