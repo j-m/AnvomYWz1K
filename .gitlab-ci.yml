@@ -1,4 +1,5 @@
 image: node:12
+timeout: 10
 
 stages:
   - code-testing
