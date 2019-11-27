@@ -8,7 +8,11 @@ jest.setTimeout(30000)
 const puppeteer = require('puppeteer')
 const PuppeteerHar = require('puppeteer-har')
 
-const { toMatchImageSnapshot } = require('jest-image-snapshot')
+const { configureToMatchImageSnapshot } = require('jest-image-snapshot')
+const toMatchImageSnapshot = configureToMatchImageSnapshot({
+  customDiffConfig: { threshold: 2 },
+  noColors: true
+})
 expect.extend({ toMatchImageSnapshot })
 
 const width = 1920
