@@ -8,58 +8,58 @@ const ErrorEnum = require('../util/ErrorEnum')
 let database
 
 async function insertAdmin() {
-  if (process.env.NODE_ENV === 'production') {
-    await run('insert.admin')
-  }
+	if (process.env.NODE_ENV === 'production') {
+		await run('insert.admin')
+	}
 }
 
 async function open() {
-  await Promise.all([
-    sqlite.open(process.env.DATABASE).then(db => {
-      database = db
-    }),
-    queries.load()
-  ])
-  await createTables()
-  await insertAdmin()
+	await Promise.all([
+		sqlite.open(process.env.DATABASE).then(db => {
+			database = db
+		}),
+		queries.load()
+	])
+	await createTables()
+	await insertAdmin()
 }
 
 async function createTables() {
-  const games = run('create.games')
-  const flags = run('create.flags')
-  const members = run('create.members')
+	const games = run('create.games')
+	const flags = run('create.flags')
+	const members = run('create.members')
 
-  const reviews = Promise.all([members, games]).then(run('create.reviews'))
+	const reviews = Promise.all([members, games]).then(run('create.reviews'))
 
-  const comments = Promise.all([members, reviews]).then(run('create.comments'))
-  const assessments = Promise.all([members, flags]).then(run('create.assessments'))
+	const comments = Promise.all([members, reviews]).then(run('create.comments'))
+	const assessments = Promise.all([members, flags]).then(run('create.assessments'))
 
-  await Promise.all([games, flags, members, reviews, comments, assessments])
+	await Promise.all([games, flags, members, reviews, comments, assessments])
 }
 
 async function close() {
-  if (database && database.db && database.db.open) {
-    await database.close()
-  }
-  queries.close()
+	if (database && database.db && database.db.open) {
+		await database.close()
+	}
+	queries.close()
 }
 
 async function run(file, ...values) {
-  const query = queries.get(file)
-  if (values.length !== query.split('?').length - 1) {
-    throw Error(ErrorEnum.FUNCTION_MISUSE_PARAM_MISSING)
-  }
-  return database.run(query, values).catch(error => {
-    throw Error(`Error running '${file}' with values '${values}'. ${error}`)
-  })
+	const query = queries.get(file)
+	if (values.length !== query.split('?').length - 1) {
+		throw Error(ErrorEnum.FUNCTION_MISUSE_PARAM_MISSING)
+	}
+	return database.run(query, values).catch(error => {
+		throw Error(`Error running '${file}' with values '${values}'. ${error}`)
+	})
 }
 
 async function all(file, ...values) {
-  const query = queries.get(file)
-  if (values.length !== query.split('?').length - 1) {
-    throw Error(ErrorEnum.FUNCTION_MISUSE_PARAM_MISSING)
-  }
-  return database.all(query, values)
+	const query = queries.get(file)
+	if (values.length !== query.split('?').length - 1) {
+		throw Error(ErrorEnum.FUNCTION_MISUSE_PARAM_MISSING)
+	}
+	return database.all(query, values)
 }
 
 module.exports = { run, all, open, close }

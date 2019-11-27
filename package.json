@@ -10,8 +10,8 @@
   "scripts": {
     "coverage": "jest --coverage --testPathIgnorePatterns='./test/acceptance/puppeteer/*'",
     "debug": "node --inspect ./src/main.js",
-    "linter": "eslint ./src/**/*.js --fix",
-    "puppeteer": "jest ./test/acceptance/puppeteer  --ci --verbose --runInBand --bail --forceExit ---detectOpenHandles",
+    "linter": "eslint ./src/**/*.js",
+    "puppeteer": "jest ./test/acceptance/puppeteer  --ci --verbose --runInBand --bail ---detectOpenHandles",
     "start": "node ./src/main.js",
     "test": "jest --testPathIgnorePatterns='./test/acceptance/puppeteer/*'"
   },
@@ -43,177 +43,12 @@
   "devDependencies": {
     "eslint": "^6.6.0",
     "jest": "^24.9.0",
-    "jest-extended": "^0.11.2",
     "jest-image-snapshot": "^2.11.1",
     "jest-puppeteer": "^4.3.0",
     "npm-run-all": "^4.1.5",
     "puppeteer": "^2.0.0",
     "puppeteer-har": "^1.1.1",
     "supertest": "^4.0.2"
-  },
-  "eslintConfig": {
-    "env": {
-      "es6": true,
-      "jasmine": true,
-      "node": true,
-      "browser": true,
-      "jest": true
-    },
-    "parserOptions": {
-      "ecmaVersion": 8
-    },
-    "rules": {
-      "arrow-body-style": "error",
-      "arrow-spacing": [
-        "error",
-        {
-          "before": true,
-          "after": true
-        }
-      ],
-      "brace-style": "error",
-      "camelcase": [
-        "error"
-      ],
-      "complexity": [
-        "error",
-        5
-      ],
-      "eol-last": "error",
-      "eqeqeq": "error",
-      "func-call-spacing": [
-        "error",
-        "never"
-      ],
-      "global-require": "error",
-      "handle-callback-err": "error",
-      "indent": [
-        "error",
-        2,
-        {
-          "SwitchCase": 1
-        }
-      ],
-      "key-spacing": [
-        "error",
-        {
-          "beforeColon": false,
-          "afterColon": true
-        }
-      ],
-      "linebreak-style": [
-        "error",
-        "windows"
-      ],
-      "max-depth": [
-        "error",
-        2
-      ],
-      "max-len": [
-        "error",
-        {
-          "code": 120,
-          "tabWidth": 2
-        }
-      ],
-      "max-lines-per-function": [
-        "error",
-        20
-      ],
-      "max-lines": [
-        "error",
-        {
-          "max": 150,
-          "skipBlankLines": true,
-          "skipComments": true
-        }
-      ],
-      "max-nested-callbacks": [
-        "error",
-        2
-      ],
-      "max-params": [
-        "error",
-        4
-      ],
-      "max-statements": [
-        "error",
-        20
-      ],
-      "no-cond-assign": "error",
-      "no-dupe-args": "error",
-      "no-dupe-keys": "error",
-      "no-duplicate-case": "error",
-      "no-empty-function": "error",
-      "no-empty": "error",
-      "no-extra-parens": "error",
-      "no-func-assign": "error",
-      "no-irregular-whitespace": "error",
-      "no-magic-numbers": [
-        "error",
-        {
-          "ignore": [
-            -1,
-            0,
-            1
-          ]
-        }
-      ],
-      "no-multi-spaces": "error",
-      "no-multi-str": "off",
-      "no-multiple-empty-lines": "error",
-      "no-self-assign": "error",
-      "no-trailing-spaces": "error",
-      "no-undef": "error",
-      "no-unexpected-multiline": "error",
-      "no-unreachable": "error",
-      "no-unused-vars": "error",
-      "no-var": 2,
-      "prefer-arrow-callback": "error",
-      "prefer-const": "error",
-      "prefer-template": "error",
-      "quotes": [
-        "error",
-        "single"
-      ],
-      "semi": [
-        "error",
-        "never"
-      ],
-      "space-before-blocks": [
-        "error",
-        "always"
-      ],
-      "space-before-function-paren": [
-        "error",
-        "never"
-      ],
-      "strict": [
-        "error",
-        "global"
-      ],
-      "yoda": "error"
-    },
-    "overrides": [
-      {
-        "files": [
-          "*.test.js",
-          "*.spec.js",
-          "*.steps.js"
-        ],
-        "rules": {
-          "global-require": "off",
-          "max-lines-per-function": "off",
-          "max-lines": "off",
-          "max-nested-callbacks": [
-            "error",
-            4
-          ],
-          "max-statements": "off",
-          "no-magic-numbers": "off"
-        }
-      }
-    ]
   },
   "jest": {
     "coverageThreshold": {
@@ -224,9 +59,6 @@
         "statements": 100
       }
     },
-    "setupFilesAfterEnv": [
-      "jest-extended"
-    ],
     "coverageReporters": [
       "text",
       "text-summary"

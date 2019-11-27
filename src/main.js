@@ -12,5 +12,5 @@ const server = require('./app/server.js')
 server.open()
 
 process.on('SIGINT', () => {
-  server.close()
+	server.close()
 })

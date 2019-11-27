@@ -11,15 +11,15 @@ const port = process.env.PORT
 let server
 
 async function open() {
-  await connection.open()
-  server = http.createServer(app.callback())
-  await server.listen(port, host)
+	await connection.open()
+	server = http.createServer(app.callback())
+	await server.listen(port, host)
 }
 
 async function close() {
-  if (server) {
-    server.close()
-  }
+	if (server) {
+		server.close()
+	}
 }
 
 module.exports = { open, close }
