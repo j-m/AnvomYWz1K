@@ -34,6 +34,8 @@ puppeteer:
 deploy-staging:
   image: ruby:latest
   stage: staging-server
+  only:
+    - master
   script:
     - apt-get update -qy
     - apt-get install -y ruby-dev
