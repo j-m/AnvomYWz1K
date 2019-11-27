@@ -373,5 +373,28 @@ describe('Flow', () => {
     expect(await page.screenshot()).toMatchImageSnapshot()
     done()
   })
-})
 
+  test('26 navigate to comments', async done => {
+    const commentsLink = (await page.$x('//*[@id="shortReviews"]/div/div[3]/a'))[0]
+    await Promise.all([
+      page.waitForNavigation({ waitUntil: 'load' }),
+      commentsLink.click()
+    ])
+
+    expect(await page.screenshot()).toMatchImageSnapshot()
+    done()
+  })
+
+  test('27 write a comment', async done => {
+    await page.type('input[id=commentInput]', 'this is a very good review. 10/10')
+
+    const submitLogin = (await page.$x('//*[@id="commentForm"]/input[2]'))[0]
+    await Promise.all([
+      page.waitForNavigation({ waitUntil: 'load' }),
+      submitLogin.click()
+    ])
+
+    expect(await page.screenshot()).toMatchImageSnapshot()
+    done()
+  })
+})
