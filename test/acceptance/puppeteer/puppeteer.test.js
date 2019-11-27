@@ -51,11 +51,12 @@ afterAll(async done => {
 
 describe('Flow', () => {
   test('1 navigate home', async done => {
+    let response
     await Promise.all([
       page.waitForNavigation({ waitUntil: 'load' }),
-      page.goto('http://localhost:5000/games/')
+      page.goto('http://localhost:5000/games/').then(data => response = data)
     ])
-
+    expect(response._status).toBe(200)
     expect(await page.screenshot()).toMatchImageSnapshot()
 
     done()
