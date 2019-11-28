@@ -2,6 +2,6 @@
   width: calc(100% - 2rem)!important;
 }
 
-#NEW_USERNAME_AVAILABLE {
+.USERNAME_AVAILABLE {
   color: green!important;
 }

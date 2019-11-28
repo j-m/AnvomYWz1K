@@ -23,12 +23,25 @@ code-coverage:
   script:
     - npm install
     - npm run coverage
-
+    
+puppeteer:
+  variables:
+    CI: "false"
+  image: buildkite/puppeteer:latest
+  stage: acceptance-testing
+  artifacts:
+    paths:
+     - test/acceptance/puppeteer/__image_snapshots__/*
+    expire_in: 3 days
+  script:
+    - npm install
+    - npm run puppeteer   
+    
 deploy-staging:
   image: ruby:latest
+  stage: staging-server
   only:
     - master
-  stage: staging-server
   script:
     - apt-get update -qy
     - apt-get install -y ruby-dev

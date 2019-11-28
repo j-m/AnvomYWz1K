@@ -62,7 +62,7 @@ exports[`routes get game author review 1`] = `
           <p class=\\"error USERNAME_MISSING\\">This field is required. </p>
           <p class=\\"error USERNAME_AVAILABLE\\">Username available. </p>
         </div>
-        <input type=\\"text\\" id=\\"new-username\\" name=\\"new-username\\" autocomplete=\\"none\\" required/>
+        <input type=\\"text\\" id=\\"new-username\\" name=\\"new-username\\" autocomplete=\\"none\\" pattern=\\"^[a-z0-9]+([a-z0-9-]+[a-z0-9])?$\\" required/>
         <button type=\\"button\\" onclick=\\"checkUsernameAvailability()\\">&#x21bb;</button>
         <p class=\\"error USERNAME_IN_USE\\">This username is already in use. </p>
         <p class=\\"info USERNAME_BAD_REGEX\\">Usernames can only contain letters and numbers. <br/> They may contain, but not start or end with, hyphens(-). </p>
@@ -97,66 +97,6 @@ exports[`routes get game author review 1`] = `
       <div id=\\"fullDescription\\">description</div>
     </div>
     
-    <div class=\\"popup\\" onclick=\\"hide('updateGame', event)\\">
-      <form id=\\"updateGame\\" onsubmit=\\"updateGame(event)\\">
-        <h1>Create new game</h1>
-        <hr/>
-        <fieldset>
-          <div class=\\"input_header\\">
-          	<label for=\\"steamAppID\\">Steam App ID</label>
-            <p class=\\"error GAME_STEAM_APP_ID_MISSING\\">This field is required</p>
-          </div>
-          <input type=\\"text\\" id=\\"steamAppID\\" name=\\"steamAppID\\" value=\\"steamAppgame2\\" required/>
-          
-          <div class=\\"input_header\\">
-          	<label for=\\"title\\">Title</label>
-            <p class=\\"error GAME_TITLE_MISSING\\">This field is required</p>
-          </div>
-          <input type=\\"text\\" id=\\"title\\" name=\\"title\\" value=\\"titleUnique\\" required/>
-          <p class=\\"error GAME_TITLE_IN_USE\\">Title in use</p>
-        
-          <div class=\\"input_header\\">
-          	<label for=\\"summary\\">Summary</label>
-            <p class=\\"error GAME_SUMMARY_MISSING\\">This field is required</p>
-          </div>
-          <input type=\\"text\\" id=\\"summary\\" name=\\"summary\\" value=\\"summary\\" required/>
-        </fieldset>
-        
-        <fieldset>
-          <legend>Optional</legend>
-          
-          <div>
-          	<label for=\\"developer\\">Developer</label>
-            <input type=\\"text\\" id=\\"developer\\" name=\\"developer\\" value=\\"developer\\"/>
-            
-          	<label for=\\"publisher\\">Publisher</label>
-            <input type=\\"text\\" id=\\"publisher\\" name=\\"publisher\\" value=\\"publisher\\"/>
-            
-            <label for=\\"category\\">Category</label>
-            <input type=\\"text\\" id=\\"category\\" name=\\"category\\" value=\\"category\\"/>
-            
-          	<label for=\\"description\\">Description</label>
-            <textarea id=\\"description\\" name=\\"description\\" rows=\\"1\\">description</textarea>
-          </div>
-          
-          <div>
-          	<label for=\\"store\\">Store</label>
-            <input type=\\"text\\" id=\\"store\\" name=\\"store\\" value=\\"store\\"/>
-            
-           	<label for=\\"thumbnail\\">Thumbnail</label>
-            <input type=\\"text\\" id=\\"thumbnail\\" name=\\"thumbnail\\" value=\\"thumbnail\\"/>
-          
-           	<label for=\\"banner\\">Banner</label>
-            <input type=\\"text\\" id=\\"banner\\" name=\\"banner\\" value=\\"banner\\"/>
-        
-            <label for=\\"releaseDate\\">Release date</label>
-            <input type=\\"date\\" id=\\"releaseDate\\" name=\\"releaseDate\\" value=\\"releaseDate\\"/>
-          </div>
-        
-        </fieldset>
-      	<input type=\\"submit\\" value=\\"Update\\">
-      </form>
-    </div>
     
     <div class=\\"popup\\" onclick=\\"hide('preview', event)\\">
       <div id=\\"preview\\">
@@ -198,7 +138,7 @@ exports[`routes get game author review 1`] = `
               <p class=\\"rating\\">👍 Recommended</p>
               <p class=\\"author\\">by <a href=\\"/members/1\\">1</a></p>
               <div class=\\"buttons\\">
-                <select id=\\"visibilityLong\\" name=\\"visibility\\" onchange=\\"visibility('game2', '1', 'long')\\">
+                <select name=\\"visibility\\" onchange=\\"visibility('game2', '1', 'short', this.value)\\">
                   <option >public</option>
                   <option selected=\\"selected\\">moderator</option>
                 </select>
@@ -226,7 +166,7 @@ exports[`routes get game author review 1`] = `
               <p class=\\"rating\\">👍 Recommended</p>
               <p class=\\"author\\">by <a href=\\"/members/3\\">3</a></p>
               <div class=\\"buttons\\">
-                <select id=\\"visibilityLong\\" name=\\"visibility\\" onchange=\\"visibility('game2', '3', 'long')\\">
+                <select name=\\"visibility\\" onchange=\\"visibility('game2', '3', 'short', this.value)\\">
                   <option >public</option>
                   <option selected=\\"selected\\">moderator</option>
                 </select>
@@ -686,7 +626,7 @@ exports[`routes get game author review 1`] = `
               <p class=\\"rating\\">10</p>
               <p class=\\"author\\">by <a href=\\"/members/memberAuthor\\">memberAuthor</a></p>
               <div class=\\"buttons\\">
-                <select id=\\"visibilityLong\\" name=\\"visibility\\" onchange=\\"visibility('game2', 'memberAuthor', 'long')\\">
+                <select name=\\"visibility\\" onchange=\\"visibility('game2', 'memberAuthor', 'long', this.value)\\">
                   <option >public</option>
                   <option >moderator</option>
                   <option selected=\\"selected\\">author</option>
@@ -717,7 +657,7 @@ exports[`routes get game author review 1`] = `
               <p class=\\"rating\\">10</p>
               <p class=\\"author\\">by <a href=\\"/members/memberPublic\\">memberPublic</a></p>
               <div class=\\"buttons\\">
-                <select id=\\"visibilityLong\\" name=\\"visibility\\" onchange=\\"visibility('game2', 'memberPublic', 'long')\\">
+                <select name=\\"visibility\\" onchange=\\"visibility('game2', 'memberPublic', 'long', this.value)\\">
                   <option selected=\\"selected\\">public</option>
                   <option >moderator</option>
                 </select>
@@ -815,7 +755,7 @@ exports[`routes get game moderator review 1`] = `
           <p class=\\"error USERNAME_MISSING\\">This field is required. </p>
           <p class=\\"error USERNAME_AVAILABLE\\">Username available. </p>
         </div>
-        <input type=\\"text\\" id=\\"new-username\\" name=\\"new-username\\" autocomplete=\\"none\\" required/>
+        <input type=\\"text\\" id=\\"new-username\\" name=\\"new-username\\" autocomplete=\\"none\\" pattern=\\"^[a-z0-9]+([a-z0-9-]+[a-z0-9])?$\\" required/>
         <button type=\\"button\\" onclick=\\"checkUsernameAvailability()\\">&#x21bb;</button>
         <p class=\\"error USERNAME_IN_USE\\">This username is already in use. </p>
         <p class=\\"info USERNAME_BAD_REGEX\\">Usernames can only contain letters and numbers. <br/> They may contain, but not start or end with, hyphens(-). </p>
@@ -850,66 +790,6 @@ exports[`routes get game moderator review 1`] = `
       <div id=\\"fullDescription\\">description</div>
     </div>
     
-    <div class=\\"popup\\" onclick=\\"hide('updateGame', event)\\">
-      <form id=\\"updateGame\\" onsubmit=\\"updateGame(event)\\">
-        <h1>Create new game</h1>
-        <hr/>
-        <fieldset>
-          <div class=\\"input_header\\">
-          	<label for=\\"steamAppID\\">Steam App ID</label>
-            <p class=\\"error GAME_STEAM_APP_ID_MISSING\\">This field is required</p>
-          </div>
-          <input type=\\"text\\" id=\\"steamAppID\\" name=\\"steamAppID\\" value=\\"steamAppgame2\\" required/>
-          
-          <div class=\\"input_header\\">
-          	<label for=\\"title\\">Title</label>
-            <p class=\\"error GAME_TITLE_MISSING\\">This field is required</p>
-          </div>
-          <input type=\\"text\\" id=\\"title\\" name=\\"title\\" value=\\"titleUnique\\" required/>
-          <p class=\\"error GAME_TITLE_IN_USE\\">Title in use</p>
-        
-          <div class=\\"input_header\\">
-          	<label for=\\"summary\\">Summary</label>
-            <p class=\\"error GAME_SUMMARY_MISSING\\">This field is required</p>
-          </div>
-          <input type=\\"text\\" id=\\"summary\\" name=\\"summary\\" value=\\"summary\\" required/>
-        </fieldset>
-        
-        <fieldset>
-          <legend>Optional</legend>
-          
-          <div>
-          	<label for=\\"developer\\">Developer</label>
-            <input type=\\"text\\" id=\\"developer\\" name=\\"developer\\" value=\\"developer\\"/>
-            
-          	<label for=\\"publisher\\">Publisher</label>
-            <input type=\\"text\\" id=\\"publisher\\" name=\\"publisher\\" value=\\"publisher\\"/>
-            
-            <label for=\\"category\\">Category</label>
-            <input type=\\"text\\" id=\\"category\\" name=\\"category\\" value=\\"category\\"/>
-            
-          	<label for=\\"description\\">Description</label>
-            <textarea id=\\"description\\" name=\\"description\\" rows=\\"1\\">description</textarea>
-          </div>
-          
-          <div>
-          	<label for=\\"store\\">Store</label>
-            <input type=\\"text\\" id=\\"store\\" name=\\"store\\" value=\\"store\\"/>
-            
-           	<label for=\\"thumbnail\\">Thumbnail</label>
-            <input type=\\"text\\" id=\\"thumbnail\\" name=\\"thumbnail\\" value=\\"thumbnail\\"/>
-          
-           	<label for=\\"banner\\">Banner</label>
-            <input type=\\"text\\" id=\\"banner\\" name=\\"banner\\" value=\\"banner\\"/>
-        
-            <label for=\\"releaseDate\\">Release date</label>
-            <input type=\\"date\\" id=\\"releaseDate\\" name=\\"releaseDate\\" value=\\"releaseDate\\"/>
-          </div>
-        
-        </fieldset>
-      	<input type=\\"submit\\" value=\\"Update\\">
-      </form>
-    </div>
     
     <div class=\\"popup\\" onclick=\\"hide('preview', event)\\">
       <div id=\\"preview\\">
@@ -951,7 +831,7 @@ exports[`routes get game moderator review 1`] = `
               <p class=\\"rating\\">👍 Recommended</p>
               <p class=\\"author\\">by <a href=\\"/members/1\\">1</a></p>
               <div class=\\"buttons\\">
-                <select id=\\"visibilityLong\\" name=\\"visibility\\" onchange=\\"visibility('game2', '1', 'long')\\">
+                <select name=\\"visibility\\" onchange=\\"visibility('game2', '1', 'short', this.value)\\">
                   <option >public</option>
                   <option selected=\\"selected\\">moderator</option>
                 </select>
@@ -979,7 +859,7 @@ exports[`routes get game moderator review 1`] = `
               <p class=\\"rating\\">👍 Recommended</p>
               <p class=\\"author\\">by <a href=\\"/members/3\\">3</a></p>
               <div class=\\"buttons\\">
-                <select id=\\"visibilityLong\\" name=\\"visibility\\" onchange=\\"visibility('game2', '3', 'long')\\">
+                <select name=\\"visibility\\" onchange=\\"visibility('game2', '3', 'short', this.value)\\">
                   <option >public</option>
                   <option selected=\\"selected\\">moderator</option>
                 </select>
@@ -1434,12 +1314,13 @@ exports[`routes get game moderator review 1`] = `
         <hr/>
         
         <div id=\\"longReviews\\">
+          <p class=\\"hidden\\">A review has been hidden. </p>
           <div class=\\"shortReview positive\\">
             <div class=\\"header\\">
               <p class=\\"rating\\">10</p>
               <p class=\\"author\\">by <a href=\\"/members/memberModerator\\">memberModerator</a></p>
               <div class=\\"buttons\\">
-                <select id=\\"visibilityLong\\" name=\\"visibility\\" onchange=\\"visibility('game2', 'memberModerator', 'long')\\">
+                <select name=\\"visibility\\" onchange=\\"visibility('game2', 'memberModerator', 'long', this.value)\\">
                   <option >public</option>
                   <option selected=\\"selected\\">moderator</option>
                 </select>
@@ -1538,7 +1419,7 @@ exports[`routes get game public review 1`] = `
           <p class=\\"error USERNAME_MISSING\\">This field is required. </p>
           <p class=\\"error USERNAME_AVAILABLE\\">Username available. </p>
         </div>
-        <input type=\\"text\\" id=\\"new-username\\" name=\\"new-username\\" autocomplete=\\"none\\" required/>
+        <input type=\\"text\\" id=\\"new-username\\" name=\\"new-username\\" autocomplete=\\"none\\" pattern=\\"^[a-z0-9]+([a-z0-9-]+[a-z0-9])?$\\" required/>
         <button type=\\"button\\" onclick=\\"checkUsernameAvailability()\\">&#x21bb;</button>
         <p class=\\"error USERNAME_IN_USE\\">This username is already in use. </p>
         <p class=\\"info USERNAME_BAD_REGEX\\">Usernames can only contain letters and numbers. <br/> They may contain, but not start or end with, hyphens(-). </p>
@@ -1573,66 +1454,6 @@ exports[`routes get game public review 1`] = `
       <div id=\\"fullDescription\\">description</div>
     </div>
     
-    <div class=\\"popup\\" onclick=\\"hide('updateGame', event)\\">
-      <form id=\\"updateGame\\" onsubmit=\\"updateGame(event)\\">
-        <h1>Create new game</h1>
-        <hr/>
-        <fieldset>
-          <div class=\\"input_header\\">
-          	<label for=\\"steamAppID\\">Steam App ID</label>
-            <p class=\\"error GAME_STEAM_APP_ID_MISSING\\">This field is required</p>
-          </div>
-          <input type=\\"text\\" id=\\"steamAppID\\" name=\\"steamAppID\\" value=\\"steamAppgame2\\" required/>
-          
-          <div class=\\"input_header\\">
-          	<label for=\\"title\\">Title</label>
-            <p class=\\"error GAME_TITLE_MISSING\\">This field is required</p>
-          </div>
-          <input type=\\"text\\" id=\\"title\\" name=\\"title\\" value=\\"titleUnique\\" required/>
-          <p class=\\"error GAME_TITLE_IN_USE\\">Title in use</p>
-        
-          <div class=\\"input_header\\">
-          	<label for=\\"summary\\">Summary</label>
-            <p class=\\"error GAME_SUMMARY_MISSING\\">This field is required</p>
-          </div>
-          <input type=\\"text\\" id=\\"summary\\" name=\\"summary\\" value=\\"summary\\" required/>
-        </fieldset>
-        
-        <fieldset>
-          <legend>Optional</legend>
-          
-          <div>
-          	<label for=\\"developer\\">Developer</label>
-            <input type=\\"text\\" id=\\"developer\\" name=\\"developer\\" value=\\"developer\\"/>
-            
-          	<label for=\\"publisher\\">Publisher</label>
-            <input type=\\"text\\" id=\\"publisher\\" name=\\"publisher\\" value=\\"publisher\\"/>
-            
-            <label for=\\"category\\">Category</label>
-            <input type=\\"text\\" id=\\"category\\" name=\\"category\\" value=\\"category\\"/>
-            
-          	<label for=\\"description\\">Description</label>
-            <textarea id=\\"description\\" name=\\"description\\" rows=\\"1\\">description</textarea>
-          </div>
-          
-          <div>
-          	<label for=\\"store\\">Store</label>
-            <input type=\\"text\\" id=\\"store\\" name=\\"store\\" value=\\"store\\"/>
-            
-           	<label for=\\"thumbnail\\">Thumbnail</label>
-            <input type=\\"text\\" id=\\"thumbnail\\" name=\\"thumbnail\\" value=\\"thumbnail\\"/>
-          
-           	<label for=\\"banner\\">Banner</label>
-            <input type=\\"text\\" id=\\"banner\\" name=\\"banner\\" value=\\"banner\\"/>
-        
-            <label for=\\"releaseDate\\">Release date</label>
-            <input type=\\"date\\" id=\\"releaseDate\\" name=\\"releaseDate\\" value=\\"releaseDate\\"/>
-          </div>
-        
-        </fieldset>
-      	<input type=\\"submit\\" value=\\"Update\\">
-      </form>
-    </div>
     
     <div class=\\"popup\\" onclick=\\"hide('preview', event)\\">
       <div id=\\"preview\\">
@@ -1659,6 +1480,8 @@ exports[`routes get game public review 1`] = `
         
         
         <div id=\\"shortReviews\\">
+          <p class=\\"hidden\\">A review has been hidden. </p>
+          <p class=\\"hidden\\">A review has been hidden. </p>
         </div>
         
         <a href=\\"http://baseURL/games/game2?s&#x3D;1\\">More reviews</a>
@@ -2180,7 +2003,7 @@ exports[`routes get game should contain templated text with defined thumbnail, b
           <p class=\\"error USERNAME_MISSING\\">This field is required. </p>
           <p class=\\"error USERNAME_AVAILABLE\\">Username available. </p>
         </div>
-        <input type=\\"text\\" id=\\"new-username\\" name=\\"new-username\\" autocomplete=\\"none\\" required/>
+        <input type=\\"text\\" id=\\"new-username\\" name=\\"new-username\\" autocomplete=\\"none\\" pattern=\\"^[a-z0-9]+([a-z0-9-]+[a-z0-9])?$\\" required/>
         <button type=\\"button\\" onclick=\\"checkUsernameAvailability()\\">&#x21bb;</button>
         <p class=\\"error USERNAME_IN_USE\\">This username is already in use. </p>
         <p class=\\"info USERNAME_BAD_REGEX\\">Usernames can only contain letters and numbers. <br/> They may contain, but not start or end with, hyphens(-). </p>
@@ -2215,66 +2038,6 @@ exports[`routes get game should contain templated text with defined thumbnail, b
       <div id=\\"fullDescription\\">description</div>
     </div>
     
-    <div class=\\"popup\\" onclick=\\"hide('updateGame', event)\\">
-      <form id=\\"updateGame\\" onsubmit=\\"updateGame(event)\\">
-        <h1>Create new game</h1>
-        <hr/>
-        <fieldset>
-          <div class=\\"input_header\\">
-          	<label for=\\"steamAppID\\">Steam App ID</label>
-            <p class=\\"error GAME_STEAM_APP_ID_MISSING\\">This field is required</p>
-          </div>
-          <input type=\\"text\\" id=\\"steamAppID\\" name=\\"steamAppID\\" value=\\"steamAppgame2\\" required/>
-          
-          <div class=\\"input_header\\">
-          	<label for=\\"title\\">Title</label>
-            <p class=\\"error GAME_TITLE_MISSING\\">This field is required</p>
-          </div>
-          <input type=\\"text\\" id=\\"title\\" name=\\"title\\" value=\\"titleUnique\\" required/>
-          <p class=\\"error GAME_TITLE_IN_USE\\">Title in use</p>
-        
-          <div class=\\"input_header\\">
-          	<label for=\\"summary\\">Summary</label>
-            <p class=\\"error GAME_SUMMARY_MISSING\\">This field is required</p>
-          </div>
-          <input type=\\"text\\" id=\\"summary\\" name=\\"summary\\" value=\\"summary\\" required/>
-        </fieldset>
-        
-        <fieldset>
-          <legend>Optional</legend>
-          
-          <div>
-          	<label for=\\"developer\\">Developer</label>
-            <input type=\\"text\\" id=\\"developer\\" name=\\"developer\\" value=\\"developer\\"/>
-            
-          	<label for=\\"publisher\\">Publisher</label>
-            <input type=\\"text\\" id=\\"publisher\\" name=\\"publisher\\" value=\\"publisher\\"/>
-            
-            <label for=\\"category\\">Category</label>
-            <input type=\\"text\\" id=\\"category\\" name=\\"category\\" value=\\"category\\"/>
-            
-          	<label for=\\"description\\">Description</label>
-            <textarea id=\\"description\\" name=\\"description\\" rows=\\"1\\">description</textarea>
-          </div>
-          
-          <div>
-          	<label for=\\"store\\">Store</label>
-            <input type=\\"text\\" id=\\"store\\" name=\\"store\\" value=\\"store\\"/>
-            
-           	<label for=\\"thumbnail\\">Thumbnail</label>
-            <input type=\\"text\\" id=\\"thumbnail\\" name=\\"thumbnail\\" value=\\"thumbnail\\"/>
-          
-           	<label for=\\"banner\\">Banner</label>
-            <input type=\\"text\\" id=\\"banner\\" name=\\"banner\\" value=\\"banner\\"/>
-        
-            <label for=\\"releaseDate\\">Release date</label>
-            <input type=\\"date\\" id=\\"releaseDate\\" name=\\"releaseDate\\" value=\\"releaseDate\\"/>
-          </div>
-        
-        </fieldset>
-      	<input type=\\"submit\\" value=\\"Update\\">
-      </form>
-    </div>
     
     <div class=\\"popup\\" onclick=\\"hide('preview', event)\\">
       <div id=\\"preview\\">
@@ -2791,7 +2554,7 @@ exports[`routes get game should contain templated text with generated thumbnail,
           <p class=\\"error USERNAME_MISSING\\">This field is required. </p>
           <p class=\\"error USERNAME_AVAILABLE\\">Username available. </p>
         </div>
-        <input type=\\"text\\" id=\\"new-username\\" name=\\"new-username\\" autocomplete=\\"none\\" required/>
+        <input type=\\"text\\" id=\\"new-username\\" name=\\"new-username\\" autocomplete=\\"none\\" pattern=\\"^[a-z0-9]+([a-z0-9-]+[a-z0-9])?$\\" required/>
         <button type=\\"button\\" onclick=\\"checkUsernameAvailability()\\">&#x21bb;</button>
         <p class=\\"error USERNAME_IN_USE\\">This username is already in use. </p>
         <p class=\\"info USERNAME_BAD_REGEX\\">Usernames can only contain letters and numbers. <br/> They may contain, but not start or end with, hyphens(-). </p>
@@ -2826,66 +2589,6 @@ exports[`routes get game should contain templated text with generated thumbnail,
       <div id=\\"fullDescription\\"></div>
     </div>
     
-    <div class=\\"popup\\" onclick=\\"hide('updateGame', event)\\">
-      <form id=\\"updateGame\\" onsubmit=\\"updateGame(event)\\">
-        <h1>Create new game</h1>
-        <hr/>
-        <fieldset>
-          <div class=\\"input_header\\">
-          	<label for=\\"steamAppID\\">Steam App ID</label>
-            <p class=\\"error GAME_STEAM_APP_ID_MISSING\\">This field is required</p>
-          </div>
-          <input type=\\"text\\" id=\\"steamAppID\\" name=\\"steamAppID\\" value=\\"steamAppId\\" required/>
-          
-          <div class=\\"input_header\\">
-          	<label for=\\"title\\">Title</label>
-            <p class=\\"error GAME_TITLE_MISSING\\">This field is required</p>
-          </div>
-          <input type=\\"text\\" id=\\"title\\" name=\\"title\\" value=\\"title\\" required/>
-          <p class=\\"error GAME_TITLE_IN_USE\\">Title in use</p>
-        
-          <div class=\\"input_header\\">
-          	<label for=\\"summary\\">Summary</label>
-            <p class=\\"error GAME_SUMMARY_MISSING\\">This field is required</p>
-          </div>
-          <input type=\\"text\\" id=\\"summary\\" name=\\"summary\\" value=\\"summary\\" required/>
-        </fieldset>
-        
-        <fieldset>
-          <legend>Optional</legend>
-          
-          <div>
-          	<label for=\\"developer\\">Developer</label>
-            <input type=\\"text\\" id=\\"developer\\" name=\\"developer\\" value=\\"\\"/>
-            
-          	<label for=\\"publisher\\">Publisher</label>
-            <input type=\\"text\\" id=\\"publisher\\" name=\\"publisher\\" value=\\"\\"/>
-            
-            <label for=\\"category\\">Category</label>
-            <input type=\\"text\\" id=\\"category\\" name=\\"category\\" value=\\"\\"/>
-            
-          	<label for=\\"description\\">Description</label>
-            <textarea id=\\"description\\" name=\\"description\\" rows=\\"1\\"></textarea>
-          </div>
-          
-          <div>
-          	<label for=\\"store\\">Store</label>
-            <input type=\\"text\\" id=\\"store\\" name=\\"store\\" value=\\"https://store.steampowered.com/app/steamAppId\\"/>
-            
-           	<label for=\\"thumbnail\\">Thumbnail</label>
-            <input type=\\"text\\" id=\\"thumbnail\\" name=\\"thumbnail\\" value=\\"https://steamcdn-a.akamaihd.net/steam/apps/steamAppId/library_600x900_2x.jpg\\"/>
-          
-           	<label for=\\"banner\\">Banner</label>
-            <input type=\\"text\\" id=\\"banner\\" name=\\"banner\\" value=\\"https://steamcdn-a.akamaihd.net/steam/apps/steamAppId/library_hero.jpg\\"/>
-        
-            <label for=\\"releaseDate\\">Release date</label>
-            <input type=\\"date\\" id=\\"releaseDate\\" name=\\"releaseDate\\" value=\\"\\"/>
-          </div>
-        
-        </fieldset>
-      	<input type=\\"submit\\" value=\\"Update\\">
-      </form>
-    </div>
     
     <div class=\\"popup\\" onclick=\\"hide('preview', event)\\">
       <div id=\\"preview\\">
@@ -3402,7 +3105,7 @@ exports[`routes get game with multiple pages of short reviews 1`] = `
           <p class=\\"error USERNAME_MISSING\\">This field is required. </p>
           <p class=\\"error USERNAME_AVAILABLE\\">Username available. </p>
         </div>
-        <input type=\\"text\\" id=\\"new-username\\" name=\\"new-username\\" autocomplete=\\"none\\" required/>
+        <input type=\\"text\\" id=\\"new-username\\" name=\\"new-username\\" autocomplete=\\"none\\" pattern=\\"^[a-z0-9]+([a-z0-9-]+[a-z0-9])?$\\" required/>
         <button type=\\"button\\" onclick=\\"checkUsernameAvailability()\\">&#x21bb;</button>
         <p class=\\"error USERNAME_IN_USE\\">This username is already in use. </p>
         <p class=\\"info USERNAME_BAD_REGEX\\">Usernames can only contain letters and numbers. <br/> They may contain, but not start or end with, hyphens(-). </p>
@@ -3437,66 +3140,6 @@ exports[`routes get game with multiple pages of short reviews 1`] = `
       <div id=\\"fullDescription\\">description</div>
     </div>
     
-    <div class=\\"popup\\" onclick=\\"hide('updateGame', event)\\">
-      <form id=\\"updateGame\\" onsubmit=\\"updateGame(event)\\">
-        <h1>Create new game</h1>
-        <hr/>
-        <fieldset>
-          <div class=\\"input_header\\">
-          	<label for=\\"steamAppID\\">Steam App ID</label>
-            <p class=\\"error GAME_STEAM_APP_ID_MISSING\\">This field is required</p>
-          </div>
-          <input type=\\"text\\" id=\\"steamAppID\\" name=\\"steamAppID\\" value=\\"steamAppgame2\\" required/>
-          
-          <div class=\\"input_header\\">
-          	<label for=\\"title\\">Title</label>
-            <p class=\\"error GAME_TITLE_MISSING\\">This field is required</p>
-          </div>
-          <input type=\\"text\\" id=\\"title\\" name=\\"title\\" value=\\"titleUnique\\" required/>
-          <p class=\\"error GAME_TITLE_IN_USE\\">Title in use</p>
-        
-          <div class=\\"input_header\\">
-          	<label for=\\"summary\\">Summary</label>
-            <p class=\\"error GAME_SUMMARY_MISSING\\">This field is required</p>
-          </div>
-          <input type=\\"text\\" id=\\"summary\\" name=\\"summary\\" value=\\"summary\\" required/>
-        </fieldset>
-        
-        <fieldset>
-          <legend>Optional</legend>
-          
-          <div>
-          	<label for=\\"developer\\">Developer</label>
-            <input type=\\"text\\" id=\\"developer\\" name=\\"developer\\" value=\\"developer\\"/>
-            
-          	<label for=\\"publisher\\">Publisher</label>
-            <input type=\\"text\\" id=\\"publisher\\" name=\\"publisher\\" value=\\"publisher\\"/>
-            
-            <label for=\\"category\\">Category</label>
-            <input type=\\"text\\" id=\\"category\\" name=\\"category\\" value=\\"category\\"/>
-            
-          	<label for=\\"description\\">Description</label>
-            <textarea id=\\"description\\" name=\\"description\\" rows=\\"1\\">description</textarea>
-          </div>
-          
-          <div>
-          	<label for=\\"store\\">Store</label>
-            <input type=\\"text\\" id=\\"store\\" name=\\"store\\" value=\\"store\\"/>
-            
-           	<label for=\\"thumbnail\\">Thumbnail</label>
-            <input type=\\"text\\" id=\\"thumbnail\\" name=\\"thumbnail\\" value=\\"thumbnail\\"/>
-          
-           	<label for=\\"banner\\">Banner</label>
-            <input type=\\"text\\" id=\\"banner\\" name=\\"banner\\" value=\\"banner\\"/>
-        
-            <label for=\\"releaseDate\\">Release date</label>
-            <input type=\\"date\\" id=\\"releaseDate\\" name=\\"releaseDate\\" value=\\"releaseDate\\"/>
-          </div>
-        
-        </fieldset>
-      	<input type=\\"submit\\" value=\\"Update\\">
-      </form>
-    </div>
     
     <div class=\\"popup\\" onclick=\\"hide('preview', event)\\">
       <div id=\\"preview\\">
@@ -3523,6 +3166,8 @@ exports[`routes get game with multiple pages of short reviews 1`] = `
         
         
         <div id=\\"shortReviews\\">
+          <p class=\\"hidden\\">A review has been hidden. </p>
+          <p class=\\"hidden\\">A review has been hidden. </p>
         </div>
         
         <a href=\\"http://baseURL/games/game2?s&#x3D;1\\">More reviews</a>
@@ -4014,7 +3659,7 @@ exports[`routes get game with only negative short reviews 1`] = `
           <p class=\\"error USERNAME_MISSING\\">This field is required. </p>
           <p class=\\"error USERNAME_AVAILABLE\\">Username available. </p>
         </div>
-        <input type=\\"text\\" id=\\"new-username\\" name=\\"new-username\\" autocomplete=\\"none\\" required/>
+        <input type=\\"text\\" id=\\"new-username\\" name=\\"new-username\\" autocomplete=\\"none\\" pattern=\\"^[a-z0-9]+([a-z0-9-]+[a-z0-9])?$\\" required/>
         <button type=\\"button\\" onclick=\\"checkUsernameAvailability()\\">&#x21bb;</button>
         <p class=\\"error USERNAME_IN_USE\\">This username is already in use. </p>
         <p class=\\"info USERNAME_BAD_REGEX\\">Usernames can only contain letters and numbers. <br/> They may contain, but not start or end with, hyphens(-). </p>
@@ -4049,66 +3694,6 @@ exports[`routes get game with only negative short reviews 1`] = `
       <div id=\\"fullDescription\\"></div>
     </div>
     
-    <div class=\\"popup\\" onclick=\\"hide('updateGame', event)\\">
-      <form id=\\"updateGame\\" onsubmit=\\"updateGame(event)\\">
-        <h1>Create new game</h1>
-        <hr/>
-        <fieldset>
-          <div class=\\"input_header\\">
-          	<label for=\\"steamAppID\\">Steam App ID</label>
-            <p class=\\"error GAME_STEAM_APP_ID_MISSING\\">This field is required</p>
-          </div>
-          <input type=\\"text\\" id=\\"steamAppID\\" name=\\"steamAppID\\" value=\\"steamAppId\\" required/>
-          
-          <div class=\\"input_header\\">
-          	<label for=\\"title\\">Title</label>
-            <p class=\\"error GAME_TITLE_MISSING\\">This field is required</p>
-          </div>
-          <input type=\\"text\\" id=\\"title\\" name=\\"title\\" value=\\"title\\" required/>
-          <p class=\\"error GAME_TITLE_IN_USE\\">Title in use</p>
-        
-          <div class=\\"input_header\\">
-          	<label for=\\"summary\\">Summary</label>
-            <p class=\\"error GAME_SUMMARY_MISSING\\">This field is required</p>
-          </div>
-          <input type=\\"text\\" id=\\"summary\\" name=\\"summary\\" value=\\"summary\\" required/>
-        </fieldset>
-        
-        <fieldset>
-          <legend>Optional</legend>
-          
-          <div>
-          	<label for=\\"developer\\">Developer</label>
-            <input type=\\"text\\" id=\\"developer\\" name=\\"developer\\" value=\\"\\"/>
-            
-          	<label for=\\"publisher\\">Publisher</label>
-            <input type=\\"text\\" id=\\"publisher\\" name=\\"publisher\\" value=\\"\\"/>
-            
-            <label for=\\"category\\">Category</label>
-            <input type=\\"text\\" id=\\"category\\" name=\\"category\\" value=\\"\\"/>
-            
-          	<label for=\\"description\\">Description</label>
-            <textarea id=\\"description\\" name=\\"description\\" rows=\\"1\\"></textarea>
-          </div>
-          
-          <div>
-          	<label for=\\"store\\">Store</label>
-            <input type=\\"text\\" id=\\"store\\" name=\\"store\\" value=\\"https://store.steampowered.com/app/steamAppId\\"/>
-            
-           	<label for=\\"thumbnail\\">Thumbnail</label>
-            <input type=\\"text\\" id=\\"thumbnail\\" name=\\"thumbnail\\" value=\\"https://steamcdn-a.akamaihd.net/steam/apps/steamAppId/library_600x900_2x.jpg\\"/>
-          
-           	<label for=\\"banner\\">Banner</label>
-            <input type=\\"text\\" id=\\"banner\\" name=\\"banner\\" value=\\"https://steamcdn-a.akamaihd.net/steam/apps/steamAppId/library_hero.jpg\\"/>
-        
-            <label for=\\"releaseDate\\">Release date</label>
-            <input type=\\"date\\" id=\\"releaseDate\\" name=\\"releaseDate\\" value=\\"\\"/>
-          </div>
-        
-        </fieldset>
-      	<input type=\\"submit\\" value=\\"Update\\">
-      </form>
-    </div>
     
     <div class=\\"popup\\" onclick=\\"hide('preview', event)\\">
       <div id=\\"preview\\">
@@ -4135,6 +3720,7 @@ exports[`routes get game with only negative short reviews 1`] = `
         
         
         <div id=\\"shortReviews\\">
+          <p class=\\"hidden\\">A review has been hidden. </p>
         </div>
         
       </div>
@@ -4625,7 +4211,7 @@ exports[`routes get game with only positive short reviews 1`] = `
           <p class=\\"error USERNAME_MISSING\\">This field is required. </p>
           <p class=\\"error USERNAME_AVAILABLE\\">Username available. </p>
         </div>
-        <input type=\\"text\\" id=\\"new-username\\" name=\\"new-username\\" autocomplete=\\"none\\" required/>
+        <input type=\\"text\\" id=\\"new-username\\" name=\\"new-username\\" autocomplete=\\"none\\" pattern=\\"^[a-z0-9]+([a-z0-9-]+[a-z0-9])?$\\" required/>
         <button type=\\"button\\" onclick=\\"checkUsernameAvailability()\\">&#x21bb;</button>
         <p class=\\"error USERNAME_IN_USE\\">This username is already in use. </p>
         <p class=\\"info USERNAME_BAD_REGEX\\">Usernames can only contain letters and numbers. <br/> They may contain, but not start or end with, hyphens(-). </p>
@@ -4660,66 +4246,6 @@ exports[`routes get game with only positive short reviews 1`] = `
       <div id=\\"fullDescription\\">description</div>
     </div>
     
-    <div class=\\"popup\\" onclick=\\"hide('updateGame', event)\\">
-      <form id=\\"updateGame\\" onsubmit=\\"updateGame(event)\\">
-        <h1>Create new game</h1>
-        <hr/>
-        <fieldset>
-          <div class=\\"input_header\\">
-          	<label for=\\"steamAppID\\">Steam App ID</label>
-            <p class=\\"error GAME_STEAM_APP_ID_MISSING\\">This field is required</p>
-          </div>
-          <input type=\\"text\\" id=\\"steamAppID\\" name=\\"steamAppID\\" value=\\"steamAppgame2\\" required/>
-          
-          <div class=\\"input_header\\">
-          	<label for=\\"title\\">Title</label>
-            <p class=\\"error GAME_TITLE_MISSING\\">This field is required</p>
-          </div>
-          <input type=\\"text\\" id=\\"title\\" name=\\"title\\" value=\\"titleUnique\\" required/>
-          <p class=\\"error GAME_TITLE_IN_USE\\">Title in use</p>
-        
-          <div class=\\"input_header\\">
-          	<label for=\\"summary\\">Summary</label>
-            <p class=\\"error GAME_SUMMARY_MISSING\\">This field is required</p>
-          </div>
-          <input type=\\"text\\" id=\\"summary\\" name=\\"summary\\" value=\\"summary\\" required/>
-        </fieldset>
-        
-        <fieldset>
-          <legend>Optional</legend>
-          
-          <div>
-          	<label for=\\"developer\\">Developer</label>
-            <input type=\\"text\\" id=\\"developer\\" name=\\"developer\\" value=\\"developer\\"/>
-            
-          	<label for=\\"publisher\\">Publisher</label>
-            <input type=\\"text\\" id=\\"publisher\\" name=\\"publisher\\" value=\\"publisher\\"/>
-            
-            <label for=\\"category\\">Category</label>
-            <input type=\\"text\\" id=\\"category\\" name=\\"category\\" value=\\"category\\"/>
-            
-          	<label for=\\"description\\">Description</label>
-            <textarea id=\\"description\\" name=\\"description\\" rows=\\"1\\">description</textarea>
-          </div>
-          
-          <div>
-          	<label for=\\"store\\">Store</label>
-            <input type=\\"text\\" id=\\"store\\" name=\\"store\\" value=\\"store\\"/>
-            
-           	<label for=\\"thumbnail\\">Thumbnail</label>
-            <input type=\\"text\\" id=\\"thumbnail\\" name=\\"thumbnail\\" value=\\"thumbnail\\"/>
-          
-           	<label for=\\"banner\\">Banner</label>
-            <input type=\\"text\\" id=\\"banner\\" name=\\"banner\\" value=\\"banner\\"/>
-        
-            <label for=\\"releaseDate\\">Release date</label>
-            <input type=\\"date\\" id=\\"releaseDate\\" name=\\"releaseDate\\" value=\\"releaseDate\\"/>
-          </div>
-        
-        </fieldset>
-      	<input type=\\"submit\\" value=\\"Update\\">
-      </form>
-    </div>
     
     <div class=\\"popup\\" onclick=\\"hide('preview', event)\\">
       <div id=\\"preview\\">
@@ -4746,6 +4272,7 @@ exports[`routes get game with only positive short reviews 1`] = `
         
         
         <div id=\\"shortReviews\\">
+          <p class=\\"hidden\\">A review has been hidden. </p>
         </div>
         
       </div>
@@ -5236,7 +4763,7 @@ exports[`routes get game with positive and negative short reviews 1`] = `
           <p class=\\"error USERNAME_MISSING\\">This field is required. </p>
           <p class=\\"error USERNAME_AVAILABLE\\">Username available. </p>
         </div>
-        <input type=\\"text\\" id=\\"new-username\\" name=\\"new-username\\" autocomplete=\\"none\\" required/>
+        <input type=\\"text\\" id=\\"new-username\\" name=\\"new-username\\" autocomplete=\\"none\\" pattern=\\"^[a-z0-9]+([a-z0-9-]+[a-z0-9])?$\\" required/>
         <button type=\\"button\\" onclick=\\"checkUsernameAvailability()\\">&#x21bb;</button>
         <p class=\\"error USERNAME_IN_USE\\">This username is already in use. </p>
         <p class=\\"info USERNAME_BAD_REGEX\\">Usernames can only contain letters and numbers. <br/> They may contain, but not start or end with, hyphens(-). </p>
@@ -5271,66 +4798,6 @@ exports[`routes get game with positive and negative short reviews 1`] = `
       <div id=\\"fullDescription\\">description</div>
     </div>
     
-    <div class=\\"popup\\" onclick=\\"hide('updateGame', event)\\">
-      <form id=\\"updateGame\\" onsubmit=\\"updateGame(event)\\">
-        <h1>Create new game</h1>
-        <hr/>
-        <fieldset>
-          <div class=\\"input_header\\">
-          	<label for=\\"steamAppID\\">Steam App ID</label>
-            <p class=\\"error GAME_STEAM_APP_ID_MISSING\\">This field is required</p>
-          </div>
-          <input type=\\"text\\" id=\\"steamAppID\\" name=\\"steamAppID\\" value=\\"steamAppgame2\\" required/>
-          
-          <div class=\\"input_header\\">
-          	<label for=\\"title\\">Title</label>
-            <p class=\\"error GAME_TITLE_MISSING\\">This field is required</p>
-          </div>
-          <input type=\\"text\\" id=\\"title\\" name=\\"title\\" value=\\"titleUnique\\" required/>
-          <p class=\\"error GAME_TITLE_IN_USE\\">Title in use</p>
-        
-          <div class=\\"input_header\\">
-          	<label for=\\"summary\\">Summary</label>
-            <p class=\\"error GAME_SUMMARY_MISSING\\">This field is required</p>
-          </div>
-          <input type=\\"text\\" id=\\"summary\\" name=\\"summary\\" value=\\"summary\\" required/>
-        </fieldset>
-        
-        <fieldset>
-          <legend>Optional</legend>
-          
-          <div>
-          	<label for=\\"developer\\">Developer</label>
-            <input type=\\"text\\" id=\\"developer\\" name=\\"developer\\" value=\\"developer\\"/>
-            
-          	<label for=\\"publisher\\">Publisher</label>
-            <input type=\\"text\\" id=\\"publisher\\" name=\\"publisher\\" value=\\"publisher\\"/>
-            
-            <label for=\\"category\\">Category</label>
-            <input type=\\"text\\" id=\\"category\\" name=\\"category\\" value=\\"category\\"/>
-            
-          	<label for=\\"description\\">Description</label>
-            <textarea id=\\"description\\" name=\\"description\\" rows=\\"1\\">description</textarea>
-          </div>
-          
-          <div>
-          	<label for=\\"store\\">Store</label>
-            <input type=\\"text\\" id=\\"store\\" name=\\"store\\" value=\\"store\\"/>
-            
-           	<label for=\\"thumbnail\\">Thumbnail</label>
-            <input type=\\"text\\" id=\\"thumbnail\\" name=\\"thumbnail\\" value=\\"thumbnail\\"/>
-          
-           	<label for=\\"banner\\">Banner</label>
-            <input type=\\"text\\" id=\\"banner\\" name=\\"banner\\" value=\\"banner\\"/>
-        
-            <label for=\\"releaseDate\\">Release date</label>
-            <input type=\\"date\\" id=\\"releaseDate\\" name=\\"releaseDate\\" value=\\"releaseDate\\"/>
-          </div>
-        
-        </fieldset>
-      	<input type=\\"submit\\" value=\\"Update\\">
-      </form>
-    </div>
     
     <div class=\\"popup\\" onclick=\\"hide('preview', event)\\">
       <div id=\\"preview\\">
@@ -5357,6 +4824,8 @@ exports[`routes get game with positive and negative short reviews 1`] = `
         
         
         <div id=\\"shortReviews\\">
+          <p class=\\"hidden\\">A review has been hidden. </p>
+          <p class=\\"hidden\\">A review has been hidden. </p>
         </div>
         
         <a href=\\"http://baseURL/games/game2?s&#x3D;1\\">More reviews</a>

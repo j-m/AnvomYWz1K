@@ -1,5 +1,6 @@
 #games {
   margin: 2rem;
+  padding-bottom: 3rem;
 }
 
 .category {
@@ -28,7 +29,7 @@
   height: 19.8rem;
 }
 
-#addGameButton {
+.addGameButton {
   width: 6rem;
   height: 6rem;
   margin: auto 2rem;
@@ -42,7 +43,7 @@
   cursor: pointer;
 }
 
-#addGameButton:hover {
+.addGameButton:hover {
   border-color: #aaaaaa;
   color: #aaaaaa;
 }

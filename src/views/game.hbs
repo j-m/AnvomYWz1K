@@ -45,6 +45,7 @@
       <div id="fullDescription">{{game.description}}</div>
     </div>
     
+    {{#if administrator}}
     <div class="popup" onclick="hide('updateGame', event)">
       <form id="updateGame" onsubmit="updateGame(event)">
         <h1>Create new game</h1>
@@ -53,6 +54,7 @@
       	<input type="submit" value="Update">
       </form>
     </div>
+    {{/if}}
     
     <div class="popup" onclick="hide('preview', event)">
       <div id="preview">
@@ -105,7 +107,7 @@
               <p class="author">by <a href="/members/{{author}}">{{author}}</a></p>
               <div class="buttons">
                 {{#if (or (equal 'moderator' ../privileges) (equal 'administrator' ../privileges))}}
-                <select id="visibilityLong" name="visibility" onchange="visibility('{{game}}', '{{author}}', 'long')">
+                <select name="visibility" onchange="visibility('{{game}}', '{{author}}', 'short', this.value)">
                   <option {{#if (equal visibility 'public')}}selected="selected"{{/if}}>public</option>
                   {{#if (or (equal 'moderator' ../privileges) (equal 'administrator' ../privileges))}}
                   <option {{#if (equal visibility 'moderator')}}selected="selected"{{/if}}>moderator</option>
@@ -130,14 +132,16 @@
             <div class="footer">
               <a href="/games/{{game}}/{{author}}/{{type}}">Read comments</a>
               <div class="dates">
-                <p class="posted">Posted: <time datetime="{{posted}}">{{posted}}</time></p>
+                <p class="posted">Posted: {{#if ../CI}}<time datetime="timestamp">timestamp</time>{{else}}<time datetime="{{posted}}">{{posted}}</time>{{/if}}</p>
                 {{#if edited}}
                 <span>|</span>
-                <p class="edited">Edited: <time datetime="{{edited}}">{{edited}}</time></p>
+                <p class="edited">Edited: {{#if ../CI}}<time datetime="timestamp">timestamp</time>{{else}}<time datetime="{{edited}}">{{edited}}</time>{{/if}}</p>
                 {{/if}}
               </div>
             </div>
           </div>
+          {{else}}
+          <p class="hidden">A review has been hidden. </p>
           {{/if}}
           {{/each}}
         </div>
@@ -188,7 +192,7 @@
               <p class="author">by <a href="/members/{{author}}">{{author}}</a></p>
               <div class="buttons">
                 {{#if (or (equal 'moderator' ../privileges) (equal 'administrator' ../privileges))}}
-                <select id="visibilityLong" name="visibility" onchange="visibility('{{game}}', '{{author}}', 'long')">
+                <select name="visibility" onchange="visibility('{{game}}', '{{author}}', 'long', this.value)">
                   <option {{#if (equal visibility 'public')}}selected="selected"{{/if}}>public</option>
                   {{#if (or (equal 'moderator' ../privileges) (equal 'administrator' ../privileges))}}
                   <option {{#if (equal visibility 'moderator')}}selected="selected"{{/if}}>moderator</option>
@@ -215,14 +219,16 @@
             <div class="footer">
               <a href="/games/{{game}}/{{author}}/{{type}}">Read comments</a>
               <div class="dates">
-                <p class="posted">Posted: <time datetime="{{posted}}">{{posted}}</time></p>
+                <p class="posted">Posted: {{#if ../CI}}<time datetime="timestamp">timestamp</time>{{else}}<time datetime="{{posted}}">{{posted}}</time>{{/if}}</p>
                 {{#if edited}}
                 <span>|</span>
-                <p class="edited">Edited: <time datetime="{{edited}}">{{edited}}</time></p>
+                <p class="edited">Edited: {{#if ../CI}}<time datetime="timestamp">timestamp</time>{{else}}<time datetime="{{edited}}">{{edited}}</time>{{/if}}</p>
                 {{/if}}
               </div>
             </div>
           </div>
+          {{else}}
+          <p class="hidden">A review has been hidden. </p>
           {{/if}}
           {{/each}}
         </div>

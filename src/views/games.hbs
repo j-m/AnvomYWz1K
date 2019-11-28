@@ -33,13 +33,18 @@
             </div>
           </a>
           {{/each}}
+          {{#if ../administrator}}
+          <button class="addGameButton" onclick="show('addGame')">+</button>
+          {{/if}}
         </div>
+      {{else}}
         {{#if administrator}}
-        <button id="addGameButton" onclick="show('addGame')">+</button>
+        <button class="addGameButton" onclick="show('addGame')">+</button>
         {{/if}}
       {{/each}}
     </div>
 
+    {{#if administrator}}
     <div class="popup" onclick="hide('addGame', event)">
       <form id="addGame" onsubmit="addGame(event)">
         <h1>Create new game</h1>
@@ -48,6 +53,7 @@
       	<input type="submit" value="Create">
       </form>
     </div>
+    {{/if}}
     
   </body>
 
