@@ -50,6 +50,7 @@ afterAll(async done => {
 	await har.stop()
 	await page.close()
 	await browser.close()
+	await connection.close()
 	done()
 })
 
