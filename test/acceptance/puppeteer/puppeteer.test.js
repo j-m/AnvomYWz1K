@@ -384,14 +384,14 @@ describe('Flow', () => {
 		const shortReviewSelect = await page.$x('//*[@id="shortReviews"]/div/div[1]/div/select')
 
 		await Promise.all([
-			page.waitForSelector('#welcome', {visible: true}),
+			page.waitForNavigation({ waitUntil: 'load' }),
 			await shortReviewSelect[0].type('public')
 		])
 
 		const longReviewSelect = await page.$x('//*[@id="longReviews"]/div/div[1]/div/select')
 
 		await Promise.all([
-			page.waitForSelector('#welcome', {visible: true}),
+			page.waitForNavigation({ waitUntil: 'load' }),
 			await longReviewSelect[0].type('public')
 		])
 
@@ -402,7 +402,7 @@ describe('Flow', () => {
 	test('24 log out and can see reviews', async done => {
 		const logout = (await page.$x('//*[@id="welcome"]/p/a'))[0]
 		await Promise.all([
-			page.waitForSelector('#welcome', {visible: true}),
+			page.waitForNavigation({ waitUntil: 'load' }),
 			logout.click()
 		])
 
@@ -412,7 +412,7 @@ describe('Flow', () => {
 
 	test('25 login user can see visibility drop downs', async done => {
 		page.waitForFunction('window.status === "ready"')
-	
+
 		await (await page.$x('//a[contains(text(), \'Login\')]'))[0].click()
 		await page.type('input[id=username]', 'user')
 		await page.type('input[id=password]', 'longpassword')
