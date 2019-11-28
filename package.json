@@ -11,7 +11,7 @@
     "coverage": "jest --coverage --testPathIgnorePatterns='./test/acceptance/puppeteer/*'",
     "debug": "node --inspect ./src/main.js",
     "linter": "eslint ./src/**/*.js",
-    "puppeteer": "jest ./test/acceptance/puppeteer",
+    "puppeteer": "jest ./test/acceptance/puppeteer --forceExit",
     "start": "node ./src/main.js",
     "test": "jest --testPathIgnorePatterns='./test/acceptance/puppeteer/*'"
   },
