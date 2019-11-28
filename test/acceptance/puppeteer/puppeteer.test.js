@@ -384,14 +384,14 @@ describe('Flow', () => {
 		const shortReviewSelect = await page.$x('//*[@id="shortReviews"]/div/div[1]/div/select')
 
 		await Promise.all([
-			page.waitForNavigation({ waitUntil: 'load' }),
+			page.waitForSelector('#welcome', {visible: true}),
 			await shortReviewSelect[0].type('public')
 		])
 
 		const longReviewSelect = await page.$x('//*[@id="longReviews"]/div/div[1]/div/select')
 
 		await Promise.all([
-			page.waitForNavigation({ waitUntil: 'load' }),
+			page.waitForSelector('#welcome', {visible: true}),
 			await longReviewSelect[0].type('public')
 		])
 
