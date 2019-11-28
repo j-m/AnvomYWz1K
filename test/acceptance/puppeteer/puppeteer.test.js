@@ -411,6 +411,7 @@ describe('Flow', () => {
 	})
 
 	test('25 login user can see visibility drop downs', async done => {
+		page.waitForSelector('#welcome', {visible: true})
 		await (await page.$x('//a[contains(text(), \'Login\')]'))[0].click()
 		await page.type('input[id=username]', 'user')
 		await page.type('input[id=password]', 'longpassword')
