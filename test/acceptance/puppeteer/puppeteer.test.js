@@ -402,7 +402,7 @@ describe('Flow', () => {
 	test('24 log out and can see reviews', async done => {
 		const logout = (await page.$x('//*[@id="welcome"]/p/a'))[0]
 		await Promise.all([
-			page.waitForNavigation({ waitUntil: 'load' }),
+			page.waitForSelector('#welcome', {visible: true}),
 			logout.click()
 		])
 
