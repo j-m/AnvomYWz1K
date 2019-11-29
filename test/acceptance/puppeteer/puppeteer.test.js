@@ -1,10 +1,5 @@
 'use strict'
 
-process.env.DATABASE = ':memory:'
-require('../../../src/main')
-const connection = require('../../../src/database/connection.js')
-jest.setTimeout(60000)
-
 const puppeteer = require('puppeteer')
 const PuppeteerHar = require('puppeteer-har')
 
@@ -17,16 +12,14 @@ expect.extend({ toMatchImageSnapshot })
 
 const width = 1920
 const height = 1080
-const delayMS = process.env.CI ? 0 : 30
-const headless = process.env.CI ? true : false
+const delayMS = 0
+const headless = true
 
 let browser
 let page
 let har
 
 beforeAll(async done => {
-	await connection.open()
-	await connection.run('insert.admin')
 	browser = await puppeteer.launch({ headless: headless, slowMo: delayMS, args: [
 		'--no-sandbox',
 		'--disable-setuid-sandbox',
@@ -50,7 +43,6 @@ afterAll(async done => {
 	await har.stop()
 	await page.close()
 	await browser.close()
-	await connection.close()
 	done()
 })
 
@@ -59,7 +51,7 @@ describe('Flow', () => {
 		let response
 		await Promise.all([
 			page.waitForNavigation({ waitUntil: 'load' }),
-			page.goto('http://localhost:5000/games/').then(data => response = data)
+			page.goto(`https://${process.env.HEROKU_STAGING_SERVER}.herokuapp.com/games/`).then(data => response = data)
 		])
 		expect(response._status).toBe(200)
 		expect(await page.screenshot()).toMatchImageSnapshot()
@@ -411,8 +403,6 @@ describe('Flow', () => {
 	})
 
 	test('25 login user can see visibility drop downs', async done => {
-		page.waitForFunction('window.status === "ready"')
-
 		await (await page.$x('//a[contains(text(), \'Login\')]'))[0].click()
 		await page.type('input[id=username]', 'user')
 		await page.type('input[id=password]', 'longpassword')

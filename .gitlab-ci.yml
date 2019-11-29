@@ -2,8 +2,8 @@ image: node:12
 
 stages:
   - code-testing
-  - acceptance-testing
   - staging-server
+  - acceptance-testing
   - production-server
 
 linting:
@@ -23,10 +23,17 @@ code-coverage:
   script:
     - npm install
     - npm run coverage
-    
+  
+deploy-staging:
+  image: ruby:latest
+  stage: staging-server
+  script:
+    - apt-get update -qy
+    - apt-get install -y ruby-dev
+    - gem install dpl
+    - dpl --provider=heroku --app=$HEROKU_STAGING_SERVER --api-key=$HEROKU_API_KEY
+
 puppeteer:
-  variables:
-    CI: "false"
   image: buildkite/puppeteer:latest
   stage: acceptance-testing
   artifacts:
@@ -36,17 +43,6 @@ puppeteer:
   script:
     - npm install
     - npm run puppeteer   
-    
-deploy-staging:
-  image: ruby:latest
-  stage: staging-server
-  only:
-    - master
-  script:
-    - apt-get update -qy
-    - apt-get install -y ruby-dev
-    - gem install dpl
-    - dpl --provider=heroku --app=$HEROKU_STAGING_SERVER --api-key=$HEROKU_API_KEY
 
 deploy-production:
   image: ruby:latest
