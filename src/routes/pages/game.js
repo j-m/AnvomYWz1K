@@ -128,8 +128,6 @@ async function game(context) {
 	parameters.nextShortReviews = checkShortReviewPages(parameters.totalCount, context.href, context.request.query)
 	parameters.nextLongReviews = checkLongReviewPages(parameters.histogram.count, context.href, context.request.query)
 
-	parameters.CI = process.env.CI
-
 	await context.render('game', parameters)
 }
 

@@ -13,8 +13,6 @@ async function comments(context) {
 	await connection.all('select.comments', reviewGameID, reviewAuthor, reviewType)
 		.then(data => parameters.comments = data)
 
-	parameters.CI = process.env.CI
-
 	await context.render('comments', parameters)
 }
 

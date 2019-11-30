@@ -35,10 +35,10 @@
         {{/if}}
         <p class="author">by <a href="/members/{{author}}">{{author}}</a></p>
         <div class="dates">
-          <p class="posted">Posted: {{#if CI}}<time datetime="timestamp">timestamp</time>{{else}}<time datetime="{{review.posted}}">{{review.posted}}</time>{{/if}}</p>
+          <p class="posted">Posted: <time datetime="{{review.posted}}">{{review.posted}}</time></p>
           {{#if edited}}
           <span>|</span>
-          <p class="edited">Edited: {{#if CI}}<time datetime="timestamp">timestamp</time>{{else}}<time datetime="{{review.edited}}">{{review.edited}}</time>{{/if}}</p>
+          <p class="edited">Edited: <time datetime="{{review.edited}}">{{review.edited}}</time></p>
           {{/if}}
         </div>
         <div class="buttons">
@@ -63,7 +63,7 @@
         {{/if}}
         {{#each comments}}
         <div class="comment">
-          {{#if ../CI}}<time class="posted" datetime="timestamp">timestamp</time>{{else}}<time class="posted" datetime="{{posted}}">{{posted}}</time>{{/if}}
+          <time class="posted" datetime="{{posted}}">{{posted}}</time>
           <span class="author">{{author}}:</span>
           <span class="commentBody">{{body}}</span>
         </div>

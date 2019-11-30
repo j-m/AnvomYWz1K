@@ -1,10 +1,5 @@
 'use strict'
 
-process.env.DATABASE = ':memory:'
-require('../../../src/main')
-const connection = require('../../../src/database/connection.js')
-jest.setTimeout(60000)
-
 const puppeteer = require('puppeteer')
 const PuppeteerHar = require('puppeteer-har')
 
@@ -17,16 +12,14 @@ expect.extend({ toMatchImageSnapshot })
 
 const width = 1920
 const height = 1080
-const delayMS = process.env.CI ? 0 : 30
-const headless = process.env.CI ? true : false
+const delayMS = 0
+const headless = true
 
 let browser
 let page
 let har
 
 beforeAll(async done => {
-	await connection.open()
-	await connection.run('insert.admin')
 	browser = await puppeteer.launch({ headless: headless, slowMo: delayMS, args: [
 		'--no-sandbox',
 		'--disable-setuid-sandbox',
@@ -50,7 +43,6 @@ afterAll(async done => {
 	await har.stop()
 	await page.close()
 	await browser.close()
-	await connection.close()
 	done()
 })
 
@@ -59,7 +51,7 @@ describe('Flow', () => {
 		let response
 		await Promise.all([
 			page.waitForNavigation({ waitUntil: 'load' }),
-			page.goto('http://localhost:5000/games/').then(data => response = data)
+			page.goto(`https://${process.env.HEROKU_STAGING_SERVER}.herokuapp.com/games/`).then(data => response = data)
 		])
 		expect(response._status).toBe(200)
 		expect(await page.screenshot()).toMatchImageSnapshot()
@@ -233,10 +225,11 @@ describe('Flow', () => {
 	})
 
 	test('12 log out', async done => {
+		await page.waitForSelector('#welcome')
 		const logout = (await page.$x('//*[@id="welcome"]/p/a'))[0]
 		await Promise.all([
-			page.waitForNavigation({ waitUntil: 'load' }),
-			logout.click()
+			logout.click(),
+			page.waitForNavigation({ waitUntil: 'networkidle0' })
 		])
 
 		expect(await page.screenshot()).toMatchImageSnapshot()
@@ -244,6 +237,7 @@ describe('Flow', () => {
 	})
 
 	test('13 show registration form', async done => {
+		await page.waitForSelector('#welcome')
 		const register = (await page.$x('//*[@id="welcome"]/p/a[2]'))[0]
 		await register.click()
 		expect(await page.screenshot()).toMatchImageSnapshot()
@@ -355,10 +349,11 @@ describe('Flow', () => {
 	})
 
 	test('21 log out and cannot see reviews', async done => {
+		await page.waitForSelector('#welcome')
 		const logout = (await page.$x('//*[@id="welcome"]/p/a'))[0]
 		await Promise.all([
-			page.waitForNavigation({ waitUntil: 'load' }),
-			logout.click()
+			logout.click(),
+			page.waitForNavigation({ waitUntil: 'networkidle0' })
 		])
 
 		expect(await page.screenshot()).toMatchImageSnapshot()
@@ -366,6 +361,7 @@ describe('Flow', () => {
 	})
 
 	test('22 login admin can see visibility drop downs', async done => {
+		await page.waitForSelector('#welcome')
 		await (await page.$x('//a[contains(text(), \'Login\')]'))[0].click()
 		await page.type('input[id=username]', 'admin')
 		await page.type('input[id=password]', 'admin')
@@ -400,6 +396,7 @@ describe('Flow', () => {
 	})
 
 	test('24 log out and can see reviews', async done => {
+		await page.waitForSelector('#welcome')
 		const logout = (await page.$x('//*[@id="welcome"]/p/a'))[0]
 		await Promise.all([
 			page.waitForNavigation({ waitUntil: 'load' }),
@@ -411,6 +408,7 @@ describe('Flow', () => {
 	})
 
 	test('25 login user can see visibility drop downs', async done => {
+		await page.waitForSelector('#welcome')
 		await (await page.$x('//a[contains(text(), \'Login\')]'))[0].click()
 		await page.type('input[id=username]', 'user')
 		await page.type('input[id=password]', 'longpassword')
