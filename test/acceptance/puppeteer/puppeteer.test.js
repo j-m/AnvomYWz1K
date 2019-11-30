@@ -225,10 +225,11 @@ describe('Flow', () => {
 	})
 
 	test('12 log out', async done => {
+		await page.waitForSelector('#welcome')
 		const logout = (await page.$x('//*[@id="welcome"]/p/a'))[0]
 		await Promise.all([
-			page.waitForNavigation({ waitUntil: 'load' }),
-			logout.click()
+			logout.click(),
+			page.waitForNavigation({ waitUntil: 'networkidle0' })
 		])
 
 		expect(await page.screenshot()).toMatchImageSnapshot()
@@ -236,6 +237,7 @@ describe('Flow', () => {
 	})
 
 	test('13 show registration form', async done => {
+		await page.waitForSelector('#welcome')
 		const register = (await page.$x('//*[@id="welcome"]/p/a[2]'))[0]
 		await register.click()
 		expect(await page.screenshot()).toMatchImageSnapshot()
@@ -347,10 +349,11 @@ describe('Flow', () => {
 	})
 
 	test('21 log out and cannot see reviews', async done => {
+		await page.waitForSelector('#welcome')
 		const logout = (await page.$x('//*[@id="welcome"]/p/a'))[0]
 		await Promise.all([
-			page.waitForNavigation({ waitUntil: 'load' }),
-			logout.click()
+			logout.click(),
+			page.waitForNavigation({ waitUntil: 'networkidle0' })
 		])
 
 		expect(await page.screenshot()).toMatchImageSnapshot()
@@ -358,6 +361,7 @@ describe('Flow', () => {
 	})
 
 	test('22 login admin can see visibility drop downs', async done => {
+		await page.waitForSelector('#welcome')
 		await (await page.$x('//a[contains(text(), \'Login\')]'))[0].click()
 		await page.type('input[id=username]', 'admin')
 		await page.type('input[id=password]', 'admin')
@@ -392,6 +396,7 @@ describe('Flow', () => {
 	})
 
 	test('24 log out and can see reviews', async done => {
+		await page.waitForSelector('#welcome')
 		const logout = (await page.$x('//*[@id="welcome"]/p/a'))[0]
 		await Promise.all([
 			page.waitForNavigation({ waitUntil: 'load' }),
@@ -403,6 +408,7 @@ describe('Flow', () => {
 	})
 
 	test('25 login user can see visibility drop downs', async done => {
+		await page.waitForSelector('#welcome')
 		await (await page.$x('//a[contains(text(), \'Login\')]'))[0].click()
 		await page.type('input[id=username]', 'user')
 		await page.type('input[id=password]', 'longpassword')
