@@ -22,6 +22,19 @@ To earn the higher marks we had to achieve/demonstrate:
  - Continuous Integration and Delivery
  - Plan the architecture of the system, complete with various types of UML models
  
-I earned a score of 84/100; the feedback was positive with only nit-picks on the design and implementation. 
+I earned a grade of 84/100; the feedback was positive with only nit-picks on the design and implementation. 
 
-To view the project as it was when it was submitted, go onto the releases tab and download v1.0.0. 
+## Viewing
+
+To view the code as it was when it was submitted, go onto the releases tab and download v1.0.0.  
+
+Navigate to https://marshj6-340ct.herokuapp.com/ to view it live.  
+
+As a free service, the heroku app will spool down after 30 minutes of inactivity.  
+This means that all data will be lost.  
+I hardcoded an admin user with the login credentials "admin" and "admin".  
+If you are using Chrome, login may not work. Try Firefox or any other browser.  
+You will have to add games yourself but for ease here are a couple:  
+
+ - 413150, Stardew Valley, 2D top-down farming sim
+ - 294100, RimWorld, 2D top-down space-age colony sim
