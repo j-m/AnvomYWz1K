@@ -28,7 +28,7 @@
   "author": "Jonathan Marsh <marshj6@coventry.ac.uk>",
   "license": "UNLICENSED",
   "dependencies": {
-    "bcrypt": "^5.0.0",
+    "bcrypt": "^5.1.0",
     "bcrypt-promise": "^2.0.0",
     "glob": "^7.1.6",
     "handlebars": "^4.7.7",
